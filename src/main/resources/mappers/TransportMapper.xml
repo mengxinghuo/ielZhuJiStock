@@ -17,11 +17,13 @@
       <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ship_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, declare_num, destination, arrival_list, purchase_list, sales_contract, invoice, 
-    purchase_contract, export_cost, sales_list, entrance_cost, status, create_time, update_time
+    purchase_contract, export_cost, sales_list, entrance_cost, status, create_time, update_time,
+    ship_num
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -38,12 +40,12 @@
       arrival_list, purchase_list, sales_contract, 
       invoice, purchase_contract, export_cost, 
       sales_list, entrance_cost, status, 
-      create_time, update_time)
+      create_time, update_time,ship_num)
     values (#{id,jdbcType=INTEGER}, #{declareNum,jdbcType=INTEGER}, #{destination,jdbcType=VARCHAR}, 
       #{arrivalList,jdbcType=VARCHAR}, #{purchaseList,jdbcType=VARCHAR}, #{salesContract,jdbcType=VARCHAR}, 
       #{invoice,jdbcType=VARCHAR}, #{purchaseContract,jdbcType=VARCHAR}, #{exportCost,jdbcType=VARCHAR}, 
       #{salesList,jdbcType=VARCHAR}, #{entranceCost,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      now(), now())
+      now(), now(),#{shipNum})
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.Transport" useGeneratedKeys="true" keyProperty="id">
     insert into iel_transport
@@ -86,6 +88,9 @@
       </if>
         create_time,
         update_time,
+      <if test="shipNum != null" >
+        ship_num,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -126,6 +131,9 @@
       </if>
         now(),
         now(),
+      <if test="shipNum != null" >
+        #{shipNum},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Transport" >
@@ -165,6 +173,9 @@
         status = #{status,jdbcType=INTEGER},
       </if>
         update_time = now(),
+      <if test="shipNum != null" >
+        ship_num=#{shipNum},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -181,7 +192,8 @@
       sales_list = #{salesList,jdbcType=VARCHAR},
       entrance_cost = #{entranceCost,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
-      update_time = now()
+      update_time = now(),
+      ship_num=#{shipNum}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

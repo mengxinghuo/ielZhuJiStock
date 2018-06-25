@@ -53,6 +53,9 @@ public class TransportServiceImpl implements ITransportService {
         if(StringUtils.isEmpty(transport.getDestination())){
             return ServerResponse.createByErrorMessage("请填写目的地");
         }
+        if(StringUtils.isEmpty(transport.getShipNum())){
+            return ServerResponse.createByErrorMessage("请填写船次");
+        }
         /*if(StringUtils.isEmpty(transport.getArrivalList()) || StringUtils.isEmpty(transport.getPurchaseList()) || StringUtils.isEmpty(transport.getPurchaseContract())
                 || StringUtils.isEmpty(transport.getSalesContract()) || StringUtils.isEmpty(transport.getInvoice()) || StringUtils.isEmpty(transport.getExportCost())){
             return ServerResponse.createByErrorMessage("上传信息不足，请完善");
@@ -177,6 +180,7 @@ public class TransportServiceImpl implements ITransportService {
     public TransportVo assembleTransport(Transport transport){
         TransportVo transportVo = new TransportVo();
         transportVo.setId(transport.getId());
+        transportVo.setShipNum(transport.getShipNum());
         transportVo.setDeclareNum(transport.getDeclareNum());
         transportVo.setDestination(transport.getDestination());
         if(!StringUtils.isEmpty(transport.getArrivalList())){

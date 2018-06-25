@@ -34,6 +34,8 @@ public class TransportVo {
 
     private String updateTime;
 
+    private Integer shipNum;
+
     public String getStatusDesc() {
         return statusDesc;
     }
@@ -152,5 +154,13 @@ public class TransportVo {
 
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getShipNum() {
+        return shipNum;
+    }
+
+    public void setShipNum(Integer shipNum) {
+        this.shipNum = shipNum;
     }
 }
