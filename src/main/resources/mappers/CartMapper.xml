@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.truck.dao.CartMapper" >
+  <resultMap id="BaseResultMap" type="com.truck.pojo.Cart" >
+    <constructor >
+      <idArg column="cart_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="admin_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="stock_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="amount" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="checked" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="cart_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cart_id, admin_id, stock_id, amount, checked, create_time, update_time, cart_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from iel_cart
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from iel_cart
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.truck.pojo.Cart" >
+    insert into iel_cart (cart_id, admin_id, stock_id, 
+      amount, checked, create_time, 
+      update_time, cart_price)
+    values (#{cartId,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}, #{stockId,jdbcType=INTEGER}, 
+      #{amount,jdbcType=INTEGER}, #{checked,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{cartPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.truck.pojo.Cart" >
+    insert into iel_cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cartId != null" >
+        cart_id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="stockId != null" >
+        stock_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="checked != null" >
+        checked,
+      </if>
+        create_time,
+        update_time,
+      <if test="cartPrice != null" >
+        cart_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cartId != null" >
+        #{cartId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="stockId != null" >
+        #{stockId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="checked != null" >
+        #{checked,jdbcType=INTEGER},
+      </if>
+        now(),
+        now(),
+      <if test="cartPrice != null" >
+        #{cartPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Cart" >
+    update iel_cart
+    <set >
+      <if test="adminId != null" >
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="stockId != null" >
+        stock_id = #{stockId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="checked != null" >
+        checked = #{checked,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cartPrice != null" >
+        cart_price = #{cartPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.truck.pojo.Cart" >
+    update iel_cart
+    set admin_id = #{adminId,jdbcType=INTEGER},
+      stock_id = #{stockId,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=INTEGER},
+      checked = #{checked,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      cart_price = #{cartPrice,jdbcType=DECIMAL}
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectCartByAdminIdStockId" resultMap="BaseResultMap" parameterType="int">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM iel_cart
+    WHERE admin_id=#{adminId}
+    AND stock_id=#{stockId}
+  </select>
+
+  <delete id="deleteByUserIdProductIds" parameterType="map">
+    DELETE FROM iel_cart
+    WHERE admin_id=#{adminId}
+    AND  stock_id IN
+    <if test="productIdList !=null">
+      <foreach collection="productIdList" item="item" index="index" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+  </delete>
+
+  <update id="checkedOrUncheckedProduct" parameterType="map">
+    UPDATE iel_cart
+    SET checked=#{checked},
+    update_time=now()
+    where admin_id=#{adminId}
+    <if test="productId!=null">
+      AND stock_id=#{stockId}
+    </if>
+  </update>
+
+  <delete id="deleteByAdminId" parameterType="integer">
+    DELETE FROM iel_cart
+    WHERE admin_id=#{adminId}
+  </delete>
+
+  <select id="selectCartProductCount" parameterType="integer" resultType="integer">
+    SELECT  NULLIF(sum(amount),0)   as count FROM iel_cart where admin_id=#{adminId}
+  </select>
+
+  <select id="selectCartByAdminId" resultMap="BaseResultMap"  parameterType="int">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM iel_cart
+    WHERE admin_id=#{adminId}
+  </select>
+
+  <select id="selectCartProductCheckedStatusByUserId" resultType="int" parameterType="int">
+    SELECT COUNT(1) FROM iel_cart WHERE checked=0 AND admin_id=#{adminId}
+  </select>
+</mapper>

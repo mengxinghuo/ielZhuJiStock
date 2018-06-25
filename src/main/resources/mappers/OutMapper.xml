@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.truck.dao.OutMapper" >
+  <resultMap id="BaseResultMap" type="com.truck.pojo.Out" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="out_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="operator_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="repair_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="repair_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, out_no, status, operator_id, create_time, update_time, repair_id, repair_no
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from iel_out
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from iel_out
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.truck.pojo.Out" >
+    insert into iel_out (id, out_no, status, 
+      operator_id, create_time, update_time, 
+      repair_id, repair_no)
+    values (#{id,jdbcType=INTEGER}, #{outNo,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{operatorId,jdbcType=INTEGER},now(), now(),
+      #{repairId,jdbcType=INTEGER}, #{repairNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.truck.pojo.Out" useGeneratedKeys="true" keyProperty="id">
+    insert into iel_out
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="outNo != null" >
+        out_no,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+        create_time,
+        update_time,
+      <if test="repairId != null" >
+        repair_id,
+      </if>
+      <if test="repairNo != null" >
+        repair_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="outNo != null" >
+        #{outNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      now(),
+      now(),
+      <if test="repairId != null" >
+        #{repairId,jdbcType=INTEGER},
+      </if>
+      <if test="repairNo != null" >
+        #{repairNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Out" >
+    update iel_out
+    <set >
+      <if test="outNo != null" >
+        out_no = #{outNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+        update_time = now(),
+      <if test="repairId != null" >
+        repair_id = #{repairId,jdbcType=INTEGER},
+      </if>
+      <if test="repairNo != null" >
+        repair_no = #{repairNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.truck.pojo.Out" >
+    update iel_out
+    set out_no = #{outNo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      update_time = now(),
+      repair_id = #{repairId,jdbcType=INTEGER},
+      repair_no = #{repairNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByAdminId" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from iel_out
+    <where>
+      <if test="adminId != null">
+        and operator_id = #{adminId}
+      </if>
+    </where>
+    order by create_time desc
+  </select>
+</mapper>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.truck.dao.EntryDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.truck.pojo.EntryDetail" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="entry_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="customs_clearance" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="destination" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="package_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="serial_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="parts_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="parts_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="parts_en_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="unit" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="purchase_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="purchase_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="sales_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="device_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="entry_position" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="inspect_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="entry_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, entry_id, customs_clearance, destination, package_no, serial_no, parts_no, parts_name, 
+    parts_en_name, unit, purchase_num, purchase_price, sales_price, device_type, entry_position, 
+    inspect_status, entry_num, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from iel_entry_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from iel_entry_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.truck.pojo.EntryDetail" >
+    insert into iel_entry_detail (id, entry_id, customs_clearance, 
+      destination, package_no, serial_no, 
+      parts_no, parts_name, parts_en_name, 
+      unit, purchase_num, purchase_price, 
+      sales_price, device_type, entry_position, 
+      inspect_status, entry_num, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{entryId,jdbcType=INTEGER}, #{customsClearance,jdbcType=VARCHAR}, 
+      #{destination,jdbcType=VARCHAR}, #{packageNo,jdbcType=VARCHAR}, #{serialNo,jdbcType=VARCHAR}, 
+      #{partsNo,jdbcType=VARCHAR}, #{partsName,jdbcType=VARCHAR}, #{partsEnName,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{purchaseNum,jdbcType=INTEGER}, #{purchasePrice,jdbcType=DECIMAL}, 
+      #{salesPrice,jdbcType=DECIMAL}, #{deviceType,jdbcType=VARCHAR}, #{entryPosition,jdbcType=INTEGER},
+      #{inspectStatus,jdbcType=INTEGER}, #{entryNum,jdbcType=INTEGER}, now(),
+      now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.truck.pojo.EntryDetail" >
+    insert into iel_entry_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="entryId != null" >
+        entry_id,
+      </if>
+      <if test="customsClearance != null" >
+        customs_clearance,
+      </if>
+      <if test="destination != null" >
+        destination,
+      </if>
+      <if test="packageNo != null" >
+        package_no,
+      </if>
+      <if test="serialNo != null" >
+        serial_no,
+      </if>
+      <if test="partsNo != null" >
+        parts_no,
+      </if>
+      <if test="partsName != null" >
+        parts_name,
+      </if>
+      <if test="partsEnName != null" >
+        parts_en_name,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="purchaseNum != null" >
+        purchase_num,
+      </if>
+      <if test="purchasePrice != null" >
+        purchase_price,
+      </if>
+      <if test="salesPrice != null" >
+        sales_price,
+      </if>
+      <if test="deviceType != null" >
+        device_type,
+      </if>
+      <if test="entryPosition != null" >
+        entry_position,
+      </if>
+      <if test="inspectStatus != null" >
+        inspect_status,
+      </if>
+      <if test="entryNum != null" >
+        entry_num,
+      </if>
+        create_time,
+        update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="entryId != null" >
+        #{entryId,jdbcType=INTEGER},
+      </if>
+      <if test="customsClearance != null" >
+        #{customsClearance,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="packageNo != null" >
+        #{packageNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNo != null" >
+        #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partsNo != null" >
+        #{partsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partsName != null" >
+        #{partsName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsEnName != null" >
+        #{partsEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseNum != null" >
+        #{purchaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="purchasePrice != null" >
+        #{purchasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salesPrice != null" >
+        #{salesPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceType != null" >
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="entryPosition != null" >
+        #{entryPosition,jdbcType=INTEGER},
+      </if>
+      <if test="inspectStatus != null" >
+        #{inspectStatus,jdbcType=INTEGER},
+      </if>
+      <if test="entryNum != null" >
+        #{entryNum,jdbcType=INTEGER},
+      </if>
+        now(),
+        now(),
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.EntryDetail" >
+    update iel_entry_detail
+    <set >
+      <if test="entryId != null" >
+        entry_id = #{entryId,jdbcType=INTEGER},
+      </if>
+      <if test="customsClearance != null" >
+        customs_clearance = #{customsClearance,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="packageNo != null" >
+        package_no = #{packageNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNo != null" >
+        serial_no = #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partsNo != null" >
+        parts_no = #{partsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partsName != null" >
+        parts_name = #{partsName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsEnName != null" >
+        parts_en_name = #{partsEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseNum != null" >
+        purchase_num = #{purchaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="purchasePrice != null" >
+        purchase_price = #{purchasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salesPrice != null" >
+        sales_price = #{salesPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceType != null" >
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="entryPosition != null" >
+        entry_position = #{entryPosition,jdbcType=INTEGER},
+      </if>
+      <if test="inspectStatus != null" >
+        inspect_status = #{inspectStatus,jdbcType=INTEGER},
+      </if>
+      <if test="entryNum != null" >
+        entry_num = #{entryNum,jdbcType=INTEGER},
+      </if>
+        update_time = now(),
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.truck.pojo.EntryDetail" >
+    update iel_entry_detail
+    set entry_id = #{entryId,jdbcType=INTEGER},
+      customs_clearance = #{customsClearance,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=VARCHAR},
+      package_no = #{packageNo,jdbcType=VARCHAR},
+      serial_no = #{serialNo,jdbcType=VARCHAR},
+      parts_no = #{partsNo,jdbcType=VARCHAR},
+      parts_name = #{partsName,jdbcType=VARCHAR},
+      parts_en_name = #{partsEnName,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      purchase_num = #{purchaseNum,jdbcType=INTEGER},
+      purchase_price = #{purchasePrice,jdbcType=DECIMAL},
+      sales_price = #{salesPrice,jdbcType=DECIMAL},
+      device_type = #{deviceType,jdbcType=VARCHAR},
+      entry_position = #{entryPosition,jdbcType=INTEGER},
+      inspect_status = #{inspectStatus,jdbcType=INTEGER},
+      entry_num = #{entryNum,jdbcType=INTEGER},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="bachInsertExports" parameterType="list" >
+    insert into iel_entry_detail ( entry_id, customs_clearance,
+    destination, package_no, serial_no,
+    parts_no, parts_name, parts_en_name,
+    unit, purchase_num, purchase_price,
+    sales_price, device_type,inspect_status, create_time,
+    update_time)
+    values
+    <foreach collection="exportsListsList" index="index" item="item" separator=",">
+      (
+      #{item.entryId,jdbcType=INTEGER}, #{item.customsClearance,jdbcType=VARCHAR},
+      #{item.destination,jdbcType=VARCHAR}, #{item.packageNo,jdbcType=VARCHAR}, #{item.serialNo,jdbcType=VARCHAR},
+      #{item.partsNo,jdbcType=VARCHAR}, #{item.partsName,jdbcType=VARCHAR}, #{item.partsEnName,jdbcType=VARCHAR},
+      #{item.unit,jdbcType=VARCHAR}, #{item.purchaseNum,jdbcType=INTEGER}, #{item.purchasePrice,jdbcType=DECIMAL},
+      #{item.salesPrice,jdbcType=DECIMAL}, #{item.deviceType,jdbcType=VARCHAR},#{item.inspectStatus,jdbcType=INTEGER}, now(),now()
+      )
+    </foreach>
+  </insert>
+
+  <select id="selectEntryDetail" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from iel_entry_detail
+    where entry_id = #{entryId}
+  </select>
+</mapper>

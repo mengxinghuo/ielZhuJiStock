@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.truck.dao.StockMapper" >
+  <resultMap id="BaseResultMap" type="com.truck.pojo.Stock" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="entry_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="customs_clearance" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="destination" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="parts_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="parts_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="parts_en_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="unit" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sales_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="device_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="repertory" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="position" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, entry_id, customs_clearance, destination, parts_no, parts_name, parts_en_name, 
+    unit, quantity, sales_price, device_type, repertory, position, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from iel_stock
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from iel_stock
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.truck.pojo.Stock" >
+    insert into iel_stock (id, entry_id, customs_clearance, 
+      destination, parts_no, parts_name, 
+      parts_en_name, unit, quantity, 
+      sales_price, device_type, repertory, 
+      position, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{entryId,jdbcType=INTEGER}, #{customsClearance,jdbcType=VARCHAR}, 
+      #{destination,jdbcType=VARCHAR}, #{partsNo,jdbcType=VARCHAR}, #{partsName,jdbcType=VARCHAR}, 
+      #{partsEnName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{salesPrice,jdbcType=DECIMAL}, #{deviceType,jdbcType=VARCHAR}, #{repertory,jdbcType=INTEGER}, 
+      #{position,jdbcType=INTEGER},now(), now()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.truck.pojo.Stock" >
+    insert into iel_stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="entryId != null" >
+        entry_id,
+      </if>
+      <if test="customsClearance != null" >
+        customs_clearance,
+      </if>
+      <if test="destination != null" >
+        destination,
+      </if>
+      <if test="partsNo != null" >
+        parts_no,
+      </if>
+      <if test="partsName != null" >
+        parts_name,
+      </if>
+      <if test="partsEnName != null" >
+        parts_en_name,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="salesPrice != null" >
+        sales_price,
+      </if>
+      <if test="deviceType != null" >
+        device_type,
+      </if>
+      <if test="repertory != null" >
+        repertory,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+        create_time,
+        update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="entryId != null" >
+        #{entryId,jdbcType=INTEGER},
+      </if>
+      <if test="customsClearance != null" >
+        #{customsClearance,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="partsNo != null" >
+        #{partsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partsName != null" >
+        #{partsName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsEnName != null" >
+        #{partsEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="salesPrice != null" >
+        #{salesPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceType != null" >
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="repertory != null" >
+        #{repertory,jdbcType=INTEGER},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=INTEGER},
+      </if>
+      now(),
+      now(),
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Stock" >
+    update iel_stock
+    <set >
+      <if test="entryId != null" >
+        entry_id = #{entryId,jdbcType=INTEGER},
+      </if>
+      <if test="customsClearance != null" >
+        customs_clearance = #{customsClearance,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="partsNo != null" >
+        parts_no = #{partsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partsName != null" >
+        parts_name = #{partsName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsEnName != null" >
+        parts_en_name = #{partsEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="salesPrice != null" >
+        sales_price = #{salesPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceType != null" >
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="repertory != null" >
+        repertory = #{repertory,jdbcType=INTEGER},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=INTEGER},
+      </if>
+        update_time = now(),
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.truck.pojo.Stock" >
+    update iel_stock
+    set entry_id = #{entryId,jdbcType=INTEGER},
+      customs_clearance = #{customsClearance,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=VARCHAR},
+      parts_no = #{partsNo,jdbcType=VARCHAR},
+      parts_name = #{partsName,jdbcType=VARCHAR},
+      parts_en_name = #{partsEnName,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      sales_price = #{salesPrice,jdbcType=DECIMAL},
+      device_type = #{deviceType,jdbcType=VARCHAR},
+      repertory = #{repertory,jdbcType=INTEGER},
+      position = #{position,jdbcType=INTEGER},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByEntryId" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from iel_stock
+    <where>
+      <if test="entryId !=null">
+       and entry_id = #{entryId}
+      </if>
+    </where>
+  </select>
+
+  <insert id="batchInsert" parameterType="list">
+    insert into iel_stock ( entry_id, customs_clearance,
+      destination, parts_no, parts_name,
+      parts_en_name, unit, quantity,
+      sales_price, device_type, repertory,
+      position, create_time, update_time
+      )
+    values
+    <foreach collection="stockList" index="index" item="item" separator=",">
+      (#{item.entryId,jdbcType=INTEGER}, #{item.customsClearance,jdbcType=VARCHAR},
+      #{item.destination,jdbcType=VARCHAR}, #{item.partsNo,jdbcType=VARCHAR}, #{item.partsName,jdbcType=VARCHAR},
+      #{item.partsEnName,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR}, #{item.quantity,jdbcType=INTEGER},
+      #{item.salesPrice,jdbcType=DECIMAL}, #{item.deviceType,jdbcType=VARCHAR}, #{item.repertory,jdbcType=INTEGER},
+      #{item.position,jdbcType=INTEGER}, now(),now()
+      )
+    </foreach>
+  </insert>
+</mapper>

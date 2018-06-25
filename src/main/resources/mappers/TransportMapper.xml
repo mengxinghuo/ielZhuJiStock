@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.truck.dao.TransportMapper" >
+  <resultMap id="BaseResultMap" type="com.truck.pojo.Transport" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="declare_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="destination" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="arrival_list" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="purchase_list" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sales_contract" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="invoice" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="purchase_contract" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="export_cost" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sales_list" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="entrance_cost" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, declare_num, destination, arrival_list, purchase_list, sales_contract, invoice, 
+    purchase_contract, export_cost, sales_list, entrance_cost, status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from iel_transport
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from iel_transport
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.truck.pojo.Transport" >
+    insert into iel_transport (id, declare_num, destination, 
+      arrival_list, purchase_list, sales_contract, 
+      invoice, purchase_contract, export_cost, 
+      sales_list, entrance_cost, status, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{declareNum,jdbcType=INTEGER}, #{destination,jdbcType=VARCHAR}, 
+      #{arrivalList,jdbcType=VARCHAR}, #{purchaseList,jdbcType=VARCHAR}, #{salesContract,jdbcType=VARCHAR}, 
+      #{invoice,jdbcType=VARCHAR}, #{purchaseContract,jdbcType=VARCHAR}, #{exportCost,jdbcType=VARCHAR}, 
+      #{salesList,jdbcType=VARCHAR}, #{entranceCost,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      now(), now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.truck.pojo.Transport" useGeneratedKeys="true" keyProperty="id">
+    insert into iel_transport
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="declareNum != null" >
+        declare_num,
+      </if>
+      <if test="destination != null" >
+        destination,
+      </if>
+      <if test="arrivalList != null" >
+        arrival_list,
+      </if>
+      <if test="purchaseList != null" >
+        purchase_list,
+      </if>
+      <if test="salesContract != null" >
+        sales_contract,
+      </if>
+      <if test="invoice != null" >
+        invoice,
+      </if>
+      <if test="purchaseContract != null" >
+        purchase_contract,
+      </if>
+      <if test="exportCost != null" >
+        export_cost,
+      </if>
+      <if test="salesList != null" >
+        sales_list,
+      </if>
+      <if test="entranceCost != null" >
+        entrance_cost,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+        create_time,
+        update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="declareNum != null" >
+        #{declareNum,jdbcType=INTEGER},
+      </if>
+      <if test="destination != null" >
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivalList != null" >
+        #{arrivalList,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseList != null" >
+        #{purchaseList,jdbcType=VARCHAR},
+      </if>
+      <if test="salesContract != null" >
+        #{salesContract,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null" >
+        #{invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseContract != null" >
+        #{purchaseContract,jdbcType=VARCHAR},
+      </if>
+      <if test="exportCost != null" >
+        #{exportCost,jdbcType=VARCHAR},
+      </if>
+      <if test="salesList != null" >
+        #{salesList,jdbcType=VARCHAR},
+      </if>
+      <if test="entranceCost != null" >
+        #{entranceCost,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+        now(),
+        now(),
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Transport" >
+    update iel_transport
+    <set >
+      <if test="declareNum != null" >
+        declare_num = #{declareNum,jdbcType=INTEGER},
+      </if>
+      <if test="destination != null" >
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivalList != null" >
+        arrival_list = #{arrivalList,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseList != null" >
+        purchase_list = #{purchaseList,jdbcType=VARCHAR},
+      </if>
+      <if test="salesContract != null" >
+        sales_contract = #{salesContract,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null" >
+        invoice = #{invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseContract != null" >
+        purchase_contract = #{purchaseContract,jdbcType=VARCHAR},
+      </if>
+      <if test="exportCost != null" >
+        export_cost = #{exportCost,jdbcType=VARCHAR},
+      </if>
+      <if test="salesList != null" >
+        sales_list = #{salesList,jdbcType=VARCHAR},
+      </if>
+      <if test="entranceCost != null" >
+        entrance_cost = #{entranceCost,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+        update_time = now(),
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.truck.pojo.Transport" >
+    update iel_transport
+    set declare_num = #{declareNum,jdbcType=INTEGER},
+      destination = #{destination,jdbcType=VARCHAR},
+      arrival_list = #{arrivalList,jdbcType=VARCHAR},
+      purchase_list = #{purchaseList,jdbcType=VARCHAR},
+      sales_contract = #{salesContract,jdbcType=VARCHAR},
+      invoice = #{invoice,jdbcType=VARCHAR},
+      purchase_contract = #{purchaseContract,jdbcType=VARCHAR},
+      export_cost = #{exportCost,jdbcType=VARCHAR},
+      sales_list = #{salesList,jdbcType=VARCHAR},
+      entrance_cost = #{entranceCost,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByDeclareNum" parameterType="map" resultType="int">
+    select count(1) from iel_transport
+    where declare_num = #{declareNum}
+  </select>
+
+  <select id="checkoutDeclareNum" parameterType="map" resultType="int">
+    select count(1) from iel_transport
+    where declare_num = #{declareNum} and id != #{id}
+  </select>
+
+  <select id="getAllList" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from iel_transport
+    <where>
+      <if test="status != null">
+        and status = #{status}
+      </if>
+    </where>
+    order by create_time desc
+  </select>
+</mapper>
