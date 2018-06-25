@@ -19,7 +19,9 @@ public class Entry {
 
     private Date updateTime;
 
-    public Entry(Integer id, String entryNo, Integer declareNum, String destination, Integer status, String inspector, Date createTime, Date updateTime) {
+    private Integer shipNum;
+
+    public Entry(Integer id, String entryNo, Integer declareNum, String destination, Integer status, String inspector, Date createTime, Date updateTime, Integer shipNum) {
         this.id = id;
         this.entryNo = entryNo;
         this.declareNum = declareNum;
@@ -28,6 +30,7 @@ public class Entry {
         this.inspector = inspector;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.shipNum = shipNum;
     }
 
     public Entry() {
@@ -96,5 +99,13 @@ public class Entry {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getShipNum() {
+        return shipNum;
+    }
+
+    public void setShipNum(Integer shipNum) {
+        this.shipNum = shipNum;
     }
 }

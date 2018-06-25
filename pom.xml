@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com</groupId>
-  <artifactId>iel-stock</artifactId>
+  <artifactId>truck</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -337,7 +337,7 @@
 
 
   <build>
-    <finalName>iel-stock</finalName>
+    <finalName>truck</finalName>
     <plugins>
       <plugin>
         <groupId>org.mybatis.generator</groupId>

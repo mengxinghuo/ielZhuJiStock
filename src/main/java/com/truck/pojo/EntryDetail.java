@@ -42,7 +42,9 @@ public class EntryDetail {
 
     private Date updateTime;
 
-    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination, String packageNo, String serialNo, String partsNo, String partsName, String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice, BigDecimal salesPrice, String deviceType, Integer entryPosition, Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime) {
+    private Integer shipNum;
+
+    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination, String packageNo, String serialNo, String partsNo, String partsName, String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice, BigDecimal salesPrice, String deviceType, Integer entryPosition, Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime,Integer shipNum) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -62,6 +64,7 @@ public class EntryDetail {
         this.entryNum = entryNum;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.shipNum = shipNum;
     }
 
     public EntryDetail() {
@@ -218,5 +221,13 @@ public class EntryDetail {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getShipNum() {
+        return shipNum;
+    }
+
+    public void setShipNum(Integer shipNum) {
+        this.shipNum = shipNum;
     }
 }

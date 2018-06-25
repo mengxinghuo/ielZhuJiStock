@@ -18,11 +18,13 @@
       <arg column="position" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ship_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, entry_id, customs_clearance, destination, parts_no, parts_name, parts_en_name, 
-    unit, quantity, sales_price, device_type, repertory, position, create_time, update_time
+    unit, quantity, sales_price, device_type, repertory, position, create_time, update_time,
+    ship_num
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -39,13 +41,14 @@
       destination, parts_no, parts_name, 
       parts_en_name, unit, quantity, 
       sales_price, device_type, repertory, 
-      position, create_time, update_time
+      position, create_time, update_time,
+      ship_num
       )
     values (#{id,jdbcType=INTEGER}, #{entryId,jdbcType=INTEGER}, #{customsClearance,jdbcType=VARCHAR}, 
       #{destination,jdbcType=VARCHAR}, #{partsNo,jdbcType=VARCHAR}, #{partsName,jdbcType=VARCHAR}, 
       #{partsEnName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
       #{salesPrice,jdbcType=DECIMAL}, #{deviceType,jdbcType=VARCHAR}, #{repertory,jdbcType=INTEGER}, 
-      #{position,jdbcType=INTEGER},now(), now()
+      #{position,jdbcType=INTEGER},now(), now(),#{shipNum}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.Stock" >
@@ -92,6 +95,9 @@
       </if>
         create_time,
         update_time,
+      <if test="shipNum != null" >
+        ship_num,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -135,6 +141,9 @@
       </if>
       now(),
       now(),
+      <if test="shipNum != null" >
+        #{shipNum},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Stock" >
@@ -177,6 +186,9 @@
         position = #{position,jdbcType=INTEGER},
       </if>
         update_time = now(),
+      <if test="shipNum != null" >
+        ship_num=#{shipNum},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -194,7 +206,8 @@
       device_type = #{deviceType,jdbcType=VARCHAR},
       repertory = #{repertory,jdbcType=INTEGER},
       position = #{position,jdbcType=INTEGER},
-      update_time = now()
+      update_time = now(),
+      ship_num=#{shipNum}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -214,7 +227,8 @@
       destination, parts_no, parts_name,
       parts_en_name, unit, quantity,
       sales_price, device_type, repertory,
-      position, create_time, update_time
+      position, create_time, update_time,
+      ship_num
       )
     values
     <foreach collection="stockList" index="index" item="item" separator=",">
@@ -222,7 +236,7 @@
       #{item.destination,jdbcType=VARCHAR}, #{item.partsNo,jdbcType=VARCHAR}, #{item.partsName,jdbcType=VARCHAR},
       #{item.partsEnName,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR}, #{item.quantity,jdbcType=INTEGER},
       #{item.salesPrice,jdbcType=DECIMAL}, #{item.deviceType,jdbcType=VARCHAR}, #{item.repertory,jdbcType=INTEGER},
-      #{item.position,jdbcType=INTEGER}, now(),now()
+      #{item.position,jdbcType=INTEGER}, now(),now(),#{item.shipNum}
       )
     </foreach>
   </insert>

@@ -34,7 +34,9 @@ public class Stock {
 
     private Date updateTime;
 
-    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName, String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory, Integer position, Date createTime, Date updateTime) {
+    private Integer shipNum;
+
+    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName, String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory, Integer position, Date createTime, Date updateTime,Integer shipNum) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -50,6 +52,7 @@ public class Stock {
         this.position = position;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.shipNum = shipNum;
     }
 
     public Stock() {
@@ -174,5 +177,13 @@ public class Stock {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getShipNum() {
+        return shipNum;
+    }
+
+    public void setShipNum(Integer shipNum) {
+        this.shipNum = shipNum;
     }
 }

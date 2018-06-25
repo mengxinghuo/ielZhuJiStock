@@ -36,6 +36,8 @@ public class StockVo {
 
     private Integer amount;
 
+    private Integer shipNum;
+
     public StockVo() {
         super();
     }
@@ -166,5 +168,13 @@ public class StockVo {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public Integer getShipNum() {
+        return shipNum;
+    }
+
+    public void setShipNum(Integer shipNum) {
+        this.shipNum = shipNum;
     }
 }
