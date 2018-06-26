@@ -38,6 +38,18 @@ public class StockVo {
 
     private Integer shipNum;
 
+    private String buyContractNo;
+
+    private String model;
+
+    private String sn;
+
+    private String engineNo;
+
+    private String xxNo;
+
+    private String brand;
+
     public StockVo() {
         super();
     }
@@ -176,5 +188,53 @@ public class StockVo {
 
     public void setShipNum(Integer shipNum) {
         this.shipNum = shipNum;
+    }
+
+    public String getBuyContractNo() {
+        return buyContractNo;
+    }
+
+    public void setBuyContractNo(String buyContractNo) {
+        this.buyContractNo = buyContractNo;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getSn() {
+        return sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
+
+    public String getEngineNo() {
+        return engineNo;
+    }
+
+    public void setEngineNo(String engineNo) {
+        this.engineNo = engineNo;
+    }
+
+    public String getXxNo() {
+        return xxNo;
+    }
+
+    public void setXxNo(String xxNo) {
+        this.xxNo = xxNo;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }

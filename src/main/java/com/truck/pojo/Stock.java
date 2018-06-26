@@ -36,7 +36,19 @@ public class Stock {
 
     private Integer shipNum;
 
-    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName, String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory, Integer position, Date createTime, Date updateTime,Integer shipNum) {
+    private String buyContractNo;
+
+    private String model;
+
+    private String sn;
+
+    private String engineNo;
+
+    private String xxNo;
+
+    private String brand;
+
+    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName, String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory, Integer position, Date createTime, Date updateTime, Integer shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -53,6 +65,12 @@ public class Stock {
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.shipNum = shipNum;
+        this.buyContractNo = buyContractNo;
+        this.model = model;
+        this.sn = sn;
+        this.engineNo = engineNo;
+        this.xxNo = xxNo;
+        this.brand = brand;
     }
 
     public Stock() {
@@ -185,5 +203,53 @@ public class Stock {
 
     public void setShipNum(Integer shipNum) {
         this.shipNum = shipNum;
+    }
+
+    public String getBuyContractNo() {
+        return buyContractNo;
+    }
+
+    public void setBuyContractNo(String buyContractNo) {
+        this.buyContractNo = buyContractNo;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getSn() {
+        return sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
+
+    public String getEngineNo() {
+        return engineNo;
+    }
+
+    public void setEngineNo(String engineNo) {
+        this.engineNo = engineNo;
+    }
+
+    public String getXxNo() {
+        return xxNo;
+    }
+
+    public void setXxNo(String xxNo) {
+        this.xxNo = xxNo;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }

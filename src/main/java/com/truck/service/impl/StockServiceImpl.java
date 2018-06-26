@@ -100,6 +100,13 @@ public class StockServiceImpl implements IStockService {
         }
         stockVo.setCreateTime(DateTimeUtil.dateToStr(stock.getCreateTime()));
         stockVo.setUpdateTime(DateTimeUtil.dateToStr(stock.getUpdateTime()));
+
+        stockVo.setBuyContractNo(stock.getBuyContractNo());
+        stockVo.setModel(stock.getModel());
+        stockVo.setSn(stock.getSn());
+        stockVo.setEngineNo(stock.getEngineNo());
+        stockVo.setXxNo(stock.getXxNo());
+        stockVo.setBrand(stock.getBrand());
         return stockVo;
     }
     

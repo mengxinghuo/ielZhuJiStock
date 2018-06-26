@@ -2,6 +2,7 @@ package com.truck.service;
 
 import com.truck.common.ServerResponse;
 import com.truck.pojo.Stock;
+import com.truck.vo.StockVo;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface IStockService {
 
     ServerResponse updateStockDetailNum(Integer entryDetailId, Integer entryNum);*/
     ServerResponse batchStockIn(Integer entryId);
+
+    StockVo assembleStockVo(Integer adminId, Stock stock);
 }
