@@ -57,6 +57,8 @@ public class EntryDetailVo {
 
     private String brand;
 
+    private String errorDescs;
+
     public Integer getId() {
         return id;
     }
@@ -271,5 +273,13 @@ public class EntryDetailVo {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getErrorDescs() {
+        return errorDescs;
+    }
+
+    public void setErrorDescs(String errorDescs) {
+        this.errorDescs = errorDescs;
     }
 }

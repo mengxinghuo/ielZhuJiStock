@@ -281,21 +281,20 @@
   </update>
 
   <insert id="batchInsert" parameterType="list" >
-    insert into iel_out_detail (out_id, parts_no,
-    parts_name, parts_en_name, unit,
+    insert into iel_out_detail (out_id,
     sales_price, device_type, stock_position,
     out_num, create_time,
     update_time,define_sn,address,entry_time,destination, buy_contract_no, model,
     sn, engine_no, xx_no, brand)
     values
     <foreach collection="outDetailList" index="index" item="item" separator=",">
-      (#{item.outId,jdbcType=INTEGER}, #{item.partsNo,jdbcType=VARCHAR},
-      #{item.partsName,jdbcType=VARCHAR}, #{item.partsEnName,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR},
+      (#{item.outId,jdbcType=INTEGER},
       #{item.salesPrice,jdbcType=DECIMAL}, #{item.deviceType,jdbcType=VARCHAR}, #{item.stockPosition,jdbcType=INTEGER},
       #{item.outNum,jdbcType=INTEGER}, now(),now(),
-      #{item.defineSn},#{item.address}),#{item.entryTime},#{item.destination}, #{item.buyContractNo,jdbcType=VARCHAR},
+      #{item.defineSn},#{item.address},#{item.entryTime},#{item.destination}, #{item.buyContractNo,jdbcType=VARCHAR},
       #{item.model,jdbcType=VARCHAR}, #{item.sn,jdbcType=VARCHAR}, #{item.engineNo,jdbcType=VARCHAR},
       #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR}
+      )
     </foreach>
   </insert>
 

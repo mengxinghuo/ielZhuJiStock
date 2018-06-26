@@ -47,7 +47,7 @@ public class CartServiceImpl implements ICartService {
             cartItem.setAmount(count);
             cartItem.setStockId(stockId);
             cartItem.setChecked(Const.Cart.CHECKED);
-            cartItem.setCartPrice(stock.getSalesPrice());
+            cartItem.setCartPrice(new BigDecimal(0));
             cartMapper.insertSelective(cartItem);
         } else {
             //这个产品已经在购物车中相加产品数量

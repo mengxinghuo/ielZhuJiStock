@@ -68,6 +68,7 @@ public class InventoryServiceImpl implements IInventoryService {
             inventoryDetail.setStockId(stockInventoryItem.getId());
             inventoryDetail.setStockNum(stockInventoryItem.getQuantity());
             inventoryDetail.setInventoryNum(stockInventoryItem.getPandian());
+            inventoryDetail.setErrorDescs(stockInventoryItem.getErrorDescs());
             inventoryDetailList.add(inventoryDetail);
         }
         return inventoryDetailList;
@@ -128,6 +129,7 @@ public class InventoryServiceImpl implements IInventoryService {
         inventoryDetailVo.setStockVo(stockVo);
         inventoryDetailVo.setCreateTime(DateTimeUtil.dateToStr(inventoryDetail.getCreateTime()));
         inventoryDetailVo.setUpdateTime(DateTimeUtil.dateToStr(inventoryDetail.getUpdateTime()));
+        inventoryDetailVo.setErrorDescs(inventoryDetail.getErrorDescs());
         return inventoryDetailVo;
     }
 

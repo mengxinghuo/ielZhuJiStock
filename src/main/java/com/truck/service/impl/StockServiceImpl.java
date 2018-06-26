@@ -31,6 +31,9 @@ public class StockServiceImpl implements IStockService {
     @Autowired
     private CartMapper cartMapper;
 
+    @Autowired
+    private RepertoryMapper repertoryMapper;
+
     public ServerResponse batchStockIn(Integer entryId){
         if (entryId == null ) {
             return ServerResponse.createByErrorMessage("入库参数错误");
@@ -100,6 +103,20 @@ public class StockServiceImpl implements IStockService {
         }
         stockVo.setCreateTime(DateTimeUtil.dateToStr(stock.getCreateTime()));
         stockVo.setUpdateTime(DateTimeUtil.dateToStr(stock.getUpdateTime()));
+
+        if(!org.springframework.util.StringUtils.isEmpty(stock.getPosition())){
+            //拼接 位置代码
+            List<Integer> idList = Lists.newArrayList();
+            iRepertoryService.findDeepParentId(idList,stock.getPosition());
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = idList.size() - 1; i >= 0; i--) {
+                Repertory repertory = repertoryMapper.selectByPrimaryKey(idList.get(i));
+                if (repertory != null) {
+                    stringBuilder.append("-"+repertory.getName());
+                }
+            }
+            stockVo.setAddress(stock.getCustomsClearance()+stringBuilder.toString());
+        }
 
         stockVo.setShipNum(stock.getShipNum());
         stockVo.setBuyContractNo(stock.getBuyContractNo());

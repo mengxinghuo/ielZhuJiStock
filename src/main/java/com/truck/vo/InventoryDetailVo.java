@@ -19,6 +19,8 @@ public class InventoryDetailVo {
 
     private StockVo stockVo;
 
+    private String errorDescs;
+
     public Integer getId() {
         return id;
     }
@@ -59,8 +61,6 @@ public class InventoryDetailVo {
         this.inventoryNum = inventoryNum;
     }
 
-
-
     public StockVo getStockVo() {
         return stockVo;
     }
@@ -83,5 +83,13 @@ public class InventoryDetailVo {
 
     public void setStockVo(StockVo stockVo) {
         this.stockVo = stockVo;
+    }
+
+    public String getErrorDescs() {
+        return errorDescs;
+    }
+
+    public void setErrorDescs(String errorDescs) {
+        this.errorDescs = errorDescs;
     }
 }

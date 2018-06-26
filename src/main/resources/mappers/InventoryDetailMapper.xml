@@ -10,10 +10,11 @@
       <arg column="inventory_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="error_descs" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id,inventory_id, stock_id, stock_num, inventory_num, create_time, update_time
+    id,inventory_id, stock_id, stock_num, inventory_num, create_time, update_time,error_descs
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,10 +28,10 @@
   </delete>
   <insert id="insert" parameterType="com.truck.pojo.InventoryDetail" >
     insert into iel_inventory_detail (id,inventory_id, stock_id, stock_num,
-      inventory_num, create_time, update_time
+      inventory_num, create_time, update_time,error_descs
       )
     values (#{id,jdbcType=INTEGER}, #{inventoryId,jdbcType=INTEGER},#{stockId,jdbcType=INTEGER}, #{stockNum,jdbcType=INTEGER},
-      #{inventoryNum,jdbcType=INTEGER}, now(), now()
+      #{inventoryNum,jdbcType=INTEGER}, now(), now(),#{errorDescs}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.InventoryDetail" >
@@ -53,6 +54,9 @@
       </if>
         create_time,
         update_time,
+      <if test="errorDescs != null" >
+        error_descs,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -72,6 +76,9 @@
       </if>
       now(),
       now(),
+      <if test="errorDescs != null" >
+        #{errorDescs},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.InventoryDetail" >
@@ -90,6 +97,9 @@
         inventory_num = #{inventoryNum,jdbcType=INTEGER},
       </if>
         update_time = now(),
+      <if test="errorDescs != null" >
+        error_descs=#{errorDescs},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -100,18 +110,19 @@
       stock_id = #{stockId,jdbcType=INTEGER},
       stock_num = #{stockNum,jdbcType=INTEGER},
       inventory_num = #{inventoryNum,jdbcType=INTEGER},
-      update_time = now()
+      update_time = now(),
+      error_descs=#{errorDescs}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
   <insert id="batchInsert" parameterType="list" >
     insert into iel_inventory_detail (inventory_id,stock_id, stock_num,
-    inventory_num, create_time, update_time
+    inventory_num, create_time, update_time,error_descs
     )
     values
     <foreach collection="inventoryDetailList" index="index" item="item" separator=",">
     (#{item.inventoryId,jdbcType=INTEGER},#{item.stockId,jdbcType=INTEGER}, #{item.stockNum,jdbcType=INTEGER},
-    #{item.inventoryNum,jdbcType=INTEGER}, now(), now()
+    #{item.inventoryNum,jdbcType=INTEGER}, now(), now(),#{errorDescs}
     )
     </foreach>
   </insert>

@@ -36,6 +36,8 @@ public class OutDetail {
 
     private Date entryTime;
 
+    private String entryTimeStr;
+
     private String destination;
 
     private String buyContractNo;
@@ -50,7 +52,7 @@ public class OutDetail {
 
     private String brand;
 
-    public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType, Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime, String address, String defineSn, Date entryTime, String destination, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand) {
+    public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType, Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime, String defineSn,String address,  Date entryTime, String destination, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand) {
         this.id = id;
         this.outId = outId;
         this.partsNo = partsNo;
@@ -64,8 +66,8 @@ public class OutDetail {
         this.outNum = outNum;
         this.createTime = createTime;
         this.updateTime = updateTime;
-        this.address = address;
         this.defineSn = defineSn;
+        this.address = address;
         this.entryTime = entryTime;
         this.destination = destination;
         this.buyContractNo = buyContractNo;
@@ -262,5 +264,13 @@ public class OutDetail {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getEntryTimeStr() {
+        return entryTimeStr;
+    }
+
+    public void setEntryTimeStr(String entryTimeStr) {
+        this.entryTimeStr = entryTimeStr;
     }
 }

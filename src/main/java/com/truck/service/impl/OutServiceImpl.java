@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
 
@@ -51,6 +52,9 @@ public class OutServiceImpl implements IOutService {
             if(StringUtils.isBlank(cartItem.getDefineSn())){
                 return ServerResponse.createByErrorMessage("请填写自定义的车号");
             }
+            if(cartItem.getCartPrice().compareTo(new BigDecimal(0))==0){
+                return ServerResponse.createByErrorMessage("请填写合同中的销售价格");
+            }
         }
         String outNo = String.valueOf(generateOutNo());
         out.setOutNo(outNo);
@@ -84,7 +88,7 @@ public class OutServiceImpl implements IOutService {
             outDetail.setPartsName(stock.getPartsName());
             outDetail.setPartsEnName(stock.getPartsEnName());
             outDetail.setUnit(stock.getUnit());
-            outDetail.setSalesPrice(stock.getSalesPrice());
+            outDetail.setSalesPrice(cartItem.getCartPrice());
             outDetail.setDeviceType(stock.getDeviceType());
             outDetail.setStockPosition(stock.getPosition());
             outDetail.setOutNum(cartItem.getAmount());
@@ -100,7 +104,7 @@ public class OutServiceImpl implements IOutService {
                         stringBuilder.append("-"+repertory.getName());
                     }
                 }
-                outDetail.setAddress(outDetail.getStockPosition()+stringBuilder.toString());
+                outDetail.setAddress(stock.getCustomsClearance()+stringBuilder.toString());
             }
 
             if (cartItem.getDefineSn()!= null) {
@@ -140,8 +144,9 @@ public class OutServiceImpl implements IOutService {
     public ServerResponse getOutDetail(Integer outId,int pageNum,int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         List<OutDetail> outDetailList = outDetailMapper.selectByOutId(outId);
-
-
+        for (OutDetail outDetail : outDetailList) {
+            outDetail.setEntryTimeStr(DateTimeUtil.dateToStr(outDetail.getEntryTime()));
+        }
         PageInfo pageInfo = new PageInfo(outDetailList);
         return ServerResponse.createBySuccess(pageInfo);
     }

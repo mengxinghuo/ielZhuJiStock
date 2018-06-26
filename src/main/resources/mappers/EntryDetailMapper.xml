@@ -29,13 +29,14 @@
       <arg column="engine_no" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="xx_no" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="brand" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="error_descs" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, entry_id, customs_clearance, destination, package_no, serial_no, parts_no, parts_name, 
     parts_en_name, unit, purchase_num, purchase_price, sales_price, device_type, entry_position, 
     inspect_status, entry_num, create_time, update_time,ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand
+    sn, engine_no, xx_no, brand,error_descs
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -55,7 +56,7 @@
       sales_price, device_type, entry_position, 
       inspect_status, entry_num, create_time, 
       update_time,ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand)
+    sn, engine_no, xx_no, brand,error_descs)
     values (#{id,jdbcType=INTEGER}, #{entryId,jdbcType=INTEGER}, #{customsClearance,jdbcType=VARCHAR}, 
       #{destination,jdbcType=VARCHAR}, #{packageNo,jdbcType=VARCHAR}, #{serialNo,jdbcType=VARCHAR}, 
       #{partsNo,jdbcType=VARCHAR}, #{partsName,jdbcType=VARCHAR}, #{partsEnName,jdbcType=VARCHAR}, 
@@ -64,7 +65,7 @@
       #{inspectStatus,jdbcType=INTEGER}, #{entryNum,jdbcType=INTEGER}, now(),
       now(),#{shipNum}, #{buyContractNo,jdbcType=VARCHAR}, 
       #{model,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{engineNo,jdbcType=VARCHAR}, 
-      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR})
+      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{errorDescs})
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.EntryDetail" >
     insert into iel_entry_detail
@@ -143,6 +144,9 @@
       <if test="brand != null" >
         brand,
       </if>
+      <if test="errorDescs != null" >
+        error_descs,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -219,6 +223,9 @@
       <if test="brand != null" >
         #{brand,jdbcType=VARCHAR},
       </if>
+      <if test="errorDescs != null" >
+        #{errorDescs},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.EntryDetail" >
@@ -294,6 +301,9 @@
       <if test="brand != null" >
         brand = #{brand,jdbcType=VARCHAR},
       </if>
+      <if test="errorDescs != null" >
+        error_descs=#{errorDescs},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -322,7 +332,8 @@
       sn = #{sn,jdbcType=VARCHAR},
       engine_no = #{engineNo,jdbcType=VARCHAR},
       xx_no = #{xxNo,jdbcType=VARCHAR},
-      brand = #{brand,jdbcType=VARCHAR}
+      brand = #{brand,jdbcType=VARCHAR},
+      error_descs=#{errorDescs}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -334,7 +345,7 @@
     sales_price, device_type,inspect_status, create_time,
     update_time,ship_num,buy_contract_no,
     model, sn, engine_no,
-    xx_no, brand)
+    xx_no, brand,error_descs)
     values
     <foreach collection="exportsListsList" index="index" item="item" separator=",">
       (
@@ -346,7 +357,7 @@
       #{item.shipNum},
       #{item.buyContractNo,jdbcType=VARCHAR},
       #{item.model,jdbcType=VARCHAR}, #{item.sn,jdbcType=VARCHAR}, #{item.engineNo,jdbcType=VARCHAR},
-      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR}
+      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.errorDescs}
       )
     </foreach>
   </insert>

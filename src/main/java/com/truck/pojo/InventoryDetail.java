@@ -17,7 +17,9 @@ public class InventoryDetail {
 
     private Date updateTime;
 
-    public InventoryDetail(Integer id,Integer inventoryId, Integer stockId, Integer stockNum, Integer inventoryNum, Date createTime, Date updateTime) {
+    private String errorDescs;
+
+    public InventoryDetail(Integer id,Integer inventoryId, Integer stockId, Integer stockNum, Integer inventoryNum, Date createTime, Date updateTime,String errorDescs) {
         this.id = id;
         this.inventoryId = inventoryId;
         this.stockId = stockId;
@@ -25,6 +27,7 @@ public class InventoryDetail {
         this.inventoryNum = inventoryNum;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.errorDescs = errorDescs;
     }
 
     public Integer getInventoryId() {
@@ -85,5 +88,13 @@ public class InventoryDetail {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getErrorDescs() {
+        return errorDescs;
+    }
+
+    public void setErrorDescs(String errorDescs) {
+        this.errorDescs = errorDescs;
     }
 }

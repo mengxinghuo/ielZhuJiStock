@@ -56,7 +56,9 @@ public class EntryDetail {
 
     private String brand;
 
-    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination, String packageNo, String serialNo, String partsNo, String partsName, String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice, BigDecimal salesPrice, String deviceType, Integer entryPosition, Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime, Integer shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand) {
+    private String errorDescs;
+
+    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination, String packageNo, String serialNo, String partsNo, String partsName, String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice, BigDecimal salesPrice, String deviceType, Integer entryPosition, Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime, Integer shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String errorDescs) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -83,6 +85,7 @@ public class EntryDetail {
         this.engineNo = engineNo;
         this.xxNo = xxNo;
         this.brand = brand;
+        this.errorDescs = errorDescs;
     }
 
     public EntryDetail() {
@@ -295,5 +298,13 @@ public class EntryDetail {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getErrorDescs() {
+        return errorDescs;
+    }
+
+    public void setErrorDescs(String errorDescs) {
+        this.errorDescs = errorDescs;
     }
 }
