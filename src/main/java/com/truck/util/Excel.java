@@ -45,37 +45,25 @@ public class Excel {
             entryDetail.setEntryId(entryId);
             entryDetail.setInspectStatus(0);
 //取出当前行第1个单元格数据，并封装在info实体stuName属性上
-            entryDetail.setCustomsClearance(String.valueOf(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(0).getNumericCellValue()))));
-            entryDetail.setDestination(r.getCell(1).getStringCellValue());
-            entryDetail.setPackageNo(r.getCell(2).getStringCellValue());
-//            entryDetail.setSerialNo(String.valueOf(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(3).getNumericCellValue()))));
-
-         if(r.getCell(3).getCellType() == HSSFCell.CELL_TYPE_STRING){
-             entryDetail.setPartsNo(r.getCell(3).getStringCellValue());
-         }else{
-             entryDetail.setPartsNo(String.valueOf(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(3).getNumericCellValue()))));
-//             exportsLists.setSerialNo(String.valueOf(r.getCell(4).getNumericCellValue()));、
-         }
-
-            entryDetail.setPartsName(r.getCell(4).getStringCellValue());
-            entryDetail.setPartsEnName(r.getCell(5).getStringCellValue());
-            entryDetail.setUnit(r.getCell(6).getStringCellValue());
-            entryDetail.setPurchaseNum(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(7).getNumericCellValue())));
-            entryDetail.setPurchasePrice(new BigDecimal(0));
-      /*      if(String.valueOf(r.getCell(9).getNume、ricCellValue())!=null){
-                entryDetail.setPurchasePrice(new BigDecimal(r.getCell(9).getNumericCellValue()));
-            }else{
-                entryDetail.setPurchasePrice(new BigDecimal(0));
+            entryDetail.setShipNum(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(0).getNumericCellValue())));
+            entryDetail.setCustomsClearance(String.valueOf(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(1).getNumericCellValue()))));
+            entryDetail.setDestination(r.getCell(2).getStringCellValue());
+            entryDetail.setBuyContractNo(r.getCell(3).getStringCellValue());
+            entryDetail.setModel(r.getCell(4).getStringCellValue());
+//            if(r.getCell(5).getCellType() == HSSFCell.CELL_TYPE_STRING) {
+                entryDetail.setSn(r.getCell(5).getStringCellValue());
+     /*       }else{
+                entryDetail.setSn(String.valueOf(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(5).getNumericCellValue()))));
             }*/
-            if(String.valueOf(r.getCell(8).getNumericCellValue())!=null){
-                entryDetail.setSalesPrice(new BigDecimal(r.getCell(8).getNumericCellValue()));
+            entryDetail.setEngineNo(r.getCell(6).getStringCellValue());
+            if(r.getCell(7).getStringCellValue()!=null){
+                entryDetail.setXxNo(r.getCell(7).getStringCellValue());
             }else{
-                entryDetail.setSalesPrice(new BigDecimal(0));
+                entryDetail.setXxNo(StringUtils.EMPTY);
             }
-            entryDetail.setDeviceType(r.getCell(9).getStringCellValue());
+            entryDetail.setDeviceType(r.getCell(8).getStringCellValue());
+            entryDetail.setBrand(r.getCell(9).getStringCellValue());
 
-
-//            info.setLscore(r.getCell(3).getNumericCellValue());
             if(StringUtils.isBlank(entryDetail.getCustomsClearance()) || entryDetail.getCustomsClearance().equals("0")){
                 continue;
             }else{
@@ -84,25 +72,22 @@ public class Excel {
 
         }
         fileIn.close();
-        //mybatis 批量插入
-//        if (temp != null) {
-//            productMapper.batchInsert(temp);
-//        }
         return temp;
     }
 
-    /*public static void main(String[] args) {
-        String path =  "/Users/jianhe/Desktop/出口产品清单 4.xls";
-        List<ExportsLists> list = null;
+
+    public static void main(String[] args) {
+        String path =  "/Users/jianhe/Desktop/主机入库6.xls";
+        List<EntryDetail> list = null;
         try {
-            list = Excel.loadExportsLists(path);
+            list = Excel.loadExportsLists(8,path);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (ExportsLists exportsLists : list) {
-            System.out.println(exportsLists.getCartType());
-            System.out.println(exportsLists.getPartsName());
+        for (EntryDetail entryDetail : list) {
+            System.out.println(entryDetail.getEngineNo());
+            System.out.println(entryDetail.getShipNum());
         }
-    }*/
+    }
 
 }
