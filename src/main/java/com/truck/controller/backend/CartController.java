@@ -48,13 +48,12 @@ public class CartController {
 
     @RequestMapping("update.do")
     @ResponseBody
-    public ServerResponse<CartVo> update(HttpSession session, Integer count, Integer stockId, BigDecimal cartPrice){
+    public ServerResponse<CartVo> update(HttpSession session, Integer count, Integer stockId, BigDecimal cartPrice,String defineSn){
       Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
         if(admin == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
         }
-
-        return iCartService.update(admin.getAdminId(),count,stockId,cartPrice);
+        return iCartService.update(admin.getAdminId(),count,stockId,cartPrice,defineSn);
     }
 
     @RequestMapping("deleteProduct.do")

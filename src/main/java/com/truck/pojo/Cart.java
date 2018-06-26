@@ -20,7 +20,10 @@ public class Cart {
 
     private BigDecimal cartPrice;
 
-    public Cart(Integer cartId, Integer adminId, Integer stockId, Integer amount, Integer checked, Date createTime, Date updateTime, BigDecimal cartPrice) {
+    private String defineSn;
+
+
+    public Cart(Integer cartId, Integer adminId, Integer stockId, Integer amount, Integer checked, Date createTime, Date updateTime, BigDecimal cartPrice, String defineSn) {
         this.cartId = cartId;
         this.adminId = adminId;
         this.stockId = stockId;
@@ -29,6 +32,7 @@ public class Cart {
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.cartPrice = cartPrice;
+        this.defineSn = defineSn;
     }
 
     public Cart() {
@@ -97,5 +101,13 @@ public class Cart {
 
     public void setCartPrice(BigDecimal cartPrice) {
         this.cartPrice = cartPrice;
+    }
+
+    public String getDefineSn() {
+        return defineSn;
+    }
+
+    public void setDefineSn(String defineSn) {
+        this.defineSn = defineSn;
     }
 }

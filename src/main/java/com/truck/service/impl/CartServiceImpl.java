@@ -14,6 +14,7 @@ import com.truck.util.BigDecimalUtil;
 import com.truck.util.DateTimeUtil;
 import com.truck.vo.CartVo;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,7 +62,7 @@ public class CartServiceImpl implements ICartService {
         return this.list(adminId);
     }
 
-    public ServerResponse<CartVo> update(Integer adminId, Integer count, Integer stockId, BigDecimal cartPrice) {
+    public ServerResponse<CartVo> update(Integer adminId, Integer count, Integer stockId, BigDecimal cartPrice,String defineSn) {
         if (count == null || stockId == null)
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(), ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         if (count < 1)
@@ -73,6 +74,9 @@ public class CartServiceImpl implements ICartService {
                     return  ServerResponse.createByErrorMessage("单价不可小于0");
                 }
                 cart.setCartPrice(cartPrice);
+            }
+            if (StringUtils.isNotBlank(defineSn)) {
+                cart.setDefineSn(defineSn);
             }
             Integer real= cart.getAmount()+count;
             if(real <=0){
@@ -143,6 +147,8 @@ public class CartServiceImpl implements ICartService {
         cartVo.setStock(stock);
         cartVo.setCreateTime(DateTimeUtil.dateToStr(cart.getCreateTime()));
         cartVo.setUpdateTime(DateTimeUtil.dateToStr(cart.getUpdateTime()));
+
+        cartVo.setDefineSn(cart.getDefineSn());
         return cartVo;
     }
 

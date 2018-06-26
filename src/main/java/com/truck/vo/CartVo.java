@@ -24,6 +24,8 @@ public class CartVo {
 
     private Stock stock;
 
+    private String defineSn;
+
     public CartVo() {
     }
 
@@ -97,5 +99,13 @@ public class CartVo {
 
     public void setStock(Stock stock) {
         this.stock = stock;
+    }
+
+    public String getDefineSn() {
+        return defineSn;
+    }
+
+    public void setDefineSn(String defineSn) {
+        this.defineSn = defineSn;
     }
 }

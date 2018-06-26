@@ -50,6 +50,32 @@ public class OutDetail {
 
     private String brand;
 
+    public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType, Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime, String address, String defineSn, Date entryTime, String destination, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand) {
+        this.id = id;
+        this.outId = outId;
+        this.partsNo = partsNo;
+        this.partsName = partsName;
+        this.partsEnName = partsEnName;
+        this.unit = unit;
+        this.salesPrice = salesPrice;
+        this.deviceType = deviceType;
+        this.stockPosition = stockPosition;
+        this.status = status;
+        this.outNum = outNum;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.address = address;
+        this.defineSn = defineSn;
+        this.entryTime = entryTime;
+        this.destination = destination;
+        this.buyContractNo = buyContractNo;
+        this.model = model;
+        this.sn = sn;
+        this.engineNo = engineNo;
+        this.xxNo = xxNo;
+        this.brand = brand;
+    }
+
     public String getAddress() {
         return address;
     }
