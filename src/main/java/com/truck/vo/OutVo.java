@@ -21,6 +21,12 @@ public class OutVo {
 
     private String repairNo;
 
+    private String pjbContractNo;
+
+    private String customerName;
+
+    private String address;
+
     public String getStatusDesc() {
         return statusDesc;
     }
@@ -99,5 +105,29 @@ public class OutVo {
 
     public void setRepairNo(String repairNo) {
         this.repairNo = repairNo;
+    }
+
+    public String getPjbContractNo() {
+        return pjbContractNo;
+    }
+
+    public void setPjbContractNo(String pjbContractNo) {
+        this.pjbContractNo = pjbContractNo;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

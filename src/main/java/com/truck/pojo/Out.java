@@ -19,7 +19,13 @@ public class Out {
 
     private String repairNo;
 
-    public Out(Integer id, String outNo, Integer status, Integer operatorId, Date createTime, Date updateTime, Integer repairId, String repairNo) {
+    private String pjbContractNo;
+
+    private String customerName;
+
+    private String address;
+
+    public Out(Integer id, String outNo, Integer status, Integer operatorId, Date createTime, Date updateTime, Integer repairId, String repairNo, String pjbContractNo, String customerName, String address) {
         this.id = id;
         this.outNo = outNo;
         this.status = status;
@@ -28,6 +34,9 @@ public class Out {
         this.updateTime = updateTime;
         this.repairId = repairId;
         this.repairNo = repairNo;
+        this.pjbContractNo = pjbContractNo;
+        this.customerName = customerName;
+        this.address = address;
     }
 
     public Out() {
@@ -96,5 +105,29 @@ public class Out {
 
     public void setRepairNo(String repairNo) {
         this.repairNo = repairNo == null ? null : repairNo.trim();
+    }
+
+    public String getPjbContractNo() {
+        return pjbContractNo;
+    }
+
+    public void setPjbContractNo(String pjbContractNo) {
+        this.pjbContractNo = pjbContractNo;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

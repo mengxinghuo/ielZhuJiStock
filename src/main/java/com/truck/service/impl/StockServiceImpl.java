@@ -101,6 +101,7 @@ public class StockServiceImpl implements IStockService {
         stockVo.setCreateTime(DateTimeUtil.dateToStr(stock.getCreateTime()));
         stockVo.setUpdateTime(DateTimeUtil.dateToStr(stock.getUpdateTime()));
 
+        stockVo.setShipNum(stock.getShipNum());
         stockVo.setBuyContractNo(stock.getBuyContractNo());
         stockVo.setModel(stock.getModel());
         stockVo.setSn(stock.getSn());
@@ -137,6 +138,15 @@ public class StockServiceImpl implements IStockService {
                 stock.setRepertory(idList.get(idList.size()-1));
             }
             stock.setPosition(entryDetailItem.getEntryPosition());
+
+            stock.setShipNum(entryDetailItem.getShipNum());
+            stock.setBuyContractNo(entryDetailItem.getBuyContractNo());
+            stock.setModel(entryDetailItem.getModel());
+            stock.setSn(entryDetailItem.getSn());
+            stock.setEngineNo(entryDetailItem.getEngineNo());
+            stock.setXxNo(entryDetailItem.getXxNo());
+            stock.setBrand(entryDetailItem.getBrand());
+            
             stockList.add(stock);
         }
         return stockList;

@@ -11,10 +11,13 @@
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="repair_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="repair_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pjb_contract_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="customer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, out_no, status, operator_id, create_time, update_time, repair_id, repair_no
+    id, out_no, status, operator_id, create_time, update_time, repair_id, repair_no,pjb_contract_no,customer_name,address
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -29,10 +32,10 @@
   <insert id="insert" parameterType="com.truck.pojo.Out" >
     insert into iel_out (id, out_no, status, 
       operator_id, create_time, update_time, 
-      repair_id, repair_no)
+      repair_id, repair_no,pjb_contract_no,customer_name,address)
     values (#{id,jdbcType=INTEGER}, #{outNo,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{operatorId,jdbcType=INTEGER},now(), now(),
-      #{repairId,jdbcType=INTEGER}, #{repairNo,jdbcType=VARCHAR})
+      #{repairId,jdbcType=INTEGER}, #{repairNo,jdbcType=VARCHAR},#{pjbContractNo},#{customerName},#{address})
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.Out" useGeneratedKeys="true" keyProperty="id">
     insert into iel_out
@@ -57,6 +60,15 @@
       <if test="repairNo != null" >
         repair_no,
       </if>
+      <if test="pjbContractNo != null" >
+        pjb_contract_no,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -79,6 +91,15 @@
       <if test="repairNo != null" >
         #{repairNo,jdbcType=VARCHAR},
       </if>
+      <if test="pjbContractNo != null" >
+        #{pjbContractNo},
+      </if>
+      <if test="customerName != null" >
+        #{customerName},
+      </if>
+      <if test="address != null" >
+        #{address},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Out" >
@@ -100,6 +121,15 @@
       <if test="repairNo != null" >
         repair_no = #{repairNo,jdbcType=VARCHAR},
       </if>
+      <if test="pjbContractNo != null" >
+        pjb_contract_no=#{pjbContractNo},
+      </if>
+      <if test="customerName != null" >
+        customer_name=#{customerName},
+      </if>
+      <if test="address != null" >
+        address=#{address},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -110,7 +140,10 @@
       operator_id = #{operatorId,jdbcType=INTEGER},
       update_time = now(),
       repair_id = #{repairId,jdbcType=INTEGER},
-      repair_no = #{repairNo,jdbcType=VARCHAR}
+      repair_no = #{repairNo,jdbcType=VARCHAR},
+      pjb_contract_no=#{pjbContractNo},
+      customer_name=#{customerName},
+      address=#{address}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

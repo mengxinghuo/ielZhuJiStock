@@ -8,6 +8,7 @@ import com.truck.common.ServerResponse;
 import com.truck.dao.*;
 import com.truck.pojo.*;
 import com.truck.service.IOutService;
+import com.truck.service.IRepertoryService;
 import com.truck.util.DateTimeUtil;
 import com.truck.vo.OutVo;
 import org.apache.commons.lang3.StringUtils;
@@ -30,21 +31,26 @@ public class OutServiceImpl implements IOutService {
     private OutDetailMapper outDetailMapper;
     @Autowired
     private AdminMapper adminMapper;
+    @Autowired
+    private IRepertoryService iRepertoryService;
+    @Autowired
+    private RepertoryMapper repertoryMapper;
 
-    public ServerResponse outStock(Integer adminId,String repairNo){
-        if(StringUtils.isBlank(repairNo)){
-            return ServerResponse.createByErrorMessage("请输入维修单号");
+    public ServerResponse outStock(Integer adminId,Out out){
+        if(StringUtils.isBlank(out.getPjbContractNo())){
+            return ServerResponse.createByErrorMessage("请输入PJB合同号");
+        }
+        if(StringUtils.isBlank(out.getCustomerName())){
+            return ServerResponse.createByErrorMessage("请输入客户名称");
         }
         List<Cart> cartList = cartMapper.selectCartByAdminId(adminId);
         if(cartList.size() == 0){
             return ServerResponse.createByErrorMessage("购物车为空");
         }
         String outNo = String.valueOf(generateOutNo());
-        Out out = new Out();
         out.setOutNo(outNo);
         out.setStatus(Const.OutStatusEnum.UN_OUT.getCode());
         out.setOperatorId(adminId);
-        out.setRepairNo(repairNo);
         int resultCount = outMapper.insertSelective(out);
         if(resultCount == 0){
             return ServerResponse.createByErrorMessage("数据异常，未生成出库单");
@@ -77,6 +83,20 @@ public class OutServiceImpl implements IOutService {
             outDetail.setDeviceType(stock.getDeviceType());
             outDetail.setStockPosition(stock.getPosition());
             outDetail.setOutNum(cartItem.getAmount());
+
+            if(!org.springframework.util.StringUtils.isEmpty(stock.getPosition())){
+                //拼接 位置代码
+                List<Integer> idList = Lists.newArrayList();
+                iRepertoryService.findDeepParentId(idList,stock.getPosition());
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = idList.size() - 1; i >= 0; i--) {
+                    Repertory repertory = repertoryMapper.selectByPrimaryKey(idList.get(i));
+                    if (repertory != null) {
+                        stringBuilder.append("-"+repertory.getName());
+                    }
+                }
+                outDetail.setAddress(outDetail.getStockPosition()+stringBuilder.toString());
+            }
             outDetailList.add(outDetail);
         }
         return outDetailList;
@@ -120,6 +140,10 @@ public class OutServiceImpl implements IOutService {
         outVo.setStatusDesc(Const.OutStatusEnum.codeOf(out.getStatus()).getValue());
         outVo.setCreateTime(DateTimeUtil.dateToStr(out.getCreateTime()));
         outVo.setUpdateTime(DateTimeUtil.dateToStr(out.getUpdateTime()));
+
+        outVo.setPjbContractNo(out.getPjbContractNo());
+        outVo.setCustomerName(out.getCustomerName());
+        outVo.setAddress(out.getAddress());
         return outVo;
     }
 

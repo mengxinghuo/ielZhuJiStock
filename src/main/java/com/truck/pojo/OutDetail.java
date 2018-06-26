@@ -30,20 +30,40 @@ public class OutDetail {
 
     private Date updateTime;
 
-    public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType, Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime) {
-        this.id = id;
-        this.outId = outId;
-        this.partsNo = partsNo;
-        this.partsName = partsName;
-        this.partsEnName = partsEnName;
-        this.unit = unit;
-        this.salesPrice = salesPrice;
-        this.deviceType = deviceType;
-        this.stockPosition = stockPosition;
-        this.status = status;
-        this.outNum = outNum;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
+    private String address;
+
+    private String defineSn;
+
+    private Date entryTime;
+
+    private String destination;
+
+    private String buyContractNo;
+
+    private String model;
+
+    private String sn;
+
+    private String engineNo;
+
+    private String xxNo;
+
+    private String brand;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDefineSn() {
+        return defineSn;
+    }
+
+    public void setDefineSn(String defineSn) {
+        this.defineSn = defineSn;
     }
 
     public OutDetail() {
@@ -152,5 +172,69 @@ public class OutDetail {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Date getEntryTime() {
+        return entryTime;
+    }
+
+    public void setEntryTime(Date entryTime) {
+        this.entryTime = entryTime;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getBuyContractNo() {
+        return buyContractNo;
+    }
+
+    public void setBuyContractNo(String buyContractNo) {
+        this.buyContractNo = buyContractNo;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getSn() {
+        return sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
+
+    public String getEngineNo() {
+        return engineNo;
+    }
+
+    public void setEngineNo(String engineNo) {
+        this.engineNo = engineNo;
+    }
+
+    public String getXxNo() {
+        return xxNo;
+    }
+
+    public void setXxNo(String xxNo) {
+        this.xxNo = xxNo;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }

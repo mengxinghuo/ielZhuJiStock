@@ -16,11 +16,22 @@
       <arg column="out_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="define_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="entry_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="destination" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="buy_contract_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="model" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="engine_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="xx_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="brand" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, out_id, parts_no, parts_name, parts_en_name, unit, sales_price, device_type, 
-    stock_position, status, out_num, create_time, update_time
+    stock_position, status, out_num, create_time, update_time,define_sn,address,entry_time,destination, buy_contract_no, model, 
+    sn, engine_no, xx_no, brand
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -37,12 +48,15 @@
       parts_name, parts_en_name, unit, 
       sales_price, device_type, stock_position, 
       status, out_num, create_time, 
-      update_time)
+      update_time,define_sn,address,entry_time,destination, buy_contract_no, model, 
+    sn, engine_no, xx_no, brand)
     values (#{id,jdbcType=INTEGER}, #{outId,jdbcType=INTEGER}, #{partsNo,jdbcType=VARCHAR}, 
       #{partsName,jdbcType=VARCHAR}, #{partsEnName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
       #{salesPrice,jdbcType=DECIMAL}, #{deviceType,jdbcType=VARCHAR}, #{stockPosition,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{outNum,jdbcType=INTEGER}, now(),
-      now())
+      now(),#{defineSn},#{address},#{entryTime},#{destination}, #{buyContractNo,jdbcType=VARCHAR}, 
+      #{model,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{engineNo,jdbcType=VARCHAR}, 
+      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.OutDetail" >
     insert into iel_out_detail
@@ -82,6 +96,36 @@
       </if>
         create_time,
         update_time,
+      <if test="defineSn != null" >
+        define_sn,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+        <if test="entryTime != null" >
+          entry_time,
+        </if>
+      <if test="destination != null" >
+        destination,
+      </if>
+        <if test="buyContractNo != null" >
+          buy_contract_no,
+        </if>
+        <if test="model != null" >
+          model,
+        </if>
+        <if test="sn != null" >
+          sn,
+        </if>
+        <if test="engineNo != null" >
+          engine_no,
+        </if>
+        <if test="xxNo != null" >
+          xx_no,
+        </if>
+        <if test="brand != null" >
+          brand,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -119,6 +163,36 @@
       </if>
       now(),
       now(),
+      <if test="defineSn != null" >
+        #{defineSn},
+      </if>
+      <if test="address != null" >
+        #{address},
+      </if>
+      <if test="entryTime != null" >
+        #{entryTime},
+      </if>
+      <if test="destination != null" >
+        #{destination},
+      </if>
+      <if test="buyContractNo != null" >
+        #{buyContractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNo != null" >
+        #{engineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="xxNo != null" >
+        #{xxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.OutDetail" >
@@ -155,6 +229,36 @@
         out_num = #{outNum,jdbcType=INTEGER},
       </if>
         update_time = now(),
+      <if test="defineSn != null" >
+        define_sn=#{defineSn},
+      </if>
+      <if test="address != null" >
+        address=#{address},
+      </if>
+      <if test="entryTime != null" >
+        entry_time=#{entryTime},
+      </if>
+      <if test="destination != null" >
+        destination=#{destination},
+      </if>
+      <if test="buyContractNo != null" >
+        buy_contract_no=#{buyContractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model=#{model,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        sn=#{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNo != null" >
+        engine_no=#{engineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="xxNo != null" >
+        xx_no=#{xxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand=#{brand,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -170,7 +274,9 @@
       stock_position = #{stockPosition,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       out_num = #{outNum,jdbcType=INTEGER},
-      update_time = now()
+      update_time = now(),
+      define_sn=#{defineSn},
+      address=#{address}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -179,14 +285,17 @@
     parts_name, parts_en_name, unit,
     sales_price, device_type, stock_position,
     out_num, create_time,
-    update_time)
+    update_time,define_sn,address,entry_time,destination, buy_contract_no, model,
+    sn, engine_no, xx_no, brand)
     values
     <foreach collection="outDetailList" index="index" item="item" separator=",">
       (#{item.outId,jdbcType=INTEGER}, #{item.partsNo,jdbcType=VARCHAR},
       #{item.partsName,jdbcType=VARCHAR}, #{item.partsEnName,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR},
       #{item.salesPrice,jdbcType=DECIMAL}, #{item.deviceType,jdbcType=VARCHAR}, #{item.stockPosition,jdbcType=INTEGER},
-      #{item.outNum,jdbcType=INTEGER}, now(),
-      now())
+      #{item.outNum,jdbcType=INTEGER}, now(),now(),
+      #{item.defineSn},#{item.address}),#{item.entryTime},#{item.destination}, #{item.buyContractNo,jdbcType=VARCHAR},
+      #{item.model,jdbcType=VARCHAR}, #{item.sn,jdbcType=VARCHAR}, #{item.engineNo,jdbcType=VARCHAR},
+      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR}
     </foreach>
   </insert>
 
