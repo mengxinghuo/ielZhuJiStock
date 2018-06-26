@@ -47,6 +47,11 @@ public class OutServiceImpl implements IOutService {
         if(cartList.size() == 0){
             return ServerResponse.createByErrorMessage("购物车为空");
         }
+        for(Cart cartItem : cartList){
+            if(StringUtils.isBlank(cartItem.getDefineSn())){
+                return ServerResponse.createByErrorMessage("请填写自定义的车号");
+            }
+        }
         String outNo = String.valueOf(generateOutNo());
         out.setOutNo(outNo);
         out.setStatus(Const.OutStatusEnum.UN_OUT.getCode());
@@ -97,6 +102,19 @@ public class OutServiceImpl implements IOutService {
                 }
                 outDetail.setAddress(outDetail.getStockPosition()+stringBuilder.toString());
             }
+
+            if (cartItem.getDefineSn()!= null) {
+                outDetail.setDefineSn(cartItem.getDefineSn());
+            }
+            outDetail.setEntryTime(stock.getCreateTime());
+            outDetail.setDestination(stock.getDestination());
+            outDetail.setBuyContractNo(stock.getBuyContractNo());
+            outDetail.setModel(stock.getModel());
+            outDetail.setSn(stock.getSn());
+            outDetail.setEngineNo(stock.getEngineNo());
+            outDetail.setXxNo(stock.getXxNo());
+            outDetail.setBrand(stock.getBrand());
+
             outDetailList.add(outDetail);
         }
         return outDetailList;
