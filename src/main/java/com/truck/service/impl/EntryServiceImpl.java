@@ -129,6 +129,27 @@ public class EntryServiceImpl implements IEntryService {
         return ServerResponse.createByErrorMessage("更新入库详情位置失败");
     }
 
+    public ServerResponse updateEntryDetailIdOrDescs(Integer entryDetailId,Integer typeCategoryId,String errorDescs){
+        if (entryDetailId == null || (typeCategoryId==null && errorDescs==null)) {
+            return ServerResponse.createByErrorMessage("更新入库详情位置错误");
+        }
+        EntryDetail entryDetail = entryDetailMapper.selectByPrimaryKey(entryDetailId);
+        if(typeCategoryId!=null){
+            entryDetail.setTypeCategoryId(typeCategoryId);
+        }
+        if(errorDescs!=null){
+            if(entryDetail.getInspectStatus()==1){
+                return ServerResponse.createByErrorMessage("已经标记车辆没有问题，不能填写问题描述");
+            }
+            entryDetail.setErrorDescs(errorDescs);
+        }
+        int rowCount = entryDetailMapper.updateByPrimaryKeySelective(entryDetail);
+        if(rowCount > 0){
+            return ServerResponse.createBySuccess("更新入库详情位置成功");
+        }
+        return ServerResponse.createByErrorMessage("更新入库详情位置失败");
+    }
+
     public EntryVo assembleEntry(Entry entry){
         EntryVo entryVo = new EntryVo();
         entryVo.setId(entry.getId());

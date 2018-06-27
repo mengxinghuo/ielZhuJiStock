@@ -67,8 +67,9 @@ public class EntryController {
                                               @RequestParam(value = "entryNum", required = false) Integer entryNum){
         return iEntryService.updateEntryDetailNum(entryDetailId,entryNum);
     }
+
     /**
-     * 检验实际入库量,修改数量
+     * 检验实际入库量,修改位置
      * @return
      */
     @RequestMapping("update_entry_detail_position.do")
@@ -76,5 +77,17 @@ public class EntryController {
     public ServerResponse updateEntryDetailPosition(Integer entryDetailId,
                                               @RequestParam(value = "entryPosition", required = false) Integer entryPosition){
         return iEntryService.updateEntryDetailPosition(entryDetailId,entryPosition);
+    }
+
+    /**
+     * 检验实际入库量,填写问题描述，或手动添加设备种类id
+     * @return
+     */
+    @RequestMapping("update_entry_detail_idOrDescs.do")
+    @ResponseBody
+    public ServerResponse updateEntryDetailIdOrDescs(Integer entryDetailId,
+                                              @RequestParam(value = "typeCategoryId", required = false) Integer typeCategoryId,
+                                              @RequestParam(value = "errorDescs", required = false) String errorDescs){
+        return iEntryService.updateEntryDetailIdOrDescs(entryDetailId,typeCategoryId,errorDescs);
     }
 }
