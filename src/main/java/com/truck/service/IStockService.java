@@ -10,6 +10,8 @@ public interface IStockService {
 
     ServerResponse getStockList(Integer adminId,Integer entryId,int pageNum, int pageSize);
 
+    ServerResponse searchStockList(Integer adminId,Stock stock,int pageNum, int pageSize);
+
   /*  ServerResponse getStockDetail(Integer entryId, int pageNum, int pageSize);
 
     ServerResponse updateStockDetailStatus(Integer entryDetailId, Integer inspectStatus);

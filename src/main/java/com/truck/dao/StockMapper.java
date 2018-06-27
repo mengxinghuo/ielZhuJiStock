@@ -20,5 +20,7 @@ public interface StockMapper {
 
     List selectByEntryId(@Param("entryId") Integer entryId);
 
+    List<Stock> selectByStockSelective(@Param("stock") Stock stock);
+
     int batchInsert(@Param("stockList")List<Stock> stockList);
 }

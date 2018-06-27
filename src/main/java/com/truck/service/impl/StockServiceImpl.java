@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 @Service("iStockService")
@@ -79,6 +80,23 @@ public class StockServiceImpl implements IStockService {
         pageInfo.setList(stockVoList);
         return ServerResponse.createBySuccess(pageInfo);
     }
+
+    public ServerResponse searchStockList(Integer adminId,Stock stock, int pageNum, int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        List<Stock> stockList =stockMapper.selectByStockSelective(stock);
+        if(stockList.size() == 0){
+            return ServerResponse.createByErrorMessage("未查到任何记录");
+        }
+        List<StockVo> stockVoList = Lists.newArrayList();
+        for(Stock stockItem : stockList){
+            StockVo stockVo = this.assembleStockVo(adminId,stockItem);
+            stockVoList.add(stockVo);
+        }
+        PageInfo pageInfo = new PageInfo(stockList);
+        pageInfo.setList(stockVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
 
     public StockVo assembleStockVo(Integer adminId,Stock stock){
         StockVo stockVo = new StockVo();

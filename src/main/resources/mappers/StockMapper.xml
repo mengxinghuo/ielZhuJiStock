@@ -315,4 +315,70 @@
       )
     </foreach>
   </insert>
+
+  <select id="selectByStockSelective" parameterType="com.truck.pojo.Stock" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from iel_stock
+    <where>
+      <if test="stock.entryId != null" >
+        and entry_id=#{stock.entryId,jdbcType=INTEGER}
+      </if>
+      <if test="stock.customsClearance != null" >
+        and customs_clearance=#{stock.customsClearance,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.destination != null" >
+        and destination = #{stock.destination,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.partsNo != null" >
+        and parts_no = #{stock.partsNo,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.partsName != null" >
+        and parts_name = #{stock.partsName,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.partsEnName != null" >
+        and parts_en_name = #{stock.partsEnName,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.unit != null" >
+        and unit = #{stock.unit,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.quantity != null" >
+        and quantity = #{stock.quantity,jdbcType=INTEGER}
+      </if>
+      <if test="stock.salesPrice != null" >
+        and sales_price = #{stock.salesPrice,jdbcType=DECIMAL}
+      </if>
+      <if test="stock.deviceType != null" >
+        and device_type = #{stock.deviceType,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.repertory != null" >
+        and repertory = #{stock.repertory,jdbcType=INTEGER}
+      </if>
+      <if test="stock.position != null" >
+        and position = #{stock.position,jdbcType=INTEGER}
+      </if>
+      <if test="stock.shipNum != null" >
+        and ship_num=#{stock.shipNum}
+      </if>
+      <if test="stock.buyContractNo != null" >
+        and buy_contract_no = #{stock.buyContractNo,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.model != null" >
+        and model = #{stock.model,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.sn != null" >
+        and sn = #{stock.sn,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.engineNo != null" >
+        and engine_no = #{stock.engineNo,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.xxNo != null" >
+        and xx_no = #{stock.xxNo,jdbcType=VARCHAR}
+      </if>
+      <if test="stock.brand != null" >
+        and brand = #{stock.brand,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
 </mapper>
