@@ -54,6 +54,8 @@ public class StockVo {
 
     private String modelAlias;
 
+    private Integer typeCategoryId;
+
     public StockVo() {
         super();
     }
@@ -256,5 +258,13 @@ public class StockVo {
 
     public void setModelAlias(String modelAlias) {
         this.modelAlias = modelAlias;
+    }
+
+    public Integer getTypeCategoryId() {
+        return typeCategoryId;
+    }
+
+    public void setTypeCategoryId(Integer typeCategoryId) {
+        this.typeCategoryId = typeCategoryId;
     }
 }

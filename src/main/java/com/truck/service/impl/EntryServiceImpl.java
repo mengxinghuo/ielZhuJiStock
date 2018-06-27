@@ -193,6 +193,7 @@ public class EntryServiceImpl implements IEntryService {
         entryDetailVo.setBrand(entryDetail.getBrand());
 
         entryDetailVo.setErrorDescs(entryDetail.getErrorDescs());
+        entryDetailVo.setTypeCategoryId(entryDetail.getTypeCategoryId());
         return entryDetailVo;
     }
 }

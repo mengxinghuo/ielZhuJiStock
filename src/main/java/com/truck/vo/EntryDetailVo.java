@@ -59,6 +59,8 @@ public class EntryDetailVo {
 
     private String errorDescs;
 
+    private Integer typeCategoryId;
+
     public Integer getId() {
         return id;
     }
@@ -281,5 +283,13 @@ public class EntryDetailVo {
 
     public void setErrorDescs(String errorDescs) {
         this.errorDescs = errorDescs;
+    }
+
+    public Integer getTypeCategoryId() {
+        return typeCategoryId;
+    }
+
+    public void setTypeCategoryId(Integer typeCategoryId) {
+        this.typeCategoryId = typeCategoryId;
     }
 }

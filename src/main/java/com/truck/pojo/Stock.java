@@ -48,7 +48,9 @@ public class Stock {
 
     private String brand;
 
-    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName, String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory, Integer position, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand) {
+    private Integer typeCategoryId;
+
+    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName, String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory, Integer position, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,Integer typeCategoryId) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -71,6 +73,7 @@ public class Stock {
         this.engineNo = engineNo;
         this.xxNo = xxNo;
         this.brand = brand;
+        this.typeCategoryId = typeCategoryId;
     }
 
     public Stock() {
@@ -251,5 +254,13 @@ public class Stock {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public Integer getTypeCategoryId() {
+        return typeCategoryId;
+    }
+
+    public void setTypeCategoryId(Integer typeCategoryId) {
+        this.typeCategoryId = typeCategoryId;
     }
 }

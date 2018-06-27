@@ -157,6 +157,7 @@ public class InventoryServiceImpl implements IInventoryService {
         stockVo.setEngineNo(stock.getEngineNo());
         stockVo.setXxNo(stock.getXxNo());
         stockVo.setBrand(stock.getBrand());
+        stockVo.setTypeCategoryId(stock.getTypeCategoryId());
         return stockVo;
     }
 }

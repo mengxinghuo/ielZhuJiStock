@@ -58,7 +58,9 @@ public class EntryDetail {
 
     private String errorDescs;
 
-    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination, String packageNo, String serialNo, String partsNo, String partsName, String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice, BigDecimal salesPrice, String deviceType, Integer entryPosition, Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String errorDescs) {
+    private Integer typeCategoryId;
+
+    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination, String packageNo, String serialNo, String partsNo, String partsName, String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice, BigDecimal salesPrice, String deviceType, Integer entryPosition, Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String errorDescs,Integer typeCategoryId) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -86,6 +88,7 @@ public class EntryDetail {
         this.xxNo = xxNo;
         this.brand = brand;
         this.errorDescs = errorDescs;
+        this.typeCategoryId = typeCategoryId;
     }
 
     public EntryDetail() {
@@ -306,5 +309,13 @@ public class EntryDetail {
 
     public void setErrorDescs(String errorDescs) {
         this.errorDescs = errorDescs;
+    }
+
+    public Integer getTypeCategoryId() {
+        return typeCategoryId;
+    }
+
+    public void setTypeCategoryId(Integer typeCategoryId) {
+        this.typeCategoryId = typeCategoryId;
     }
 }

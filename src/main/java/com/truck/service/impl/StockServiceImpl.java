@@ -146,6 +146,8 @@ public class StockServiceImpl implements IStockService {
         if (stock.getModel().compareTo("SX3255DR384R")==0){
             stockVo.setModelAlias("6X4自卸车");
         }
+
+        stockVo.setTypeCategoryId(stock.getTypeCategoryId());
         return stockVo;
     }
     
