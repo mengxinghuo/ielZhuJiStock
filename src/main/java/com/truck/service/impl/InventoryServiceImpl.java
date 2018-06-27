@@ -7,12 +7,11 @@ import com.truck.common.Const;
 import com.truck.common.ServerResponse;
 import com.truck.dao.InventoryDetailMapper;
 import com.truck.dao.InventoryMapper;
+import com.truck.dao.RepertoryMapper;
 import com.truck.dao.StockMapper;
-import com.truck.pojo.Inventory;
-import com.truck.pojo.InventoryDetail;
-import com.truck.pojo.Stock;
-import com.truck.pojo.StockInventory;
+import com.truck.pojo.*;
 import com.truck.service.IInventoryService;
+import com.truck.service.IRepertoryService;
 import com.truck.util.DateTimeUtil;
 import com.truck.vo.InventoryDetailVo;
 import com.truck.vo.InventoryVo;
@@ -33,6 +32,10 @@ public class InventoryServiceImpl implements IInventoryService {
     private InventoryDetailMapper inventoryDetailMapper;
     @Autowired
     private StockMapper stockMapper;
+    @Autowired
+    private IRepertoryService iRepertoryService;
+    @Autowired
+    private RepertoryMapper repertoryMapper;
 
     public ServerResponse createInventory(List<StockInventory> stockInventoryList){
         Inventory inventory = new Inventory();
@@ -167,6 +170,20 @@ public class InventoryServiceImpl implements IInventoryService {
         stockVo.setXxNo(stock.getXxNo());
         stockVo.setBrand(stock.getBrand());
         stockVo.setTypeCategoryId(stock.getTypeCategoryId());
+
+        if(!org.springframework.util.StringUtils.isEmpty(stock.getPosition())){
+            //拼接 位置代码
+            List<Integer> idList = Lists.newArrayList();
+            iRepertoryService.findDeepParentId(idList,stock.getPosition());
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = idList.size() - 1; i >= 0; i--) {
+                Repertory repertory = repertoryMapper.selectByPrimaryKey(idList.get(i));
+                if (repertory != null) {
+                    stringBuilder.append("-"+repertory.getName());
+                }
+            }
+            stockVo.setAddress(stock.getCustomsClearance()+stringBuilder.toString());
+        }
         return stockVo;
     }
 }

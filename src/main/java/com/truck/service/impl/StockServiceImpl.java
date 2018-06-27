@@ -31,7 +31,6 @@ public class StockServiceImpl implements IStockService {
     private EntryMapper entryMapper;
     @Autowired
     private CartMapper cartMapper;
-
     @Autowired
     private RepertoryMapper repertoryMapper;
 
