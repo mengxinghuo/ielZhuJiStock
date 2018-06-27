@@ -55,27 +55,6 @@ public class StockController {
         return iStockService.getStockList(admin.getAdminId(),entryId, pageNum, pageSize);
     }
 
-/*    @RequestMapping("search_stock_list.do")
-    @ResponseBody
-    public ServerResponse searchStockList(HttpSession session,
-                                          @RequestParam(value = "shipNum", required = false) String shipNum,
-                                          @RequestParam(value = "customsClearance", required = false) String customsClearance,
-                                          @RequestParam(value = "destination", required = false) String destination,
-                                          @RequestParam(value = "buyContractNo", required = false) String buyContractNo,
-                                          @RequestParam(value = "deviceType", required = false) String deviceType,
-                                          @RequestParam(value = "brand", required = false) String brand,
-                                          @RequestParam(value = "model", required = false) String model,
-                                          @RequestParam(value = "sn", required = false) String sn,
-                                          @RequestParam(value = "engineNo", required = false) String engineNo,
-                                         @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-                                         @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
-        if(admin == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
-        }
-        return iStockService.searchStockList(admin.getAdminId(),entryId, pageNum, pageSize);
-    }*/
-
     /**
      * 搜索查询在库详情
      * @param stock
