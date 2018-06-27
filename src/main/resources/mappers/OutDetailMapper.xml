@@ -326,7 +326,7 @@
       #{item.outNum,jdbcType=INTEGER}, now(),now(),
       #{item.defineSn},#{item.address},#{item.entryTime},#{item.destination}, #{item.buyContractNo,jdbcType=VARCHAR},
       #{item.model,jdbcType=VARCHAR}, #{item.sn,jdbcType=VARCHAR}, #{item.engineNo,jdbcType=VARCHAR},
-      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.modelAlias},#{defineStr},#{defineModelNo}
+      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.modelAlias},#{item.defineStr},#{item.defineModelNo}
       )
     </foreach>
   </insert>
