@@ -68,7 +68,14 @@ public class InventoryServiceImpl implements IInventoryService {
             inventoryDetail.setStockId(stockInventoryItem.getId());
             inventoryDetail.setStockNum(stockInventoryItem.getQuantity());
             inventoryDetail.setInventoryNum(stockInventoryItem.getPandian());
-            inventoryDetail.setErrorDescs(stockInventoryItem.getErrorDescs());
+            inventoryDetail.setStatus(Const.InventoryDetailStatusEnum.NORMAL.getCode());
+            if(inventoryDetail.getStockNum() > inventoryDetail.getInventoryNum()){
+                inventoryDetail.setStatus(Const.InventoryDetailStatusEnum.LESS.getCode());
+            }
+            if (stockInventoryItem.getErrorDescs()!= null) {
+                inventoryDetail.setErrorDescs(stockInventoryItem.getErrorDescs());
+                inventoryDetail.setStatus(Const.InventoryDetailStatusEnum.ERROR_ZHUJI.getCode());
+            }
             inventoryDetailList.add(inventoryDetail);
         }
         return inventoryDetailList;
@@ -130,6 +137,7 @@ public class InventoryServiceImpl implements IInventoryService {
         inventoryDetailVo.setCreateTime(DateTimeUtil.dateToStr(inventoryDetail.getCreateTime()));
         inventoryDetailVo.setUpdateTime(DateTimeUtil.dateToStr(inventoryDetail.getUpdateTime()));
         inventoryDetailVo.setErrorDescs(inventoryDetail.getErrorDescs());
+        inventoryDetailVo.setStatus(inventoryDetail.getStatus());
         return inventoryDetailVo;
     }
 

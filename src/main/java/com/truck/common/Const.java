@@ -112,6 +112,35 @@ public class Const {
             }
             throw new RuntimeException("么有找到对应的枚举");
         }
+    }
+
+    public enum InventoryDetailStatusEnum{
+        ERROR_ZHUJI(0,"有问题车辆"),
+        NORMAL(1,"正常"),
+        LESS(2,"数量不对");
+
+        private String value;
+        private int code;
+        InventoryDetailStatusEnum(int code,String value){
+            this.code = code;
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+        public static InventoryDetailStatusEnum codeOf(int code){
+            for(InventoryDetailStatusEnum inventoryDetailStatusEnum : values()){
+                if(inventoryDetailStatusEnum.getCode() == code){
+                    return inventoryDetailStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
 
     }
 
