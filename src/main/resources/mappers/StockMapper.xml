@@ -394,4 +394,72 @@
     </where>
   </select>
 
+  <select id="selectByStockSelectiveLike" parameterType="com.truck.pojo.Stock" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from iel_stock
+    <where>
+      <if test="stock.entryId != null" >
+        and entry_id like concat('%',#{stock.entryId},'%')
+      </if>
+      <if test="stock.customsClearance != null" >
+        and customs_clearance like concat('%',#{stock.customsClearance},'%')
+      </if>
+      <if test="stock.destination != null" >
+        and destination like concat('%',#{stock.destination},'%')
+      </if>
+      <if test="stock.partsNo != null" >
+        and parts_no like concat('%',#{stock.partsNo},'%')
+      </if>
+      <if test="stock.partsName != null" >
+        and parts_name like concat('%',#{stock.partsName},'%')
+      </if>
+      <if test="stock.partsEnName != null" >
+        and parts_en_name like concat('%',#{stock.partsEnName},'%')
+      </if>
+      <if test="stock.unit != null" >
+        and unit like concat('%',#{stock.unit},'%')
+      </if>
+      <if test="stock.quantity != null" >
+        and quantity like concat('%',#{stock.quantity},'%')
+      </if>
+      <if test="stock.salesPrice != null" >
+        and sales_price like concat('%',#{stock.salesPrice},'%')
+      </if>
+      <if test="stock.deviceType != null" >
+        and device_type like concat('%',#{stock.salesPrice},'%')
+      </if>
+      <if test="stock.repertory != null" >
+        and repertory like concat('%',#{stock.salesPrice},'%')
+      </if>
+      <if test="stock.position != null" >
+        and position = #{stock.position,jdbcType=INTEGER}
+      </if>
+      <if test="stock.shipNum != null" >
+        and ship_num like concat('%',#{stock.shipNum},'%')
+      </if>
+      <if test="stock.buyContractNo != null" >
+        and buy_contract_no like concat('%',#{stock.buyContractNo},'%')
+      </if>
+      <if test="stock.model != null" >
+        and model like concat('%',#{stock.model},'%')
+      </if>
+      <if test="stock.sn != null" >
+        and sn like concat('%',#{stock.sn},'%')
+      </if>
+      <if test="stock.engineNo != null" >
+        and engine_no like concat('%',#{stock.engineNo},'%')
+      </if>
+      <if test="stock.xxNo != null" >
+        and xx_no like concat('%',#{stock.xxNo},'%')
+      </if>
+      <if test="stock.brand != null" >
+        and brand like concat('%',#{stock.brand},'%')
+      </if>
+      <if test="stock.typeCategoryId != null" >
+        and type_category_id like concat('%',#{stock.typeCategoryId},'%')
+      </if>
+    </where>
+  </select>
+
 </mapper>

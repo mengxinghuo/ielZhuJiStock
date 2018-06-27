@@ -22,5 +22,7 @@ public interface StockMapper {
 
     List<Stock> selectByStockSelective(@Param("stock") Stock stock);
 
+    List<Stock> selectByStockSelectiveLike(@Param("stock") Stock stock);
+
     int batchInsert(@Param("stockList")List<Stock> stockList);
 }

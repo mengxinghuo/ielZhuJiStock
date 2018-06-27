@@ -96,6 +96,22 @@ public class StockServiceImpl implements IStockService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
+    public ServerResponse searchLikeStockList(Integer adminId,Stock stock, int pageNum, int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        List<Stock> stockList =stockMapper.selectByStockSelectiveLike(stock);
+        if(stockList.size() == 0){
+            return ServerResponse.createByErrorMessage("未查到任何记录");
+        }
+        List<StockVo> stockVoList = Lists.newArrayList();
+        for(Stock stockItem : stockList){
+            StockVo stockVo = this.assembleStockVo(adminId,stockItem);
+            stockVoList.add(stockVo);
+        }
+        PageInfo pageInfo = new PageInfo(stockList);
+        pageInfo.setList(stockVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
 
     public StockVo assembleStockVo(Integer adminId,Stock stock){
         StockVo stockVo = new StockVo();

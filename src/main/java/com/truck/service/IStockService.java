@@ -12,6 +12,8 @@ public interface IStockService {
 
     ServerResponse searchStockList(Integer adminId,Stock stock,int pageNum, int pageSize);
 
+    ServerResponse searchLikeStockList(Integer adminId,Stock stock,int pageNum, int pageSize);
+
   /*  ServerResponse getStockDetail(Integer entryId, int pageNum, int pageSize);
 
     ServerResponse updateStockDetailStatus(Integer entryDetailId, Integer inspectStatus);
