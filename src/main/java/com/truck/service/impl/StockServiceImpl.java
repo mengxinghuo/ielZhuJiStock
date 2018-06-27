@@ -158,11 +158,10 @@ public class StockServiceImpl implements IStockService {
         stockVo.setEngineNo(stock.getEngineNo());
         stockVo.setXxNo(stock.getXxNo());
         stockVo.setBrand(stock.getBrand());
-        if (stock.getModel().compareTo("SX3255DR384R")==0){
-            stockVo.setModelAlias("6X4自卸车");
-        }
+
 
         stockVo.setTypeCategoryId(stock.getTypeCategoryId());
+        stockVo.setModelAlias(stock.getModelAlias());
         return stockVo;
     }
     
@@ -201,7 +200,9 @@ public class StockServiceImpl implements IStockService {
             stock.setEngineNo(entryDetailItem.getEngineNo());
             stock.setXxNo(entryDetailItem.getXxNo());
             stock.setBrand(entryDetailItem.getBrand());
-            
+            if (entryDetailItem.getModelAlias() != null) {
+                stock.setModelAlias(entryDetailItem.getModelAlias());
+            }
             stockList.add(stock);
         }
         return stockList;

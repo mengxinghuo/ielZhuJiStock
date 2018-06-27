@@ -184,6 +184,7 @@ public class InventoryServiceImpl implements IInventoryService {
             }
             stockVo.setAddress(stock.getCustomsClearance()+stringBuilder.toString());
         }
+        stockVo.setModelAlias(stock.getModelAlias());
         return stockVo;
     }
 }

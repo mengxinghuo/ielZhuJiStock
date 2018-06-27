@@ -61,6 +61,8 @@ public class EntryDetailVo {
 
     private Integer typeCategoryId;
 
+    private String modelAlias;
+
     public Integer getId() {
         return id;
     }
@@ -291,5 +293,13 @@ public class EntryDetailVo {
 
     public void setTypeCategoryId(Integer typeCategoryId) {
         this.typeCategoryId = typeCategoryId;
+    }
+
+    public String getModelAlias() {
+        return modelAlias;
+    }
+
+    public void setModelAlias(String modelAlias) {
+        this.modelAlias = modelAlias;
     }
 }

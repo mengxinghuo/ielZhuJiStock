@@ -118,7 +118,7 @@ public class OutServiceImpl implements IOutService {
             outDetail.setEngineNo(stock.getEngineNo());
             outDetail.setXxNo(stock.getXxNo());
             outDetail.setBrand(stock.getBrand());
-
+            outDetail.setModelAlias(stock.getModelAlias());
             outDetailList.add(outDetail);
         }
         return outDetailList;

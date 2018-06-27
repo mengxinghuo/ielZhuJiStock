@@ -52,7 +52,9 @@ public class OutDetail {
 
     private String brand;
 
-    public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType, Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime, String defineSn,String address,  Date entryTime, String destination, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand) {
+    private String modelAlias;
+
+    public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType, Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime, String defineSn,String address,  Date entryTime, String destination, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String modelAlias) {
         this.id = id;
         this.outId = outId;
         this.partsNo = partsNo;
@@ -76,6 +78,7 @@ public class OutDetail {
         this.engineNo = engineNo;
         this.xxNo = xxNo;
         this.brand = brand;
+        this.modelAlias = modelAlias;
     }
 
     public String getAddress() {
@@ -272,5 +275,13 @@ public class OutDetail {
 
     public void setEntryTimeStr(String entryTimeStr) {
         this.entryTimeStr = entryTimeStr;
+    }
+
+    public String getModelAlias() {
+        return modelAlias;
+    }
+
+    public void setModelAlias(String modelAlias) {
+        this.modelAlias = modelAlias;
     }
 }

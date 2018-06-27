@@ -26,13 +26,14 @@
       <arg column="xx_no" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="brand" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="type_category_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="model_alias" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, entry_id, customs_clearance, destination, parts_no, parts_name, parts_en_name, 
     unit, quantity, sales_price, device_type, repertory, position, create_time, update_time,
     ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand,type_category_id
+    sn, engine_no, xx_no, brand,type_category_id,model_alias
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -51,7 +52,7 @@
       sales_price, device_type, repertory, 
       position, create_time, update_time,
       ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand,type_category_id
+    sn, engine_no, xx_no, brand,type_category_id,model_alias
       )
     values (#{id,jdbcType=INTEGER}, #{entryId,jdbcType=INTEGER}, #{customsClearance,jdbcType=VARCHAR}, 
       #{destination,jdbcType=VARCHAR}, #{partsNo,jdbcType=VARCHAR}, #{partsName,jdbcType=VARCHAR}, 
@@ -59,7 +60,7 @@
       #{salesPrice,jdbcType=DECIMAL}, #{deviceType,jdbcType=VARCHAR}, #{repertory,jdbcType=INTEGER}, 
       #{position,jdbcType=INTEGER},now(), now(),#{shipNum}, #{buyContractNo,jdbcType=VARCHAR}, 
       #{model,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{engineNo,jdbcType=VARCHAR}, 
-      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{typeCategoryId}
+      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{typeCategoryId},#{modelAlias}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.Stock" >
@@ -130,6 +131,9 @@
       <if test="typeCategoryId != null" >
         type_category_id,
       </if>
+      <if test="modelAlias != null" >
+        model_alias,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -197,6 +201,9 @@
       <if test="typeCategoryId != null" >
         #{typeCategoryId,jdbcType=INTEGER},
       </if>
+      <if test="modelAlias != null" >
+        #{modelAlias},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Stock" >
@@ -263,6 +270,9 @@
       <if test="typeCategoryId != null" >
         type_category_id = #{typeCategoryId,jdbcType=INTEGER},
       </if>
+      <if test="modelAlias != null" >
+        model_alias=#{modelAlias},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -310,7 +320,7 @@
       position, create_time, update_time,
       ship_num,buy_contract_no,
     model, sn, engine_no,
-    xx_no, brand,type_category_id
+    xx_no, brand,type_category_id,model_alias
       )
     values
     <foreach collection="stockList" index="index" item="item" separator=",">
@@ -321,7 +331,7 @@
       #{item.position,jdbcType=INTEGER}, now(),now(),#{item.shipNum},
        #{item.buyContractNo,jdbcType=VARCHAR},
       #{item.model,jdbcType=VARCHAR}, #{item.sn,jdbcType=VARCHAR}, #{item.engineNo,jdbcType=VARCHAR},
-      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.typeCategoryId}
+      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.typeCategoryId},#{item.modelAlias}
       )
     </foreach>
   </insert>
@@ -391,6 +401,9 @@
       <if test="stock.typeCategoryId != null" >
         and type_category_id = #{stock.typeCategoryId,jdbcType=INTEGER}
       </if>
+      <if test="stock.modelAlias != null" >
+        and model_alias=#{stock.modelAlias}
+      </if>
     </where>
   </select>
 
@@ -458,6 +471,9 @@
       </if>
       <if test="stock.typeCategoryId != null" >
         and type_category_id like concat('%',#{stock.typeCategoryId},'%')
+      </if>
+      <if test="stock.modelAlias != null" >
+        and model_alias like concat('%',#{stock.modelAlias},'%')
       </if>
     </where>
   </select>

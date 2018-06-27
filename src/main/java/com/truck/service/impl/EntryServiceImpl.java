@@ -215,6 +215,7 @@ public class EntryServiceImpl implements IEntryService {
 
         entryDetailVo.setErrorDescs(entryDetail.getErrorDescs());
         entryDetailVo.setTypeCategoryId(entryDetail.getTypeCategoryId());
+        entryDetailVo.setModelAlias(entryDetail.getModelAlias());
         return entryDetailVo;
     }
 }

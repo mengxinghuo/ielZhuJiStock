@@ -33,6 +33,25 @@ public class ExportsListsServiceImpl implements IExportsListsService {
             if (path != null) {
                 list = Excel.loadExportsLists(entryId,path);
                 if (list != null) {
+                    for (EntryDetail entryDetail : list) {
+
+                        if (entryDetail.getModel().equals("SX3255DR384R"))
+                            entryDetail.setModelAlias("6X4自卸车");
+                        if (entryDetail.getModel().equals("SX1255DR464R"))
+                            entryDetail.setModelAlias("6X4载货车");
+                        if (entryDetail.getModel().equals("SX1254DR366R"))
+                            entryDetail.setModelAlias("8X4载货车");
+                        //todo 一个型号两个别名，应该是笔误
+               /*         if (entryDetail.getModel().equals("SX4255JV294R"))
+                            entryDetail.setModelAlias("420马力牵引+80吨平板");
+                        if (entryDetail.getModel().equals("SX4255JV294R"))
+                            entryDetail.setModelAlias("420马力重载牵引车");*/
+                        if (entryDetail.getModel().equals("SX4254JR294R"))
+                            entryDetail.setModelAlias("340马力牵引+40吨平板");
+                        if (entryDetail.getModel().equals("SX5634TQYPV304"))
+                            entryDetail.setModelAlias("钢包牵引车");
+
+                    }
                     result = entryDetailMapper.bachInsertExports(list);
                 }
             }

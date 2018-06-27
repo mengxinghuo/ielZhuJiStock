@@ -60,7 +60,9 @@ public class EntryDetail {
 
     private Integer typeCategoryId;
 
-    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination, String packageNo, String serialNo, String partsNo, String partsName, String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice, BigDecimal salesPrice, String deviceType, Integer entryPosition, Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String errorDescs,Integer typeCategoryId) {
+    private String modelAlias;
+
+    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination, String packageNo, String serialNo, String partsNo, String partsName, String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice, BigDecimal salesPrice, String deviceType, Integer entryPosition, Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String errorDescs,Integer typeCategoryId,String modelAlias) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -89,6 +91,7 @@ public class EntryDetail {
         this.brand = brand;
         this.errorDescs = errorDescs;
         this.typeCategoryId = typeCategoryId;
+        this.modelAlias = modelAlias;
     }
 
     public EntryDetail() {
@@ -317,5 +320,13 @@ public class EntryDetail {
 
     public void setTypeCategoryId(Integer typeCategoryId) {
         this.typeCategoryId = typeCategoryId;
+    }
+
+    public String getModelAlias() {
+        return modelAlias;
+    }
+
+    public void setModelAlias(String modelAlias) {
+        this.modelAlias = modelAlias;
     }
 }
