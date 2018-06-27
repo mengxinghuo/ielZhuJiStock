@@ -49,9 +49,9 @@ public class OutServiceImpl implements IOutService {
             return ServerResponse.createByErrorMessage("购物车为空");
         }
         for(Cart cartItem : cartList){
-            if(StringUtils.isBlank(cartItem.getDefineSn())){
+          /*  if(StringUtils.isBlank(cartItem.getDefineSn())){
                 return ServerResponse.createByErrorMessage("请填写自定义的车号");
-            }
+            }*/
             if(cartItem.getCartPrice().compareTo(new BigDecimal(0))==0){
                 return ServerResponse.createByErrorMessage("请填写合同中的销售价格");
             }
