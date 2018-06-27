@@ -101,7 +101,7 @@ public class OutServiceImpl implements IOutService {
                 for (int i = idList.size() - 1; i >= 0; i--) {
                     Repertory repertory = repertoryMapper.selectByPrimaryKey(idList.get(i));
                     if (repertory != null) {
-                        stringBuilder.append("-"+repertory.getName());
+                        stringBuilder.append("-"+repertory.getCode());
                     }
                 }
                 outDetail.setAddress(stock.getCustomsClearance()+stringBuilder.toString());

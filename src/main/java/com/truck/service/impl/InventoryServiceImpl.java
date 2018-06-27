@@ -179,7 +179,7 @@ public class InventoryServiceImpl implements IInventoryService {
             for (int i = idList.size() - 1; i >= 0; i--) {
                 Repertory repertory = repertoryMapper.selectByPrimaryKey(idList.get(i));
                 if (repertory != null) {
-                    stringBuilder.append("-"+repertory.getName());
+                    stringBuilder.append("-"+repertory.getCode());
                 }
             }
             stockVo.setAddress(stock.getCustomsClearance()+stringBuilder.toString());
