@@ -52,6 +52,8 @@ public class StockVo {
 
     private String address;
 
+    private String modelAlias;
+
     public StockVo() {
         super();
     }
@@ -246,5 +248,13 @@ public class StockVo {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getModelAlias() {
+        return modelAlias;
+    }
+
+    public void setModelAlias(String modelAlias) {
+        this.modelAlias = modelAlias;
     }
 }
