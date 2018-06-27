@@ -22,8 +22,11 @@ public class Cart {
 
     private String defineSn;
 
+    private String defineStr;
 
-    public Cart(Integer cartId, Integer adminId, Integer stockId, Integer amount, Integer checked, Date createTime, Date updateTime, BigDecimal cartPrice, String defineSn) {
+    private String defineModelNo;
+
+    public Cart(Integer cartId, Integer adminId, Integer stockId, Integer amount, Integer checked, Date createTime, Date updateTime, BigDecimal cartPrice, String defineSn,String defineStr,String defineModelNo) {
         this.cartId = cartId;
         this.adminId = adminId;
         this.stockId = stockId;
@@ -33,6 +36,8 @@ public class Cart {
         this.updateTime = updateTime;
         this.cartPrice = cartPrice;
         this.defineSn = defineSn;
+        this.defineStr = defineStr;
+        this.defineModelNo = defineModelNo;
     }
 
     public Cart() {
@@ -109,5 +114,21 @@ public class Cart {
 
     public void setDefineSn(String defineSn) {
         this.defineSn = defineSn;
+    }
+
+    public String getDefineStr() {
+        return defineStr;
+    }
+
+    public void setDefineStr(String defineStr) {
+        this.defineStr = defineStr;
+    }
+
+    public String getDefineModelNo() {
+        return defineModelNo;
+    }
+
+    public void setDefineModelNo(String defineModelNo) {
+        this.defineModelNo = defineModelNo;
     }
 }

@@ -54,7 +54,14 @@ public class OutDetail {
 
     private String modelAlias;
 
-    public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType, Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime, String defineSn,String address,  Date entryTime, String destination, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String modelAlias) {
+    private String defineStr;
+
+    private String defineModelNo;
+
+    public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType,
+                     Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime, String defineSn,String address,  Date entryTime,
+                     String destination, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String modelAlias,
+                     String defineStr,String defineModelNo) {
         this.id = id;
         this.outId = outId;
         this.partsNo = partsNo;
@@ -79,6 +86,8 @@ public class OutDetail {
         this.xxNo = xxNo;
         this.brand = brand;
         this.modelAlias = modelAlias;
+        this.defineStr = defineStr;
+        this.defineModelNo = defineModelNo;
     }
 
     public String getAddress() {
@@ -283,5 +292,21 @@ public class OutDetail {
 
     public void setModelAlias(String modelAlias) {
         this.modelAlias = modelAlias;
+    }
+
+    public String getDefineStr() {
+        return defineStr;
+    }
+
+    public void setDefineStr(String defineStr) {
+        this.defineStr = defineStr;
+    }
+
+    public String getDefineModelNo() {
+        return defineModelNo;
+    }
+
+    public void setDefineModelNo(String defineModelNo) {
+        this.defineModelNo = defineModelNo;
     }
 }

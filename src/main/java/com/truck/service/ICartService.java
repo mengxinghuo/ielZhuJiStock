@@ -11,7 +11,7 @@ public interface ICartService {
 
     ServerResponse<CartVo> add(Integer adminId, Integer stockId, Integer count);
 
-    ServerResponse<CartVo> update(Integer adminId, Integer count, Integer stockId, BigDecimal cartPrice,String defineSn);
+    ServerResponse<CartVo> update(Integer adminId, Integer count, Integer stockId, BigDecimal cartPrice,String defineSn,String defineStr,String defineModelNo);
 
     ServerResponse<CartVo> deleteProduct(Integer adminId, String stockIds);
 

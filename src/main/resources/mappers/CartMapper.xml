@@ -12,10 +12,13 @@
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="cart_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="define_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="define_str" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="define_model_no" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    cart_id, admin_id, stock_id, amount, checked, create_time, update_time, cart_price,define_sn
+    cart_id, admin_id, stock_id, amount, checked, create_time, update_time, cart_price,define_sn, define_str,
+    define_model_no
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,10 +33,12 @@
   <insert id="insert" parameterType="com.truck.pojo.Cart" >
     insert into iel_cart (cart_id, admin_id, stock_id, 
       amount, checked, create_time, 
-      update_time, cart_price,define_sn)
+      update_time, cart_price,define_sn, define_str,
+    define_model_no)
     values (#{cartId,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}, #{stockId,jdbcType=INTEGER}, 
       #{amount,jdbcType=INTEGER}, #{checked,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{cartPrice,jdbcType=DECIMAL},#{defineSn})
+      #{updateTime,jdbcType=TIMESTAMP}, #{cartPrice,jdbcType=DECIMAL},#{defineSn},
+      #{defineStr,jdbcType=VARCHAR}, #{defineModelNo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.Cart" >
     insert into iel_cart
@@ -61,6 +66,12 @@
       <if test="defineSn != null" >
         define_sn,
       </if>
+      <if test="defineStr != null" >
+        define_str,
+      </if>
+      <if test="defineModelNo != null" >
+        define_model_no,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="cartId != null" >
@@ -85,6 +96,12 @@
       </if>
       <if test="defineSn != null" >
         #{defineSn},
+      </if>
+      <if test="defineStr != null" >
+        #{defineStr,jdbcType=VARCHAR},
+      </if>
+      <if test="defineModelNo != null" >
+        #{defineModelNo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -114,6 +131,12 @@
       </if>
       <if test="defineSn != null" >
         define_sn=#{defineSn},
+      </if>
+      <if test="defineStr != null" >
+        define_str = #{defineStr,jdbcType=VARCHAR},
+      </if>
+      <if test="defineModelNo != null" >
+        define_model_no = #{defineModelNo,jdbcType=VARCHAR},
       </if>
     </set>
     where cart_id = #{cartId,jdbcType=INTEGER}

@@ -62,7 +62,7 @@ public class CartServiceImpl implements ICartService {
         return this.list(adminId);
     }
 
-    public ServerResponse<CartVo> update(Integer adminId, Integer count, Integer stockId, BigDecimal cartPrice,String defineSn) {
+    public ServerResponse<CartVo> update(Integer adminId, Integer count, Integer stockId, BigDecimal cartPrice,String defineSn,String defineStr,String defineModelNo) {
         if (count == null || stockId == null)
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(), ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         if (count < 1)
@@ -77,6 +77,12 @@ public class CartServiceImpl implements ICartService {
             }
             if (StringUtils.isNotBlank(defineSn)) {
                 cart.setDefineSn(defineSn);
+            }
+            if (StringUtils.isNotBlank(defineStr)) {
+                cart.setDefineStr(defineStr);
+            }
+            if (StringUtils.isNotBlank(defineModelNo)) {
+                cart.setDefineModelNo(defineModelNo);
             }
             Integer real= cart.getAmount()+count;
             if(real <=0){
