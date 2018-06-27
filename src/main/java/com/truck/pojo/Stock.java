@@ -34,7 +34,7 @@ public class Stock {
 
     private Date updateTime;
 
-    private Integer shipNum;
+    private String shipNum;
 
     private String buyContractNo;
 
@@ -48,7 +48,7 @@ public class Stock {
 
     private String brand;
 
-    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName, String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory, Integer position, Date createTime, Date updateTime, Integer shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand) {
+    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName, String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory, Integer position, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -197,11 +197,11 @@ public class Stock {
         this.updateTime = updateTime;
     }
 
-    public Integer getShipNum() {
+    public String getShipNum() {
         return shipNum;
     }
 
-    public void setShipNum(Integer shipNum) {
+    public void setShipNum(String shipNum) {
         this.shipNum = shipNum;
     }
 

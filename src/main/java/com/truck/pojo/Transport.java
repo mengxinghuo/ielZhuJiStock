@@ -31,9 +31,9 @@ public class Transport {
 
     private Date updateTime;
 
-    private Integer shipNum;
+    private String shipNum;
 
-    public Transport(Integer id, Integer declareNum, String destination, String arrivalList, String purchaseList, String salesContract, String invoice, String purchaseContract, String exportCost, String salesList, String entranceCost, Integer status, Date createTime, Date updateTime,Integer shipNum) {
+    public Transport(Integer id, Integer declareNum, String destination, String arrivalList, String purchaseList, String salesContract, String invoice, String purchaseContract, String exportCost, String salesList, String entranceCost, Integer status, Date createTime, Date updateTime,String shipNum) {
         this.id = id;
         this.declareNum = declareNum;
         this.destination = destination;
@@ -167,11 +167,11 @@ public class Transport {
         this.updateTime = updateTime;
     }
 
-    public Integer getShipNum() {
+    public String getShipNum() {
         return shipNum;
     }
 
-    public void setShipNum(Integer shipNum) {
+    public void setShipNum(String shipNum) {
         this.shipNum = shipNum;
     }
 }

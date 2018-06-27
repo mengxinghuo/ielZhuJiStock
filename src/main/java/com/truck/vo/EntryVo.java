@@ -18,7 +18,7 @@ public class EntryVo {
 
     private String updateTime;
 
-    private Integer shipNum;
+    private String shipNum;
 
     public Integer getId() {
         return id;
@@ -92,11 +92,11 @@ public class EntryVo {
         this.updateTime = updateTime;
     }
 
-    public Integer getShipNum() {
+    public String getShipNum() {
         return shipNum;
     }
 
-    public void setShipNum(Integer shipNum) {
+    public void setShipNum(String shipNum) {
         this.shipNum = shipNum;
     }
 }

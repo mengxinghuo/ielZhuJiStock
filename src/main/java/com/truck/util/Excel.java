@@ -46,7 +46,8 @@ public class Excel {
             entryDetail.setInspectStatus(0);
             entryDetail.setPurchaseNum(1);
 //取出当前行第1个单元格数据，并封装在info实体stuName属性上
-            entryDetail.setShipNum(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(0).getNumericCellValue())));
+//            entryDetail.setShipNum(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(0).getNumericCellValue())));
+            entryDetail.setShipNum(r.getCell(0).getStringCellValue());
             entryDetail.setCustomsClearance(String.valueOf(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(1).getNumericCellValue()))));
             entryDetail.setDestination(r.getCell(2).getStringCellValue());
             entryDetail.setBuyContractNo(r.getCell(3).getStringCellValue());

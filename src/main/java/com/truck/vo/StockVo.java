@@ -36,7 +36,7 @@ public class StockVo {
 
     private Integer amount;
 
-    private Integer shipNum;
+    private String shipNum;
 
     private String buyContractNo;
 
@@ -184,11 +184,11 @@ public class StockVo {
         this.amount = amount;
     }
 
-    public Integer getShipNum() {
+    public String getShipNum() {
         return shipNum;
     }
 
-    public void setShipNum(Integer shipNum) {
+    public void setShipNum(String shipNum) {
         this.shipNum = shipNum;
     }
 
