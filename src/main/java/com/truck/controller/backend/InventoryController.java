@@ -70,9 +70,10 @@ public class InventoryController {
     @RequestMapping("get_inventory_detail.do")
     @ResponseBody
     public ServerResponse getInventoryDetail(Integer inventoryId,
+                                             Integer status,
                                              @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                              @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
-        return iInventoryService.getInventoryDetail(inventoryId,pageNum,pageSize);
+        return iInventoryService.getInventoryDetail(inventoryId,status,pageNum,pageSize);
     }
 
 }

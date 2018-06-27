@@ -97,12 +97,12 @@ public class InventoryServiceImpl implements IInventoryService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
-    public ServerResponse getInventoryDetail(Integer inventoryId,int pageNum,int pageSize){
+    public ServerResponse getInventoryDetail(Integer inventoryId,Integer status,int pageNum,int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         if(StringUtils.isEmpty(inventoryId)){
             return ServerResponse.createByErrorMessage("请选择要查询的记录");
         }
-        List<InventoryDetail> inventoryDetailList = inventoryDetailMapper.selectByInventoryId(inventoryId);
+        List<InventoryDetail> inventoryDetailList = inventoryDetailMapper.selectByInventoryIdStatus(inventoryId,status);
         List<InventoryDetailVo> inventoryDetailVoList = Lists.newArrayList();
         for(InventoryDetail inventoryDetailItem : inventoryDetailList){
             InventoryDetailVo inventoryDetailVo = this.assembleInventoryDetail(inventoryDetailItem);
@@ -138,6 +138,7 @@ public class InventoryServiceImpl implements IInventoryService {
         inventoryDetailVo.setUpdateTime(DateTimeUtil.dateToStr(inventoryDetail.getUpdateTime()));
         inventoryDetailVo.setErrorDescs(inventoryDetail.getErrorDescs());
         inventoryDetailVo.setStatus(inventoryDetail.getStatus());
+        inventoryDetailVo.setStatusDesc(Const.InventoryDetailStatusEnum.codeOf(inventoryDetail.getStatus()).getValue());
         return inventoryDetailVo;
     }
 

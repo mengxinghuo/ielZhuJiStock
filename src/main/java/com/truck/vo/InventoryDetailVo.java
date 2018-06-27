@@ -23,6 +23,8 @@ public class InventoryDetailVo {
 
     private Integer status;
 
+    private String statusDesc;
+
     public Integer getId() {
         return id;
     }
@@ -101,5 +103,13 @@ public class InventoryDetailVo {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getStatusDesc() {
+        return statusDesc;
+    }
+
+    public void setStatusDesc(String statusDesc) {
+        this.statusDesc = statusDesc;
     }
 }

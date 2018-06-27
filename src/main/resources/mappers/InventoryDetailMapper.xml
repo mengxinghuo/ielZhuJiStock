@@ -138,11 +138,14 @@
     </foreach>
   </insert>
 
-  <select id="selectByInventoryId" parameterType="map" resultMap="BaseResultMap">
+  <select id="selectByInventoryIdStatus" parameterType="map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from iel_inventory_detail
     where inventory_id = #{inventoryId}
+    <if test="status !=null">
+      and status=#{status}
+    </if>
     order by create_time desc
   </select>
 </mapper>
