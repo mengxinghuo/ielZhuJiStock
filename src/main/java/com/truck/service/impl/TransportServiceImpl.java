@@ -282,7 +282,7 @@ public class TransportServiceImpl implements ITransportService {
         }
         transportVo.setStatus(transportVo.getStatus());
         transportVo.setStatusDesc(Const.TransportStatusEnum.codeOf(transport.getStatus()).getValue());
-        transportVo.setCreateTime(DateTimeUtil.dateToStr(transport.getCreateTime()));
+        transportVo.setCreateTime(DateTimeUtil.dateToStr(transport.getCreateTime(),"yyyy-MM-dd"));
         transportVo.setUpdateTime(DateTimeUtil.dateToStr(transport.getUpdateTime()));
 
         return transportVo;
