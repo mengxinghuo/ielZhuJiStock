@@ -160,6 +160,7 @@ public class CartServiceImpl implements ICartService {
         cartVo.setUpdateTime(DateTimeUtil.dateToStr(cart.getUpdateTime()));
 
         cartVo.setDefineSn(cart.getDefineSn());
+        cartVo.setCartPrice(cart.getCartPrice());
         return cartVo;
     }
 
