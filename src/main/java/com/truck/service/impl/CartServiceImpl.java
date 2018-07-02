@@ -161,6 +161,7 @@ public class CartServiceImpl implements ICartService {
 
         cartVo.setDefineSn(cart.getDefineSn());
         cartVo.setCartPrice(cart.getCartPrice());
+        cartVo.setDefineModelNo(cart.getDefineModelNo());
         return cartVo;
     }
 

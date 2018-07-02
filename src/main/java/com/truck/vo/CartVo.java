@@ -26,6 +26,8 @@ public class CartVo {
 
     private String defineSn;
 
+    private String defineModelNo;
+
     public CartVo() {
     }
 
@@ -107,5 +109,13 @@ public class CartVo {
 
     public void setDefineSn(String defineSn) {
         this.defineSn = defineSn;
+    }
+
+    public String getDefineModelNo() {
+        return defineModelNo;
+    }
+
+    public void setDefineModelNo(String defineModelNo) {
+        this.defineModelNo = defineModelNo;
     }
 }
