@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.truck.common.Const;
 import com.truck.common.ServerResponse;
+import com.truck.controller.backend.InventoryController;
 import com.truck.dao.InventoryDetailMapper;
 import com.truck.dao.InventoryMapper;
 import com.truck.dao.RepertoryMapper;
@@ -16,6 +17,8 @@ import com.truck.util.DateTimeUtil;
 import com.truck.vo.InventoryDetailVo;
 import com.truck.vo.InventoryVo;
 import com.truck.vo.StockVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -25,6 +28,8 @@ import java.util.List;
 
 @Service("iInventoryService")
 public class InventoryServiceImpl implements IInventoryService {
+
+    private static  final Logger logger = LoggerFactory.getLogger(InventoryServiceImpl.class);
 
     @Autowired
     private InventoryMapper inventoryMapper;
@@ -75,7 +80,9 @@ public class InventoryServiceImpl implements IInventoryService {
             if(inventoryDetail.getStockNum() > inventoryDetail.getInventoryNum()){
                 inventoryDetail.setStatus(Const.InventoryDetailStatusEnum.LESS.getCode());
             }
-            if (stockInventoryItem.getErrorDescs()!= null) {
+            logger.info("errorDescs=======:{}",stockInventoryItem.getErrorDescs());
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(stockInventoryItem.getErrorDescs())) {
+                logger.info("errorDescs不是空");
                 inventoryDetail.setErrorDescs(stockInventoryItem.getErrorDescs());
                 inventoryDetail.setStatus(Const.InventoryDetailStatusEnum.ERROR_ZHUJI.getCode());
             }

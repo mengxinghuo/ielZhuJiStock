@@ -133,7 +133,7 @@
     values
     <foreach collection="inventoryDetailList" index="index" item="item" separator=",">
     (#{item.inventoryId,jdbcType=INTEGER},#{item.stockId,jdbcType=INTEGER}, #{item.stockNum,jdbcType=INTEGER},
-    #{item.inventoryNum,jdbcType=INTEGER}, now(), now(),#{errorDescs},#{status}
+    #{item.inventoryNum,jdbcType=INTEGER}, now(), now(),#{item.errorDescs},#{item.status}
     )
     </foreach>
   </insert>
