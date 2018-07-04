@@ -78,6 +78,22 @@ public class TransportController {
     }
 
     /**
+     * 删除运输信息
+     * @param session
+     * @param id
+     * @return
+     */
+    @RequestMapping("del_transport.do")
+    @ResponseBody
+    public ServerResponse updateTransport(HttpSession session,Integer id){
+        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+        if(admin == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+        }
+        return iTransportService.delTransport(admin.getAdminId(),id);
+    }
+
+    /**
      * 进口完善信息
      * @param id
      * @param salesList

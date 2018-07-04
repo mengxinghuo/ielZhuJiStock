@@ -93,6 +93,31 @@ public class TransportServiceImpl implements ITransportService {
     }
 
     /**
+     * 删除出口记录
+     * @param adminId
+     * @param id
+     * @return
+     */
+    public ServerResponse delTransport(Integer adminId, Integer id){
+        if(StringUtils.isEmpty(id)){
+            return ServerResponse.createByErrorMessage("请选择要删除的记录");
+        }
+        Transport transport = transportMapper.selectByPrimaryKey(id);
+        if (transport != null) {
+            if(org.apache.commons.lang3.StringUtils.isNotBlank(transport.getSalesList()) ||
+                    org.apache.commons.lang3.StringUtils.isNotBlank(transport.getEntranceCost())){
+                return ServerResponse.createByErrorMessage("进口已经在使用该记录，无法删除");
+            }
+        }
+        //待定判断
+        int resultCount = transportMapper.deleteByPrimaryKey(id);
+        if(resultCount > 0){
+            return ServerResponse.createBySuccess("删除成功");
+        }
+        return ServerResponse.createByErrorMessage("删除失败");
+    }
+
+    /**
      * 进口 完善信息
      * @param id
      * @param salesList

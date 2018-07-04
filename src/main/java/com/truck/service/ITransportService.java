@@ -9,6 +9,8 @@ public interface ITransportService {
 
     ServerResponse updateTransport(Integer adminId, Transport transport);
 
+    ServerResponse delTransport(Integer adminId, Integer id);
+
     ServerResponse consummateTransport( Integer id, String salesList);
 
     ServerResponse getAllList(Integer status,int pageNum,int pageSize);
