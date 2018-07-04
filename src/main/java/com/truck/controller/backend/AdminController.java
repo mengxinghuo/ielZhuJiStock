@@ -39,6 +39,26 @@ public class AdminController {
             return response;
     }
 
+    /**
+     * 免登陆
+     * @param adminId
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "loginByAdminId.do")
+    @ResponseBody
+    public ServerResponse<Admin> loginByAdminId(Integer adminId, HttpSession session){
+        ServerResponse<Admin> response=iAdminService.getInfomartion(adminId);
+        if (response.isSuccess()){
+            Admin admin=response.getData();
+            session.setAttribute(Const.CURRENT_ADMIN,admin);
+            return response;
+
+        }
+        return response;
+    }
+
+
 
     /**
      * 退出登陆
