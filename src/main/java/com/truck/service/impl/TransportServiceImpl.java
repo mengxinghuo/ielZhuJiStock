@@ -78,13 +78,13 @@ public class TransportServiceImpl implements ITransportService {
         if(StringUtils.isEmpty(transport.getId())){
             return ServerResponse.createByErrorMessage("请选择要修改的记录");
         }
-        Transport transport1 = transportMapper.selectByPrimaryKey(transport.getId());
+ /*       Transport transport1 = transportMapper.selectByPrimaryKey(transport.getId());
         if (transport1 != null) {
             if(org.apache.commons.lang3.StringUtils.isNotBlank(transport1.getSalesList()) ||
                     org.apache.commons.lang3.StringUtils.isNotBlank(transport1.getEntranceCost())){
                 return ServerResponse.createByErrorMessage("进口已经在使用该记录，无法修改");
             }
-        }
+        }*/
         if(!StringUtils.isEmpty(transport.getDeclareNum())){
             int rowCount = transportMapper.checkoutDeclareNum(transport.getId(),transport.getDeclareNum());
             if(rowCount > 0){
@@ -109,13 +109,13 @@ public class TransportServiceImpl implements ITransportService {
         if(StringUtils.isEmpty(id)){
             return ServerResponse.createByErrorMessage("请选择要删除的记录");
         }
-        Transport transport = transportMapper.selectByPrimaryKey(id);
+/*        Transport transport = transportMapper.selectByPrimaryKey(id);
         if (transport != null) {
             if(org.apache.commons.lang3.StringUtils.isNotBlank(transport.getSalesList()) ||
                     org.apache.commons.lang3.StringUtils.isNotBlank(transport.getEntranceCost())){
                 return ServerResponse.createByErrorMessage("进口已经在使用该记录，无法删除");
             }
-        }
+        }*/
         //待定判断
         int resultCount = transportMapper.deleteByPrimaryKey(id);
         if(resultCount > 0){
