@@ -316,8 +316,8 @@ public class TransportServiceImpl implements ITransportService {
         transportVo.setStatusDesc(Const.TransportStatusEnum.codeOf(transport.getStatus()).getValue());
         transportVo.setCreateTime(DateTimeUtil.dateToStr(transport.getCreateTime(),"yyyy-MM-dd"));
         transportVo.setUpdateTime(DateTimeUtil.dateToStr(transport.getUpdateTime()));
-        transportVo.setUrlPeiJian("http://cdn.ayotrust.com/upload/2018-07-05出口产品清单7.xls");
-        transportVo.setUrlZhuJi("http://cdn.ayotrust.com/upload/2018-07-05主机入库6.xls");
+        transportVo.setUrlPeiJian("http://cdn.ayotrust.com/upload/配件入库模板.xls");
+        transportVo.setUrlZhuJi("http://cdn.ayotrust.com/upload/主机入库模板.xls");
 
         return transportVo;
     }
