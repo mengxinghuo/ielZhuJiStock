@@ -7,6 +7,8 @@ import com.truck.pojo.EntryDetail;
 import com.truck.service.FileService;
 import com.truck.service.IExportsListsService;
 import com.truck.util.Excel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import java.util.List;
 @Service("iExportsListsService")
 public class ExportsListsServiceImpl implements IExportsListsService {
 
+    private static  final Logger logger = LoggerFactory.getLogger(ExportsListsServiceImpl.class);
+
     @Autowired
     private EntryDetailMapper entryDetailMapper;
     @Autowired
@@ -25,6 +29,9 @@ public class ExportsListsServiceImpl implements IExportsListsService {
 
     public ServerResponse bachInsertExports (Integer entryId, String path) {
 //        String path =  "/Users/jianhe/Desktop/服务费new.xls";
+
+
+        logger.info("传过来的path{}:",path);
 
         //路径地址转化
         List<EntryDetail> list;
