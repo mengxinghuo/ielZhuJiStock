@@ -5,7 +5,7 @@ import java.util.Date;
 public class Transport {
     private Integer id;
 
-    private Integer declareNum;
+    private String declareNum;
 
     private String destination;
 
@@ -33,7 +33,7 @@ public class Transport {
 
     private String shipNum;
 
-    public Transport(Integer id, Integer declareNum, String destination, String arrivalList, String purchaseList, String salesContract, String invoice, String purchaseContract, String exportCost, String salesList, String entranceCost, Integer status, Date createTime, Date updateTime,String shipNum) {
+    public Transport(Integer id, String declareNum, String destination, String arrivalList, String purchaseList, String salesContract, String invoice, String purchaseContract, String exportCost, String salesList, String entranceCost, Integer status, Date createTime, Date updateTime,String shipNum) {
         this.id = id;
         this.declareNum = declareNum;
         this.destination = destination;
@@ -63,11 +63,11 @@ public class Transport {
         this.id = id;
     }
 
-    public Integer getDeclareNum() {
+    public String getDeclareNum() {
         return declareNum;
     }
 
-    public void setDeclareNum(Integer declareNum) {
+    public void setDeclareNum(String declareNum) {
         this.declareNum = declareNum;
     }
 

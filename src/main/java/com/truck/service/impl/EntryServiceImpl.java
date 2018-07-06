@@ -41,7 +41,7 @@ public class EntryServiceImpl implements IEntryService {
      * @param pageSize
      * @return
      */
-    public ServerResponse getEntryList(Integer status, Integer declareNum, int pageNum, int pageSize){
+    public ServerResponse getEntryList(Integer status, String declareNum, int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         List<Entry> entryList = entryMapper.selectAllList(status,declareNum);
         if(entryList.size() == 0){

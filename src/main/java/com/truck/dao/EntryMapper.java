@@ -18,7 +18,7 @@ public interface EntryMapper {
 
     int updateByPrimaryKey(Entry record);
 
-    int checkoutDeclare(@Param("declareNum")Integer declareNum);
+    int checkoutDeclare(@Param("declareNum")String declareNum);
 
-    List selectAllList(@Param("status") Integer status,@Param("declareNum") Integer declareNum);
+    List selectAllList(@Param("status") Integer status,@Param("declareNum") String declareNum);
 }

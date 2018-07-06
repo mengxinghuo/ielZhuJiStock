@@ -5,7 +5,7 @@
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="entry_no" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="declare_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="declare_num" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="destination" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="inspector" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -31,7 +31,7 @@
     insert into iel_entry (id, entry_no, declare_num, 
       destination, status, inspector, 
       create_time, update_time,ship_num)
-    values (#{id,jdbcType=INTEGER}, #{entryNo,jdbcType=VARCHAR}, #{declareNum,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{entryNo,jdbcType=VARCHAR}, #{declareNum,jdbcType=VARCHAR},
       #{destination,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{inspector,jdbcType=VARCHAR}, 
       now(), now(),#{shipNum})
   </insert>
@@ -70,7 +70,7 @@
         #{entryNo,jdbcType=VARCHAR},
       </if>
       <if test="declareNum != null" >
-        #{declareNum,jdbcType=INTEGER},
+        #{declareNum,jdbcType=VARCHAR},
       </if>
       <if test="destination != null" >
         #{destination,jdbcType=VARCHAR},
@@ -95,7 +95,7 @@
         entry_no = #{entryNo,jdbcType=VARCHAR},
       </if>
       <if test="declareNum != null" >
-        declare_num = #{declareNum,jdbcType=INTEGER},
+        declare_num = #{declareNum,jdbcType=VARCHAR},
       </if>
       <if test="destination != null" >
         destination = #{destination,jdbcType=VARCHAR},
@@ -116,7 +116,7 @@
   <update id="updateByPrimaryKey" parameterType="com.truck.pojo.Entry" >
     update iel_entry
     set entry_no = #{entryNo,jdbcType=VARCHAR},
-      declare_num = #{declareNum,jdbcType=INTEGER},
+      declare_num = #{declareNum,jdbcType=VARCHAR},
       destination = #{destination,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       inspector = #{inspector,jdbcType=VARCHAR},

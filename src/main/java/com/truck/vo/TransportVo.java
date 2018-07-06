@@ -7,7 +7,7 @@ import java.util.List;
 public class TransportVo {
     private Integer id;
 
-    private Integer declareNum;
+    private String declareNum;
 
     private String destination;
 
@@ -56,11 +56,11 @@ public class TransportVo {
         this.id = id;
     }
 
-    public Integer getDeclareNum() {
+    public String getDeclareNum() {
         return declareNum;
     }
 
-    public void setDeclareNum(Integer declareNum) {
+    public void setDeclareNum(String declareNum) {
         this.declareNum = declareNum;
     }
 

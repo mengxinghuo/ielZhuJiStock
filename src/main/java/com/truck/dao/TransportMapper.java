@@ -18,9 +18,9 @@ public interface TransportMapper {
 
     int updateByPrimaryKey(Transport record);
 
-    int selectByDeclareNum(@Param("declareNum") Integer declareNum);
+    int selectByDeclareNum(@Param("declareNum") String declareNum);
 
-    int checkoutDeclareNum(@Param("id") Integer id,@Param("declareNum") Integer declareNum);
+    int checkoutDeclareNum(@Param("id") Integer id,@Param("declareNum") String declareNum);
 
     List getAllList(@Param("status") Integer status);
 }

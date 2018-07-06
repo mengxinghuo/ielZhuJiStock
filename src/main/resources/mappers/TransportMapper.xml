@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.truck.pojo.Transport" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="declare_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="declare_num" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="destination" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="arrival_list" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="purchase_list" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -41,7 +41,7 @@
       invoice, purchase_contract, export_cost, 
       sales_list, entrance_cost, status, 
       create_time, update_time,ship_num)
-    values (#{id,jdbcType=INTEGER}, #{declareNum,jdbcType=INTEGER}, #{destination,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{declareNum,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR},
       #{arrivalList,jdbcType=VARCHAR}, #{purchaseList,jdbcType=VARCHAR}, #{salesContract,jdbcType=VARCHAR}, 
       #{invoice,jdbcType=VARCHAR}, #{purchaseContract,jdbcType=VARCHAR}, #{exportCost,jdbcType=VARCHAR}, 
       #{salesList,jdbcType=VARCHAR}, #{entranceCost,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
@@ -97,7 +97,7 @@
         #{id,jdbcType=INTEGER},
       </if>
       <if test="declareNum != null" >
-        #{declareNum,jdbcType=INTEGER},
+        #{declareNum,jdbcType=VARCHAR},
       </if>
       <if test="destination != null" >
         #{destination,jdbcType=VARCHAR},
@@ -140,7 +140,7 @@
     update iel_transport
     <set >
       <if test="declareNum != null" >
-        declare_num = #{declareNum,jdbcType=INTEGER},
+        declare_num = #{declareNum,jdbcType=VARCHAR},
       </if>
       <if test="destination != null" >
         destination = #{destination,jdbcType=VARCHAR},
@@ -181,7 +181,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.truck.pojo.Transport" >
     update iel_transport
-    set declare_num = #{declareNum,jdbcType=INTEGER},
+    set declare_num = #{declareNum,jdbcType=VARCHAR},
       destination = #{destination,jdbcType=VARCHAR},
       arrival_list = #{arrivalList,jdbcType=VARCHAR},
       purchase_list = #{purchaseList,jdbcType=VARCHAR},

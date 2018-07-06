@@ -7,7 +7,7 @@ public class Entry {
 
     private String entryNo;
 
-    private Integer declareNum;
+    private String declareNum;
 
     private String destination;
 
@@ -21,7 +21,7 @@ public class Entry {
 
     private String shipNum;
 
-    public Entry(Integer id, String entryNo, Integer declareNum, String destination, Integer status, String inspector, Date createTime, Date updateTime, String shipNum) {
+    public Entry(Integer id, String entryNo, String declareNum, String destination, Integer status, String inspector, Date createTime, Date updateTime, String shipNum) {
         this.id = id;
         this.entryNo = entryNo;
         this.declareNum = declareNum;
@@ -53,11 +53,11 @@ public class Entry {
         this.entryNo = entryNo == null ? null : entryNo.trim();
     }
 
-    public Integer getDeclareNum() {
+    public String getDeclareNum() {
         return declareNum;
     }
 
-    public void setDeclareNum(Integer declareNum) {
+    public void setDeclareNum(String declareNum) {
         this.declareNum = declareNum;
     }
 
