@@ -63,7 +63,12 @@ public class Excel {
      /*       }else{
                 entryDetail.setSn(String.valueOf(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(5).getNumericCellValue()))));
             }*/
-            entryDetail.setEngineNo(r.getCell(6).getStringCellValue());
+            if(r.getCell(6).getCellType() == HSSFCell.CELL_TYPE_STRING){
+                entryDetail.setEngineNo(r.getCell(6).getStringCellValue());
+            }else{
+                entryDetail.setEngineNo(String.valueOf(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(6).getNumericCellValue()))));
+            }
+
             if(r.getCell(7).getStringCellValue()!=null){
                 entryDetail.setXxNo(r.getCell(7).getStringCellValue());
             }else{
