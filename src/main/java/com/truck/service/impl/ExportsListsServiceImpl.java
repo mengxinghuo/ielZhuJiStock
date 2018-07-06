@@ -1,5 +1,6 @@
 package com.truck.service.impl;
 
+import com.google.common.collect.Lists;
 import com.truck.common.ServerResponse;
 import com.truck.dao.EntryDetailMapper;
 import com.truck.pojo.EntryDetail;
@@ -33,8 +34,8 @@ public class ExportsListsServiceImpl implements IExportsListsService {
             if (path != null) {
                 list = Excel.loadExportsLists(entryId,path);
                 if (list != null) {
+                    List<EntryDetail> insertList = Lists.newArrayList();
                     for (EntryDetail entryDetail : list) {
-
                         if (entryDetail.getModel().equals("SX3255DR384R"))
                             entryDetail.setModelAlias("6X4自卸车");
                         if (entryDetail.getModel().equals("SX1255DR464R"))
@@ -50,9 +51,10 @@ public class ExportsListsServiceImpl implements IExportsListsService {
                             entryDetail.setModelAlias("340马力牵引+40吨平板");
                         if (entryDetail.getModel().equals("SX5634TQYPV304"))
                             entryDetail.setModelAlias("钢包牵引车");
+                        insertList.add(entryDetail);
 
                     }
-                    result = entryDetailMapper.bachInsertExports(list);
+                    result = entryDetailMapper.bachInsertExports(insertList);
                 }
             }
         } catch (IOException e) {
