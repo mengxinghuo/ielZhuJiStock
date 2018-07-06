@@ -2,6 +2,7 @@ package com.truck.controller.backend;
 
 import com.truck.common.ServerResponse;
 import com.truck.service.IEntryService;
+import com.truck.service.ITransportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ public class EntryController {
 
     @Autowired
     private IEntryService iEntryService;
+    @Autowired
+    private ITransportService iTransportService;
 
     /**
      * 查询入库单列表
@@ -89,5 +92,16 @@ public class EntryController {
                                               @RequestParam(value = "typeCategoryId", required = false) Integer typeCategoryId,
                                               @RequestParam(value = "errorDescs", required = false) String errorDescs){
         return iEntryService.updateEntryDetailIdOrDescs(entryDetailId,typeCategoryId,errorDescs);
+    }
+
+    /**
+     * 创建订单
+     * @param id
+     * @return
+     */
+    @RequestMapping("create_entry.do")
+    @ResponseBody
+    public ServerResponse createEntry(String entryStr){
+        return iTransportService.createEntry(entryStr);
     }
 }

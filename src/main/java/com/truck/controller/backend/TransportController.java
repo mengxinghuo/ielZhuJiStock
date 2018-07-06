@@ -94,32 +94,15 @@ public class TransportController {
     }
 
     /**
-     * 进口完善信息
-     * @param id
-     * @param salesList
+     * 批量插入
+     * @param entryId
+     * @param path
      * @return
      */
-    @RequestMapping("consummate_transport.do")
+    @RequestMapping("batch_insert_exports.do")
     @ResponseBody
-    public ServerResponse consummateTransport(Integer id,HttpServletRequest request,
-                                              @RequestParam(value = "salesList",required = false) MultipartFile[] salesList){
-        Transport transport = transportMapper.selectByPrimaryKey(id);
-        if(Const.TransportStatusEnum.ON_ENTRY.getCode() == transport.getStatus()){
-            return ServerResponse.createByErrorMessage("该记录无法进行修改");
-        }
-        ServerResponse serverResponse = iTransportService.createEntry(id);
-        Map salesMap = uploadFileCDNExcel(salesList,request,serverResponse);
-        String[] urlS= (String[])salesMap.get("file_path");
-        StringBuffer filePath = new StringBuffer();
-        for(int i=0;i<urlS.length;i++){
-            if(i==0){
-                filePath.append(urlS[i]);
-            }else{
-                filePath.append(",").append(urlS[i]);
-            }
-        }
-
-        return iTransportService.consummateTransport(id,filePath.toString());
+    public ServerResponse bachInsertExports(Integer entryId,String path){
+        return iExportsListsService.bachInsertExports(entryId, path);
     }
 
     /**

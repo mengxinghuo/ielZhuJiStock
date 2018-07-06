@@ -15,5 +15,5 @@ public interface ITransportService {
 
     ServerResponse getAllList(Integer status,int pageNum,int pageSize);
 
-    ServerResponse createEntry(Integer id);
+    ServerResponse createEntry(String entryStr);
 }

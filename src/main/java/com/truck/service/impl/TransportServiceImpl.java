@@ -15,6 +15,7 @@ import com.truck.pojo.Transport;
 import com.truck.service.ITransportService;
 import com.truck.util.DateTimeUtil;
 import com.truck.util.FTPUtil;
+import com.truck.util.JsonUtil;
 import com.truck.vo.TransportVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -176,23 +177,8 @@ public class TransportServiceImpl implements ITransportService {
      * @param id
      * @return
      */
-    public ServerResponse createEntry(Integer id){
-        logger.info("id:{}",id);
-        Transport transport = transportMapper.selectByPrimaryKey(id);
-        logger.info("mmm:{}",transport);
-        int rowCount = entryMapper.checkoutDeclare(transport.getDeclareNum());
-        if(rowCount > 0){
-            return ServerResponse.createByErrorMessage("已存在");
-            //业务待定
-        }
-        String entryNo = String.valueOf(this.generateEntryNo());
-        Entry entry = new Entry();
-        entry.setEntryNo(entryNo);
-        entry.setDeclareNum(transport.getDeclareNum());
-        entry.setDestination(transport.getDestination());
-        entry.setShipNum(transport.getShipNum());
-
-        entry.setStatus(Const.EntryStatusEnum.STANDBY.getCode());
+    public ServerResponse createEntry(String  entryStr){
+        Entry entry = JsonUtil.string2Obj(entryStr,Entry.class);
         int resultCount = entryMapper.insertSelective(entry);
         if(resultCount > 0){
             return ServerResponse.createBySuccess(entry.getId());
