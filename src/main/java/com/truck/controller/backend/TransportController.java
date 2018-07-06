@@ -172,7 +172,8 @@ public class TransportController {
                 targetFileName = fileService.uploadReturnCDN(files[i], path);
                 if (StringUtils.isNotBlank(targetFileName)) {
 
-                    urlS[i] = PropertiesUtil.getProperty("field") + PropertiesUtil.getProperty("uploadUrl") +targetFileName;
+                    urlS[i] = PropertiesUtil.getProperty("field") +targetFileName;
+                    targetFileName = targetFileName.substring(targetFileName.lastIndexOf("/")+1);
                     if(id ==null){
                         id=new Random().nextInt(1000);
                     }
