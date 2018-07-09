@@ -21,4 +21,6 @@ public interface EntryDetailMapper {
     int bachInsertExports(@Param("exportsListsList") List<EntryDetail> entryDetailList);
 
     List selectEntryDetail(@Param("entryId") Integer entryId);
+
+    List selectEntryDetailStatus(@Param("entryId") Integer entryId,@Param("status") Integer status);
 }

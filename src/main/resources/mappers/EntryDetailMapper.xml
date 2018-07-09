@@ -389,4 +389,14 @@
     from iel_entry_detail
     where entry_id = #{entryId}
   </select>
+
+  <select id="selectEntryDetailStatus" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from iel_entry_detail
+    where entry_id = #{entryId}
+    <if test="status !=null">
+      and inspect_status =#{status}
+    </if>
+  </select>
 </mapper>

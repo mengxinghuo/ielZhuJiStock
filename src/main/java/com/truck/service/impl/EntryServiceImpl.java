@@ -57,7 +57,20 @@ public class EntryServiceImpl implements IEntryService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
-    public ServerResponse getEntryDetail(Integer entryId, int pageNum, int pageSize){
+    public ServerResponse getEntryDetailByStatus(Integer entryId,Integer status,int pageNum, int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        List<EntryDetail> entryDetailList = entryDetailMapper.selectEntryDetailStatus(entryId,status);
+        List<EntryDetailVo> entryDetailVoList = Lists.newArrayList();
+        for(EntryDetail entryDetailItem : entryDetailList){
+            EntryDetailVo entryDetailVo = this.assembleEntryDetail(entryDetailItem);
+            entryDetailVoList.add(entryDetailVo);
+        }
+        PageInfo pageInfo = new PageInfo(entryDetailList);
+        pageInfo.setList(entryDetailVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
+    public ServerResponse getEntryDetail(Integer entryId,int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         List<EntryDetail> entryDetailList = entryDetailMapper.selectEntryDetail(entryId);
         List<EntryDetailVo> entryDetailVoList = Lists.newArrayList();
@@ -131,7 +144,7 @@ public class EntryServiceImpl implements IEntryService {
 
     public ServerResponse updateEntryDetailIdOrDescs(Integer entryDetailId,Integer typeCategoryId,String errorDescs){
         if (entryDetailId == null || (typeCategoryId==null && errorDescs==null)) {
-            return ServerResponse.createByErrorMessage("更新入库详情位置错误");
+            return ServerResponse.createByErrorMessage("更新入库详情问题描述错误");
         }
         EntryDetail entryDetail = entryDetailMapper.selectByPrimaryKey(entryDetailId);
         if(typeCategoryId!=null){
@@ -145,9 +158,9 @@ public class EntryServiceImpl implements IEntryService {
         }
         int rowCount = entryDetailMapper.updateByPrimaryKeySelective(entryDetail);
         if(rowCount > 0){
-            return ServerResponse.createBySuccess("更新入库详情位置成功");
+            return ServerResponse.createBySuccess("更新入库详情问题描述成功");
         }
-        return ServerResponse.createByErrorMessage("更新入库详情位置失败");
+        return ServerResponse.createByErrorMessage("更新入库详情问题描述失败");
     }
 
     public EntryVo assembleEntry(Entry entry){

@@ -50,6 +50,22 @@ public class EntryController {
     }
 
     /**
+     * 查询入库详情,带状态
+     * @param entryId
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("get_entry_detail_status.do")
+    @ResponseBody
+    public ServerResponse getEntryDetail(Integer entryId,
+                                         @RequestParam(value = "status",defaultValue = "0")Integer status,
+                                         @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                         @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+        return iEntryService.getEntryDetailByStatus(entryId,status,pageNum,pageSize);
+    }
+
+    /**
      * 检验实际入库量,修改状态
      * @return
      */

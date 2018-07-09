@@ -8,6 +8,8 @@ public interface IEntryService {
 
     ServerResponse getEntryDetail(Integer entryId, int pageNum, int pageSize);
 
+    ServerResponse getEntryDetailByStatus(Integer entryId,Integer status, int pageNum, int pageSize);
+
     ServerResponse updateEntryDetailStatus(Integer entryDetailId,Integer inspectStatus);
 
     ServerResponse updateEntryDetailNum(Integer entryDetailId,Integer entryNum);
