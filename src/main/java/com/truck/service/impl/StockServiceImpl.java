@@ -47,8 +47,8 @@ public class StockServiceImpl implements IStockService {
         }
         List<EntryDetail> entryDetails = entryDetailMapper.selectEntryDetail(entryId);
         for (EntryDetail entryDetail : entryDetails) {
-            if (entryDetail.getInspectStatus() == 0 ) {
-                return ServerResponse.createByErrorMessage("请确认入库");
+            if (entryDetail.getInspectStatus() == 0 && StringUtils.isEmpty(entryDetail.getErrorDescs())) {
+                return ServerResponse.createByErrorMessage("请确认入库或填写问题描述");
             }
             if (entryDetail.getEntryPosition()==null) {
                 return ServerResponse.createByErrorMessage("请选择入库位置");
