@@ -398,5 +398,6 @@
     <if test="status !=null">
       and inspect_status =#{status}
     </if>
+    and error_descs !=null
   </select>
 </mapper>
