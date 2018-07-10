@@ -400,4 +400,9 @@
     </if>
     and error_descs is not null
   </select>
+
+  <delete id="deleteByEntryId" parameterType="map">
+    delete from iel_entry_detail
+    where entry_id = #{entryId}
+  </delete>
 </mapper>

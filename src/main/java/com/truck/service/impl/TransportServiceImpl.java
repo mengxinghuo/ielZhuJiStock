@@ -8,9 +8,11 @@ import com.google.common.collect.Maps;
 import com.sun.org.apache.regexp.internal.RE;
 import com.truck.common.Const;
 import com.truck.common.ServerResponse;
+import com.truck.dao.EntryDetailMapper;
 import com.truck.dao.EntryMapper;
 import com.truck.dao.TransportMapper;
 import com.truck.pojo.Entry;
+import com.truck.pojo.EntryDetail;
 import com.truck.pojo.Transport;
 import com.truck.service.ITransportService;
 import com.truck.util.DateTimeUtil;
@@ -34,6 +36,8 @@ public class TransportServiceImpl implements ITransportService {
     private TransportMapper transportMapper;
     @Autowired
     private EntryMapper entryMapper;
+    @Autowired
+    private EntryDetailMapper entryDetailMapper;
 
     private static  final Logger logger = LoggerFactory.getLogger(TransportServiceImpl.class);
 
@@ -184,6 +188,21 @@ public class TransportServiceImpl implements ITransportService {
             return ServerResponse.createBySuccess(entry.getId());
         }
         return ServerResponse.createByErrorMessage("创建失败");
+    }
+
+    public ServerResponse checkEntryByDeclareNum(String declareNum){
+        Entry entry = entryMapper.selectByDeclareNum(declareNum);
+        if(entry != null){
+            entryDetailMapper.deleteByEntryId(entry.getId());
+            List<EntryDetail> entryDetailList = entryDetailMapper.selectEntryDetail(entry.getId());
+            if(entryDetailList.size() == 0){
+                entryMapper.deleteByPrimaryKey(entry.getId());
+                return ServerResponse.createBySuccess();
+            }else{
+                return ServerResponse.createByErrorMessage("清除失败");
+            }
+        }
+        return ServerResponse.createBySuccess();
     }
 
     private long generateEntryNo(){

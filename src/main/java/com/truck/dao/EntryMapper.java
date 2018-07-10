@@ -21,4 +21,6 @@ public interface EntryMapper {
     int checkoutDeclare(@Param("declareNum")String declareNum);
 
     List selectAllList(@Param("status") Integer status,@Param("declareNum") String declareNum);
+
+    Entry selectByDeclareNum(@Param("declareNum")String declareNum);
 }

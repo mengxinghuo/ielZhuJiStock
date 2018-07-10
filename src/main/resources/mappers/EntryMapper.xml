@@ -144,4 +144,11 @@
     </where>
     order by create_time desc
   </select>
+
+  <select id="selectByDeclareNum" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from iel_entry
+    where declare_num = #{declareNum}
+  </select>
 </mapper>

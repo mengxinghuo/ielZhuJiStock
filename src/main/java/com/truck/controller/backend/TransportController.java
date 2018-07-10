@@ -106,6 +106,17 @@ public class TransportController {
     }
 
     /**
+     * 重导 检验重复 删除
+     * @param declareNum
+     * @return
+     */
+    @RequestMapping("check_entry_by_declare_num.do")
+    @ResponseBody
+    public ServerResponse checkEntryByDeclareNum(String declareNum){
+        return iTransportService.checkEntryByDeclareNum(declareNum);
+    }
+
+    /**
      * 查询所有列表，带分页 可根据状态查询
      * @param status
      * @param pageNum
