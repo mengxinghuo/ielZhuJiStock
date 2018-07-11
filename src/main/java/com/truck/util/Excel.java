@@ -32,7 +32,7 @@ public class Excel {
 //对Sheet中的每一行进行迭代
         for (Row r : sht0) {
             //如果当前行的行号（从0开始）未达到2（第三行）则从新循环
-            if(r.getRowNum()<2){
+            if(r.getRowNum()<1){
                 continue;
             }
 /*
