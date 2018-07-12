@@ -83,6 +83,6 @@
     select
     <include refid="Base_Column_List" />
     from iel_customer_address
-    where customer_id = #{customerId},
+    where customer_id = #{customerId}
   </select>
 </mapper>

@@ -65,9 +65,9 @@ public class CustomerContactServiceImpl implements ICustomerContactService {
         }
         int resultCount = customerContactMapper.updateByPrimaryKeySelective(customerContact);
         if(resultCount > 0){
-            return ServerResponse.createBySuccess("新增成功");
+            return ServerResponse.createBySuccess("修改成功");
         }else{
-            return ServerResponse.createByErrorMessage("新增失败");
+            return ServerResponse.createByErrorMessage("修改失败");
         }
     }
 

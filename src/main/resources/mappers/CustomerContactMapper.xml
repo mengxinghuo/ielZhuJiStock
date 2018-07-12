@@ -119,7 +119,7 @@
     from iel_customer_contact
     <where>
       <if test="contactId != null">
-        and contact_id = #{contactId}
+        and contact_id != #{contactId}
       </if>
       <if test="email != null">
         and email = #{email}
