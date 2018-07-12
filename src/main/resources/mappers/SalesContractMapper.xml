@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.truck.dao.SalesContractMapper" >
+  <resultMap id="BaseResultMap" type="com.truck.pojo.SalesContract" >
+    <constructor >
+      <idArg column="sales_contract_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="customer_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="address_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="contact_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="out_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="out_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="bpk_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sales_contract_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sales_contract_id, customer_id, address_id, contact_id, date, out_id, out_no, bpk_no, 
+    sales_contract_no, type, status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from iel_sales_contract
+    where sales_contract_id = #{salesContractId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from iel_sales_contract
+    where sales_contract_id = #{salesContractId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.truck.pojo.SalesContract" >
+    insert into iel_sales_contract (sales_contract_id, customer_id, address_id, 
+      contact_id, date, out_id, 
+      out_no, bpk_no, sales_contract_no, 
+      type, status, create_time, 
+      update_time)
+    values (#{salesContractId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER}, 
+      #{contactId,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{outId,jdbcType=INTEGER}, 
+      #{outNo,jdbcType=VARCHAR}, #{bpkNo,jdbcType=VARCHAR}, #{salesContractNo,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, now(),
+      now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.truck.pojo.SalesContract" >
+    insert into iel_sales_contract
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="salesContractId != null" >
+        sales_contract_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="addressId != null" >
+        address_id,
+      </if>
+      <if test="contactId != null" >
+        contact_id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="outId != null" >
+        out_id,
+      </if>
+      <if test="outNo != null" >
+        out_no,
+      </if>
+      <if test="bpkNo != null" >
+        bpk_no,
+      </if>
+      <if test="salesContractNo != null" >
+        sales_contract_no,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+        create_time,
+        update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="salesContractId != null" >
+        #{salesContractId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="contactId != null" >
+        #{contactId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outId != null" >
+        #{outId,jdbcType=INTEGER},
+      </if>
+      <if test="outNo != null" >
+        #{outNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bpkNo != null" >
+        #{bpkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="salesContractNo != null" >
+        #{salesContractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      now(),
+      now(),
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.SalesContract" >
+    update iel_sales_contract
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="addressId != null" >
+        address_id = #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="contactId != null" >
+        contact_id = #{contactId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outId != null" >
+        out_id = #{outId,jdbcType=INTEGER},
+      </if>
+      <if test="outNo != null" >
+        out_no = #{outNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bpkNo != null" >
+        bpk_no = #{bpkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="salesContractNo != null" >
+        sales_contract_no = #{salesContractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+        update_time = now(),
+    </set>
+    where sales_contract_id = #{salesContractId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.truck.pojo.SalesContract" >
+    update iel_sales_contract
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      address_id = #{addressId,jdbcType=INTEGER},
+      contact_id = #{contactId,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      out_id = #{outId,jdbcType=INTEGER},
+      out_no = #{outNo,jdbcType=VARCHAR},
+      bpk_no = #{bpkNo,jdbcType=VARCHAR},
+      sales_contract_no = #{salesContractNo,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      update_time = now()
+    where sales_contract_id = #{salesContractId,jdbcType=INTEGER}
+  </update>
+
+  <select id="checkOutSalesContract" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from iel_sales_contract
+    <where>
+      <if test="bpkNo != null">
+        and bpk_no = #{bpkNo}
+      </if>
+      <if test="outNo != null">
+        and out_no = #{outNo}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByCustomer" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from iel_sales_contract
+    where customer_id = #{customerId}
+  </select>
+
+  <select id="selectSalesContractList" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from iel_sales_contract
+    where customer_id = #{customerId}
+  </select>
+</mapper>

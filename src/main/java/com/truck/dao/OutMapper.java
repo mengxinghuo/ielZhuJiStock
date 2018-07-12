@@ -19,4 +19,6 @@ public interface OutMapper {
     int updateByPrimaryKey(Out record);
 
     List selectByAdminId(@Param("adminId") Integer adminId);
+
+    Out selectByOutNo(@Param("outNo") String outNo);
 }

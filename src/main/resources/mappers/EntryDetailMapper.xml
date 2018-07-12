@@ -32,13 +32,14 @@
       <arg column="error_descs" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="type_category_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="model_alias" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="configuration" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, entry_id, customs_clearance, destination, package_no, serial_no, parts_no, parts_name, 
     parts_en_name, unit, purchase_num, purchase_price, sales_price, device_type, entry_position, 
     inspect_status, entry_num, create_time, update_time,ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand,error_descs, type_category_id,model_alias
+    sn, engine_no, xx_no, brand,error_descs, type_category_id,model_alias,configuration
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -58,7 +59,7 @@
       sales_price, device_type, entry_position, 
       inspect_status, entry_num, create_time, 
       update_time,ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand,error_descs,type_category_id,model_alias)
+    sn, engine_no, xx_no, brand,error_descs,type_category_id,model_alias,configuration)
     values (#{id,jdbcType=INTEGER}, #{entryId,jdbcType=INTEGER}, #{customsClearance,jdbcType=VARCHAR}, 
       #{destination,jdbcType=VARCHAR}, #{packageNo,jdbcType=VARCHAR}, #{serialNo,jdbcType=VARCHAR}, 
       #{partsNo,jdbcType=VARCHAR}, #{partsName,jdbcType=VARCHAR}, #{partsEnName,jdbcType=VARCHAR}, 
@@ -67,7 +68,7 @@
       #{inspectStatus,jdbcType=INTEGER}, #{entryNum,jdbcType=INTEGER}, now(),
       now(),#{shipNum}, #{buyContractNo,jdbcType=VARCHAR}, 
       #{model,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{engineNo,jdbcType=VARCHAR}, 
-      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{errorDescs},#{typeCategoryId},#{modelAlias})
+      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{errorDescs},#{typeCategoryId},#{modelAlias},#{configuration})
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.EntryDetail" >
     insert into iel_entry_detail
@@ -155,6 +156,9 @@
       <if test="modelAlias != null" >
         model_alias,
       </if>
+      <if test="configuration != null" >
+        configuration,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -240,6 +244,9 @@
       <if test="modelAlias != null" >
         #{modelAlias},
       </if>
+      <if test="configuration != null" >
+        #{configuration},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.EntryDetail" >
@@ -324,6 +331,9 @@
       <if test="modelAlias != null" >
         model_alias=#{modelAlias},
       </if>
+      <if test="configuration != null" >
+        configuration=#{configuration},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -354,7 +364,9 @@
       xx_no = #{xxNo,jdbcType=VARCHAR},
       brand = #{brand,jdbcType=VARCHAR},
       error_descs=#{errorDescs},
-      type_category_id = #{typeCategoryId,jdbcType=INTEGER}
+      type_category_id = #{typeCategoryId,jdbcType=INTEGER},
+      model_alias = #{modelAlias},
+      configuration = #{configuration}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -366,7 +378,7 @@
     sales_price, device_type,inspect_status, create_time,
     update_time,ship_num,buy_contract_no,
     model, sn, engine_no,
-    xx_no, brand,error_descs,model_alias)
+    xx_no, brand,error_descs,model_alias,configuration)
     values
     <foreach collection="exportsListsList" index="index" item="item" separator=",">
       (
@@ -378,7 +390,7 @@
       #{item.shipNum},
       #{item.buyContractNo,jdbcType=VARCHAR},
       #{item.model,jdbcType=VARCHAR}, #{item.sn,jdbcType=VARCHAR}, #{item.engineNo,jdbcType=VARCHAR},
-      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.errorDescs},#{item.modelAlias}
+      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.errorDescs},#{item.modelAlias},#{item.configuration}
       )
     </foreach>
   </insert>

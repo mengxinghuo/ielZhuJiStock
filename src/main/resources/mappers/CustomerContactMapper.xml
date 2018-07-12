@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.truck.dao.CustomerContactMapper" >
+  <resultMap id="BaseResultMap" type="com.truck.pojo.CustomerContact" >
+    <constructor >
+      <idArg column="contact_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="customer_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="contact_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="job_position" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    contact_id, customer_id, contact_name, job_position, email, phone, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from iel_customer_contact
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from iel_customer_contact
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.truck.pojo.CustomerContact" >
+    insert into iel_customer_contact (contact_id, customer_id, contact_name, 
+      job_position, email, phone, 
+      create_time, update_time)
+    values (#{contactId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{contactName,jdbcType=VARCHAR}, 
+      #{jobPosition,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      now(), now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.truck.pojo.CustomerContact" >
+    insert into iel_customer_contact
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contactId != null" >
+        contact_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="contactName != null" >
+        contact_name,
+      </if>
+      <if test="jobPosition != null" >
+        job_position,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+        create_time,
+        update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contactId != null" >
+        #{contactId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="contactName != null" >
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobPosition != null" >
+        #{jobPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      now(),
+      now(),
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.CustomerContact" >
+    update iel_customer_contact
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="contactName != null" >
+        contact_name = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobPosition != null" >
+        job_position = #{jobPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+        update_time = now(),
+    </set>
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.truck.pojo.CustomerContact" >
+    update iel_customer_contact
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      job_position = #{jobPosition,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      update_time = now()
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </update>
+  <select id="checkOutCustomerContact" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from iel_customer_contact
+    <where>
+      <if test="contactId != null">
+        and contact_id = #{contactId}
+      </if>
+      <if test="email != null">
+        and email = #{email}
+      </if>
+      <if test="phone != null">
+        and phone = #{phone}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByCustomerId" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from iel_customer_contact
+    where customer_id = #{customerId}
+  </select>
+
+</mapper>

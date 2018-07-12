@@ -63,6 +63,16 @@ public class EntryDetailVo {
 
     private String modelAlias;
 
+    private String configuration;
+
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
+    }
+
     public Integer getId() {
         return id;
     }

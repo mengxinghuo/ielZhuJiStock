@@ -52,7 +52,9 @@ public class Stock {
 
     private String modelAlias;
 
-    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName, String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory, Integer position, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,Integer typeCategoryId,String modelAlias) {
+    private String configuration;
+
+    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName, String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory, Integer position, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,Integer typeCategoryId,String modelAlias,String configuration) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -77,6 +79,15 @@ public class Stock {
         this.brand = brand;
         this.typeCategoryId = typeCategoryId;
         this.modelAlias = modelAlias;
+        this.configuration = configuration;
+    }
+
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
     }
 
     public Stock() {

@@ -182,6 +182,66 @@ public class Const {
 
     }
 
+
+    public enum CustomerStatusEnum{
+        ENABLE(0,"启用"),
+        DISABLE(1,"禁用");
+
+        private String value;
+        private int code;
+        CustomerStatusEnum(int code,String value){
+            this.code = code;
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+        public static CustomerStatusEnum codeOf(int code){
+            for(CustomerStatusEnum customerStatusEnum : values()){
+                if(customerStatusEnum.getCode() == code){
+                    return customerStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+
+    }
+
+    public enum SalesContractStatusEnum{
+        NORMAL(0,"正常");
+
+        private String value;
+        private int code;
+        SalesContractStatusEnum(int code,String value){
+            this.code = code;
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+        public static SalesContractStatusEnum codeOf(int code){
+            for(SalesContractStatusEnum salesContractStatusEnum : values()){
+                if(salesContractStatusEnum.getCode() == code){
+                    return salesContractStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+
+    }
+
+
+
     public interface AlipayCallback {
         String TRADE_STATUS_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
         String TRADE_STATUS_TRADE_SUCCESS = "TRADE_SUCCESS";

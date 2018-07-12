@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.truck.dao.CustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.truck.pojo.Customer" >
+    <constructor >
+      <idArg column="customer_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="customer_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pt_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="customer_level" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="business" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="area" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="city" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="phone_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    customer_id, customer_no, pt_name, customer_level, business, area, city, phone_number, status,
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from iel_customer
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from iel_customer
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.truck.pojo.Customer" >
+    insert into iel_customer (customer_id, customer_no, pt_name, 
+      customer_level, business, area, 
+      city, phone_number, status, create_time,
+      update_time)
+    values (#{customerId,jdbcType=INTEGER}, #{customerNo,jdbcType=VARCHAR}, #{ptName,jdbcType=VARCHAR}, 
+      #{customerLevel,jdbcType=VARCHAR}, #{business,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, now(),
+      now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.truck.pojo.Customer" >
+    insert into iel_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="customerNo != null" >
+        customer_no,
+      </if>
+      <if test="ptName != null" >
+        pt_name,
+      </if>
+      <if test="customerLevel != null" >
+        customer_level,
+      </if>
+      <if test="business != null" >
+        business,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+        create_time,
+        update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerNo != null" >
+        #{customerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ptName != null" >
+        #{ptName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerLevel != null" >
+        #{customerLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="business != null" >
+        #{business,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      now(),
+      now(),
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Customer" >
+    update iel_customer
+    <set >
+      <if test="customerNo != null" >
+        customer_no = #{customerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ptName != null" >
+        pt_name = #{ptName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerLevel != null" >
+        customer_level = #{customerLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="business != null" >
+        business = #{business,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+        update_time = now(),
+    </set>
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.truck.pojo.Customer" >
+    update iel_customer
+    set customer_no = #{customerNo,jdbcType=VARCHAR},
+      pt_name = #{ptName,jdbcType=VARCHAR},
+      customer_level = #{customerLevel,jdbcType=VARCHAR},
+      business = #{business,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      update_time = now()
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </update>
+
+  <select id="checkOutCustomer" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from iel_customer
+    <where>
+      <if test="customerId != null">
+        and customer_id != #{customerId}
+      </if>
+      <if test="ptName != null">
+        and pt_name = #{ptName}
+      </if>
+      <if test="customerNo != null">
+        and customer_no = #{customerNo}
+      </if>
+      <if test="phoneNumber != null">
+        and phone_number = #{phoneNumber}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByNoAndName" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from iel_customer
+    <where>
+      <if test="customerNo != null">
+        and customer_no = #{customerNo}
+      </if>
+      <if test="ptName != null">
+        and pt_name like #{ptName}
+      </if>
+      <if test="status != null">
+        and status = #{status}
+      </if>
+    </where>
+  </select>
+</mapper>

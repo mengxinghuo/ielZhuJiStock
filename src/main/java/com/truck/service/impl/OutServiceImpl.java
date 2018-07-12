@@ -119,6 +119,7 @@ public class OutServiceImpl implements IOutService {
             outDetail.setXxNo(stock.getXxNo());
             outDetail.setBrand(stock.getBrand());
             outDetail.setModelAlias(stock.getModelAlias());
+            outDetail.setConfiguration(stock.getConfiguration());
             outDetail.setDefineModelNo(cartItem.getDefineModelNo());
             if (cartItem.getDefineStr()!= null) {
                 outDetail.setDefineStr(cartItem.getDefineStr());

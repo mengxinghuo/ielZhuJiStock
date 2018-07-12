@@ -62,7 +62,9 @@ public class EntryDetail {
 
     private String modelAlias;
 
-    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination, String packageNo, String serialNo, String partsNo, String partsName, String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice, BigDecimal salesPrice, String deviceType, Integer entryPosition, Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String errorDescs,Integer typeCategoryId,String modelAlias) {
+    private String configuration;
+
+    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination, String packageNo, String serialNo, String partsNo, String partsName, String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice, BigDecimal salesPrice, String deviceType, Integer entryPosition, Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String errorDescs,Integer typeCategoryId,String modelAlias,String configuration) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -92,6 +94,15 @@ public class EntryDetail {
         this.errorDescs = errorDescs;
         this.typeCategoryId = typeCategoryId;
         this.modelAlias = modelAlias;
+        this.configuration = configuration;
+    }
+
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
     }
 
     public EntryDetail() {

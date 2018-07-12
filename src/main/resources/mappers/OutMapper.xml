@@ -158,4 +158,11 @@
     </where>
     order by create_time desc
   </select>
+
+  <select id="selectByOutNo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from iel_out
+    where out_no = #{outNo}
+  </select>
 </mapper>

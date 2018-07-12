@@ -1,0 +1,15 @@
+package com.truck.service;
+
+import com.truck.common.ServerResponse;
+import com.truck.pojo.Customer;
+
+public interface ICustomerService {
+
+    ServerResponse addCustomer(Customer customer);
+
+    ServerResponse updateCustomer(Customer customer);
+
+    ServerResponse getCustomerList(String customerNo,String ptName,Integer status, int pageNum,int pageSize);
+
+    ServerResponse disableCustomer(Integer customerId,Integer status);
+}

@@ -56,6 +56,16 @@ public class StockVo {
 
     private Integer typeCategoryId;
 
+    private String configuration;
+
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
+    }
+
     public StockVo() {
         super();
     }

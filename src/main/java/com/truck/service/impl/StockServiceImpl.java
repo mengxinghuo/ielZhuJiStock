@@ -162,6 +162,7 @@ public class StockServiceImpl implements IStockService {
 
         stockVo.setTypeCategoryId(stock.getTypeCategoryId());
         stockVo.setModelAlias(stock.getModelAlias());
+        stockVo.setConfiguration(stock.getConfiguration());
         return stockVo;
     }
     
@@ -203,6 +204,7 @@ public class StockServiceImpl implements IStockService {
             if (entryDetailItem.getModelAlias() != null) {
                 stock.setModelAlias(entryDetailItem.getModelAlias());
             }
+            stock.setConfiguration(entryDetailItem.getConfiguration());
             stockList.add(stock);
         }
         return stockList;

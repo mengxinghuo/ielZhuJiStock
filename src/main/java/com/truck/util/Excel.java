@@ -76,6 +76,11 @@ public class Excel {
             }
             entryDetail.setDeviceType(r.getCell(8).getStringCellValue());
             entryDetail.setBrand(r.getCell(9).getStringCellValue());
+            if(r.getCell(10).getStringCellValue()!=null){
+                entryDetail.setConfiguration(r.getCell(10).getStringCellValue());
+            }else{
+                entryDetail.setConfiguration(StringUtils.EMPTY);
+            }
 
             if(StringUtils.isBlank(entryDetail.getCustomsClearance()) || entryDetail.getCustomsClearance().equals("0")){
                 continue;
