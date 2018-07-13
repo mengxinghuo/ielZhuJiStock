@@ -109,6 +109,37 @@ public class CustomerServiceImpl implements ICustomerService {
         return ServerResponse.createBySuccess(customerVoList);
     }
 
+    public ServerResponse getCustomerDetail(Integer customerId){
+        if(StringUtils.isEmpty(customerId)){
+            return ServerResponse.createByErrorMessage("请选择要查看的客户");
+        }
+        Customer customer = customerMapper.selectByPrimaryKey(customerId);
+        if(customer == null){
+            return ServerResponse.createByErrorMessage("未查到该客户");
+        }else{
+            return ServerResponse.createBySuccess(customer);
+        }
+    }
+
+    public ServerResponse updateIntroduction(Integer customerId,String introduction){
+        if(StringUtils.isEmpty(customerId)){
+            return ServerResponse.createByErrorMessage("请选择要查看的客户");
+        }
+        Customer search = customerMapper.selectByPrimaryKey(customerId);
+        if(search == null){
+            return ServerResponse.createByErrorMessage("未查到该客户");
+        }
+        Customer customer = new Customer();
+        customer.setCustomerId(customerId);
+        customer.setIntroduction(introduction);
+        int resultCount = customerMapper.updateByPrimaryKeySelective(customer);
+        if(resultCount > 0){
+            return ServerResponse.createBySuccess("修改成功");
+        }else{
+            return ServerResponse.createByErrorMessage("修改失败");
+        }
+    }
+
     public ServerResponse disableCustomer(Integer customerId,Integer status){
         Customer search = customerMapper.selectByPrimaryKey(customerId);
         if(search == null){
@@ -152,6 +183,7 @@ public class CustomerServiceImpl implements ICustomerService {
         customerVo.setStatusDesc(Const.CustomerStatusEnum.codeOf(customer.getStatus()).getValue());
         customerVo.setCreateTime(DateTimeUtil.dateToStr(customer.getCreateTime()));
         customerVo.setUpdateTime(DateTimeUtil.dateToStr(customer.getUpdateTime()));
+        customerVo.setIntroduction(customer.getIntroduction());
         return customerVo;
     }
 }

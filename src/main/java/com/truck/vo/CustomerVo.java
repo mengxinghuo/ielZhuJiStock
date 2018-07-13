@@ -25,6 +25,16 @@ public class CustomerVo {
 
     private String updateTime;
 
+    private String introduction;
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
     public Integer getCustomerId() {
         return customerId;
     }

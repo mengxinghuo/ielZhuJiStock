@@ -14,4 +14,8 @@ public interface ICustomerService {
     ServerResponse disableCustomer(Integer customerId,Integer status);
 
     ServerResponse getEnableCustomer();
+
+    ServerResponse getCustomerDetail(Integer customerId);
+
+    ServerResponse updateIntroduction(Integer customerId,String introduction);
 }

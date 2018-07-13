@@ -25,7 +25,9 @@ public class Customer {
 
     private Date updateTime;
 
-    public Customer(Integer customerId, String customerNo, String ptName, String customerLevel, String business, String area, String city, String phoneNumber, Integer status, Date createTime, Date updateTime) {
+    private String introduction;
+
+    public Customer(Integer customerId, String customerNo, String ptName, String customerLevel, String business, String area, String city, String phoneNumber, Integer status, Date createTime, Date updateTime,String introduction) {
         this.customerId = customerId;
         this.customerNo = customerNo;
         this.ptName = ptName;
@@ -37,6 +39,16 @@ public class Customer {
         this.status = status;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.introduction = introduction;
+    }
+
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
     public Customer() {
