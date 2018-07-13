@@ -163,6 +163,22 @@ public class EntryServiceImpl implements IEntryService {
         return ServerResponse.createByErrorMessage("更新入库详情问题描述失败");
     }
 
+    public ServerResponse updateEntryDetailConfiguration(Integer entryDetailId,String configuration){
+        EntryDetail search = entryDetailMapper.selectByPrimaryKey(entryDetailId);
+        if(search == null){
+            return ServerResponse.createByErrorMessage("数据异常，该详情不存在");
+        }
+        EntryDetail entryDetail = new EntryDetail();
+        entryDetail.setId(entryDetailId);
+        entryDetail.setConfiguration(configuration);
+        int resultCount = entryDetailMapper.updateByPrimaryKeySelective(entryDetail);
+        if(resultCount > 0){
+            return ServerResponse.createBySuccess("修改成功");
+        }else{
+            return ServerResponse.createByErrorMessage("修改失败");
+        }
+    }
+
     public EntryVo assembleEntry(Entry entry){
         EntryVo entryVo = new EntryVo();
         entryVo.setId(entry.getId());

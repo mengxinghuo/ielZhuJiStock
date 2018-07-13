@@ -111,6 +111,18 @@ public class EntryController {
     }
 
     /**
+     * 修改configuration
+     * @param entryDetailId
+     * @param configuration
+     * @return
+     */
+    @RequestMapping("update_entry_detail_configuration.do")
+    @ResponseBody
+    public ServerResponse updateEntryDetailConfiguration(Integer entryDetailId,String configuration){
+        return iEntryService.updateEntryDetailConfiguration(entryDetailId,configuration);
+    }
+
+    /**
      * 创建订单
      * @param
      * @return
