@@ -200,4 +200,11 @@
     <include refid="Base_Column_List" />
     from iel_sales_contract
   </select>
+
+  <select id="selectByOutId" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from iel_sales_contract
+    where out_id = #{outId}
+  </select>
 </mapper>

@@ -113,6 +113,15 @@ public class SalesContractServiceImpl implements ISalesContractService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
+    public ServerResponse getOutSalesContract(Integer id){
+        SalesContract salesContract = salesContractMapper.selectByOutId(id);
+        if(salesContract == null){
+            return ServerResponse.createByErrorMessage("未查到信息");
+        }
+        SalesContractVo salesContractVo = this.assembleSalesContract(salesContract);
+        return ServerResponse.createBySuccess(salesContractVo);
+    }
+
     public SalesContractVo assembleSalesContract(SalesContract salesContract){
         SalesContractVo salesContractVo = new SalesContractVo();
         salesContractVo.setSalesContractId(salesContract.getSalesContractId());

@@ -23,4 +23,6 @@ public interface SalesContractMapper {
     List<SalesContract> selectByCustomer(@Param("customerId") Integer customerId);
 
     List<SalesContract> selectSalesContractList();
+
+    SalesContract selectByOutId(@Param("outId") Integer outId);
 }

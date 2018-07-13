@@ -89,4 +89,20 @@ public class SalesContractManageController {
         }
         return iSalesContractService.getSalesContractList(pageNum,pageSize);
     }
+
+    /**
+     * 根据出库单查询该合同信息
+     * @param session
+     * @param id
+     * @return
+     */
+    @RequestMapping("get_out_sales_contract.do")
+    @ResponseBody
+    public ServerResponse getOutSalesContract(HttpSession session,Integer id){
+        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+        if(admin == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+        }
+        return iSalesContractService.getOutSalesContract(id);
+    }
 }
