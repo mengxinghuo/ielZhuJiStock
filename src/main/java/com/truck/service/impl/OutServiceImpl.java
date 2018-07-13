@@ -9,6 +9,7 @@ import com.truck.dao.*;
 import com.truck.pojo.*;
 import com.truck.service.IOutService;
 import com.truck.service.IRepertoryService;
+import com.truck.service.ISalesContractService;
 import com.truck.util.DateTimeUtil;
 import com.truck.vo.OutVo;
 import org.apache.commons.lang3.StringUtils;
@@ -36,8 +37,10 @@ public class OutServiceImpl implements IOutService {
     private IRepertoryService iRepertoryService;
     @Autowired
     private RepertoryMapper repertoryMapper;
+    @Autowired
+    private ISalesContractService iSalesContractService;
 
-    public ServerResponse outStock(Integer adminId,Out out){
+    public ServerResponse outStock(Integer adminId,Out out,SalesContract salesContract){
         if(StringUtils.isBlank(out.getPjbContractNo())){
             return ServerResponse.createByErrorMessage("请输入PJB合同号");
         }
@@ -47,6 +50,9 @@ public class OutServiceImpl implements IOutService {
         List<Cart> cartList = cartMapper.selectCartByAdminId(adminId);
         if(cartList.size() == 0){
             return ServerResponse.createByErrorMessage("购物车为空");
+        }
+        if(StringUtils.isEmpty(salesContract.getSalesDate()) || StringUtils.isEmpty(salesContract.getBpkNo())){
+            return ServerResponse.createByErrorMessage("合同信息不完善，请完善");
         }
         for(Cart cartItem : cartList){
             if(StringUtils.isBlank(cartItem.getDefineModelNo())){
@@ -68,7 +74,10 @@ public class OutServiceImpl implements IOutService {
         resultCount = outDetailMapper.batchInsert(outDetailList);
         if(resultCount > 0){
             cartMapper.deleteByAdminId(adminId);
-            return ServerResponse.createBySuccess("生成出库单成功");
+            salesContract.setOutNo(outNo);
+            salesContract.setSalesContractNo(out.getPjbContractNo());
+            iSalesContractService.addSalesContract(salesContract);
+            return ServerResponse.createBySuccess("建立销售合同，出库成功");
         }
         return ServerResponse.createByErrorMessage("生成出库单失败");
     }
