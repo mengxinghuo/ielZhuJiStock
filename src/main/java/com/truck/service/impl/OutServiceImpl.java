@@ -12,9 +12,9 @@ import com.truck.service.IRepertoryService;
 import com.truck.service.ISalesContractService;
 import com.truck.util.DateTimeUtil;
 import com.truck.vo.OutVo;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -39,33 +39,40 @@ public class OutServiceImpl implements IOutService {
     private RepertoryMapper repertoryMapper;
     @Autowired
     private ISalesContractService iSalesContractService;
+    @Autowired
+    private CustomerMapper customerMapper;
 
     public ServerResponse outStock(Integer adminId,Out out,SalesContract salesContract){
-        if(StringUtils.isBlank(out.getPjbContractNo())){
+        if(StringUtils.isEmpty(out.getPjbContractNo())){
             return ServerResponse.createByErrorMessage("请输入PJB合同号");
-        }
-        if(StringUtils.isBlank(out.getCustomerName())){
-            return ServerResponse.createByErrorMessage("请输入客户名称");
         }
         List<Cart> cartList = cartMapper.selectCartByAdminId(adminId);
         if(cartList.size() == 0){
             return ServerResponse.createByErrorMessage("购物车为空");
         }
+        if(StringUtils.isEmpty(salesContract.getCustomerId()) || StringUtils.isEmpty(salesContract.getAddressId()) || StringUtils.isEmpty(salesContract.getContactId())){
+            return ServerResponse.createByErrorMessage("请输入客户信息");
+        }
         if(StringUtils.isEmpty(salesContract.getSalesDate()) || StringUtils.isEmpty(salesContract.getBpkNo())){
             return ServerResponse.createByErrorMessage("合同信息不完善，请完善");
         }
         for(Cart cartItem : cartList){
-            if(StringUtils.isBlank(cartItem.getDefineModelNo())){
+            if(StringUtils.isEmpty(cartItem.getDefineModelNo())){
                 return ServerResponse.createByErrorMessage("请填写客户主机编号");
             }
             if(cartItem.getCartPrice().compareTo(new BigDecimal(0))==0){
                 return ServerResponse.createByErrorMessage("请填写合同中的销售价格");
             }
         }
+        Customer customer = customerMapper.selectByPrimaryKey(salesContract.getCustomerId());
+        if(customer == null){
+            return ServerResponse.createByErrorMessage("数据异常，客户不存在");
+        }
         String outNo = String.valueOf(generateOutNo());
         out.setOutNo(outNo);
         out.setStatus(Const.OutStatusEnum.UN_OUT.getCode());
         out.setOperatorId(adminId);
+        out.setCustomerName(customer.getPtName());
         int resultCount = outMapper.insertSelective(out);
         if(resultCount == 0){
             return ServerResponse.createByErrorMessage("数据异常，未生成出库单");
