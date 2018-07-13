@@ -77,16 +77,22 @@ public class OutServiceImpl implements IOutService {
         if(resultCount == 0){
             return ServerResponse.createByErrorMessage("数据异常，未生成出库单");
         }
-        List<OutDetail> outDetailList = getOutDetailList(cartList,out.getId());
-        resultCount = outDetailMapper.batchInsert(outDetailList);
-        if(resultCount > 0){
-            cartMapper.deleteByAdminId(adminId);
-            salesContract.setOutNo(outNo);
-            salesContract.setSalesContractNo(out.getPjbContractNo());
-            iSalesContractService.addSalesContract(salesContract);
-            return ServerResponse.createBySuccess("建立销售合同，出库成功");
+        salesContract.setOutNo(outNo);
+        salesContract.setSalesContractNo(out.getPjbContractNo());
+        ServerResponse serverResponse = iSalesContractService.addSalesContract(salesContract);
+        if(serverResponse.isSuccess()){
+            List<OutDetail> outDetailList = getOutDetailList(cartList,out.getId());
+            resultCount = outDetailMapper.batchInsert(outDetailList);
+            if(resultCount > 0){
+                cartMapper.deleteByAdminId(adminId);
+
+                return ServerResponse.createBySuccess("建立销售合同，出库成功");
+            }
+            return ServerResponse.createByErrorMessage("生成出库单失败");
+        }else{
+            outMapper.deleteByPrimaryKey(out.getId());
+            return ServerResponse.createByErrorMessage("数据异常，合同建立失败");
         }
-        return ServerResponse.createByErrorMessage("生成出库单失败");
     }
 
     private long generateOutNo() {
