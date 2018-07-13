@@ -55,7 +55,7 @@ public class SalesContractServiceImpl implements ISalesContractService {
             return ServerResponse.createByErrorMessage("出库单号重复");
         }
         salesContract.setOutId(out.getId());
-        salesContract.setDate(DateTimeUtil.strToDate(salesContract.getSalesDate()));
+        salesContract.setDate(DateTimeUtil.strToDate(salesContract.getSalesDate(),"yyyy-MM-dd"));
         salesContract.setStatus(Const.SalesContractStatusEnum.NORMAL.getCode());
         //预留type类型字段
         int resultCount = salesContractMapper.insertSelective(salesContract);
