@@ -12,6 +12,7 @@ public class SalesContract {
     private Integer contactId;
 
     private Date date;
+    private String salesDate;
 
     private Integer outId;
 
@@ -43,6 +44,14 @@ public class SalesContract {
         this.status = status;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+    public String getSalesDate() {
+        return salesDate;
+    }
+
+    public void setSalesDate(String salesDate) {
+        this.salesDate = salesDate;
     }
 
     public SalesContract() {

@@ -39,7 +39,7 @@ public class SalesContractServiceImpl implements ISalesContractService {
     public ServerResponse addSalesContract(SalesContract salesContract){
         if(StringUtils.isEmpty(salesContract.getCustomerId()) || StringUtils.isEmpty(salesContract.getAddressId()) || StringUtils.isEmpty(salesContract.getContactId()) ||
                 StringUtils.isEmpty(salesContract.getBpkNo()) || StringUtils.isEmpty(salesContract.getOutNo()) || StringUtils.isEmpty(salesContract.getSalesContractNo()) ||
-                StringUtils.isEmpty(salesContract.getDate())){
+                StringUtils.isEmpty(salesContract.getSalesDate())){
             return ServerResponse.createByErrorMessage("信息不完整");
         }
         Out out = outMapper.selectByOutNo(salesContract.getOutNo());
@@ -55,6 +55,7 @@ public class SalesContractServiceImpl implements ISalesContractService {
             return ServerResponse.createByErrorMessage("出库单号重复");
         }
         salesContract.setOutId(out.getId());
+        salesContract.setDate(DateTimeUtil.strToDate(salesContract.getSalesDate()));
         salesContract.setStatus(Const.SalesContractStatusEnum.NORMAL.getCode());
         //预留type类型字段
         int resultCount = salesContractMapper.insertSelective(salesContract);

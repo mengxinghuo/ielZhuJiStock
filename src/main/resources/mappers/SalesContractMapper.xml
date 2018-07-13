@@ -199,6 +199,5 @@
     select
     <include refid="Base_Column_List" />
     from iel_sales_contract
-    where customer_id = #{customerId}
   </select>
 </mapper>
