@@ -12,4 +12,6 @@ public interface ICustomerService {
     ServerResponse getCustomerList(String customerNo,String ptName,Integer status, int pageNum,int pageSize);
 
     ServerResponse disableCustomer(Integer customerId,Integer status);
+
+    ServerResponse getEnableCustomer();
 }

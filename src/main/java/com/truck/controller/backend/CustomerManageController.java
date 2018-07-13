@@ -93,4 +93,19 @@ public class CustomerManageController {
         }
         return iCustomerService.getCustomerList(customerNo,ptName,status,pageNum,pageSize);
     }
+
+    /**
+     * 查询启用的客户信息
+     * @param session
+     * @return
+     */
+    @RequestMapping("get_enable_customer.do")
+    @ResponseBody
+    public ServerResponse getEnableCustomer(HttpSession session){
+        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+        if(admin == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+        }
+        return iCustomerService.getEnableCustomer();
+    }
 }
