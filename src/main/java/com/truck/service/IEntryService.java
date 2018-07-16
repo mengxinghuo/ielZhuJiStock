@@ -19,4 +19,6 @@ public interface IEntryService {
     ServerResponse updateEntryDetailIdOrDescs(Integer entryDetailId,Integer typeCategoryId,String errorDescs);
 
     ServerResponse updateEntryDetailConfiguration(Integer entryDetailId,String configuration);
+
+    ServerResponse changeAll(Integer entryId,Integer status);
 }

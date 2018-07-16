@@ -1,6 +1,9 @@
 package com.truck.controller.backend;
 
+import com.truck.common.Const;
+import com.truck.common.ResponseCode;
 import com.truck.common.ServerResponse;
+import com.truck.pojo.Admin;
 import com.truck.service.IEntryService;
 import com.truck.service.ITransportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/manage/entry/")
@@ -131,5 +136,23 @@ public class EntryController {
     @ResponseBody
     public ServerResponse createEntry(String entryStr){
         return iTransportService.createEntry(entryStr);
+    }
+
+
+    /**
+     * 全选  全不选
+     * @param session
+     * @param entryId
+     * @param status
+     * @return
+     */
+    @RequestMapping("change_all.do")
+    @ResponseBody
+    public ServerResponse changeAll(HttpSession session, Integer entryId, Integer status){
+        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+        if(admin == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+        }
+        return iEntryService.changeAll(entryId,status);
     }
 }

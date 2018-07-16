@@ -417,4 +417,10 @@
     delete from iel_entry_detail
     where entry_id = #{entryId}
   </delete>
+
+  <update id="updateByEntryId" parameterType="map">
+    update iel_entry_detail
+    set inspect_status = #{status}
+    where entry_id = #{entryId}
+  </update>
 </mapper>

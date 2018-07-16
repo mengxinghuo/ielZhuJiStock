@@ -178,7 +178,7 @@ public class TransportServiceImpl implements ITransportService {
 
     /**
      * 创建入库单
-     * @param id
+     * @param
      * @return
      */
     public ServerResponse createEntry(String  entryStr){

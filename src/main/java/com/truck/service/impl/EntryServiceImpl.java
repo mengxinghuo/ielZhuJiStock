@@ -179,6 +179,26 @@ public class EntryServiceImpl implements IEntryService {
         }
     }
 
+    public ServerResponse changeAll(Integer entryId,Integer status){
+        if(StringUtils.isEmpty(entryId)){
+            return ServerResponse.createByErrorMessage("请选择单子");
+        }
+        Entry search = entryMapper.selectByPrimaryKey(entryId);
+        if(search == null){
+            return ServerResponse.createByErrorMessage("该单不存在");
+        }
+        List<EntryDetail> entryDetailList = entryDetailMapper.selectEntryDetail(entryId);
+        if(entryDetailList.size() == 0){
+            return ServerResponse.createByErrorMessage("未查到详情，无法更改信息");
+        }
+        int resultCount = entryDetailMapper.updateByEntryId(entryId,status);
+        if(resultCount > 0){
+            return ServerResponse.createBySuccess("更改成功");
+        }else{
+            return ServerResponse.createByErrorMessage("更改失败");
+        }
+    }
+
     public EntryVo assembleEntry(Entry entry){
         EntryVo entryVo = new EntryVo();
         entryVo.setId(entry.getId());

@@ -25,4 +25,6 @@ public interface EntryDetailMapper {
     List selectEntryDetailStatus(@Param("entryId") Integer entryId,@Param("status") Integer status);
 
     int deleteByEntryId(@Param("entryId") Integer entryId);
+
+    int updateByEntryId(@Param("entryId") Integer entryId,@Param("status") Integer status);
 }
