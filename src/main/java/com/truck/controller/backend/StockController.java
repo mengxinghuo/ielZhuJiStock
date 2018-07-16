@@ -94,4 +94,16 @@ public class StockController {
         }
         return iStockService.searchLikeStockList(admin.getAdminId(),stock, pageNum, pageSize);
     }
+
+    /**
+     * 修改在库配置信息
+     * @param stockId
+     * @param configuration
+     * @return
+     */
+    @RequestMapping("update_stock_configuration.do")
+    @ResponseBody
+    public ServerResponse updateStockConfiguration(Integer stockId,String configuration){
+        return iStockService.updateStockConfiguration(stockId,configuration);
+    }
 }

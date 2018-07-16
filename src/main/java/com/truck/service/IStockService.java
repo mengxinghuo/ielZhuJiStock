@@ -22,4 +22,6 @@ public interface IStockService {
     ServerResponse batchStockIn(Integer entryId);
 
     StockVo assembleStockVo(Integer adminId, Stock stock);
+
+    ServerResponse updateStockConfiguration(Integer stockId,String configuration);
 }

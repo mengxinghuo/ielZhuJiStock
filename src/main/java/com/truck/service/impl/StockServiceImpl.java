@@ -57,10 +57,10 @@ public class StockServiceImpl implements IStockService {
         List<Stock> stockList = entryDetailToStock(entryDetails);
         int count = stockMapper.batchInsert(stockList);
         if(count == 0){
-            entry.setStatus(Const.EntryStatusEnum.FINISH.getCode());
-            entryMapper.updateByPrimaryKeySelective(entry);
             return ServerResponse.createByErrorMessage("入库失败");
         }
+        entry.setStatus(Const.EntryStatusEnum.FINISH.getCode());
+        entryMapper.updateByPrimaryKeySelective(entry);
         return ServerResponse.createBySuccess("入库成功");
     }
 
@@ -110,6 +110,24 @@ public class StockServiceImpl implements IStockService {
         PageInfo pageInfo = new PageInfo(stockList);
         pageInfo.setList(stockVoList);
         return ServerResponse.createBySuccess(pageInfo);
+    }
+
+    public ServerResponse updateStockConfiguration(Integer stockId,String configuration){
+        Stock search = stockMapper.selectByPrimaryKey(stockId);
+        if(search == null){
+            return ServerResponse.createByErrorMessage("该条记录不存在");
+        }
+        if(StringUtils.isEmpty(configuration)){
+            return ServerResponse.createByErrorMessage("请填写配置信息");
+        }
+        Stock stock = new Stock();
+        stock.setId(stockId);
+        stock.setConfiguration(configuration);
+        int resultCount = stockMapper.updateByPrimaryKeySelective(stock);
+        if(resultCount == 0){
+            return ServerResponse.createByErrorMessage("更改失败");
+        }
+        return ServerResponse.createBySuccess("更改成功");
     }
 
 
