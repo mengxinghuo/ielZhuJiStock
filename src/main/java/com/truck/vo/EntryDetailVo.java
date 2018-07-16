@@ -65,6 +65,25 @@ public class EntryDetailVo {
 
     private String configuration;
 
+    private Integer entryStatus;
+    private String entryStatusDesc;
+
+    public Integer getEntryStatus() {
+        return entryStatus;
+    }
+
+    public void setEntryStatus(Integer entryStatus) {
+        this.entryStatus = entryStatus;
+    }
+
+    public String getEntryStatusDesc() {
+        return entryStatusDesc;
+    }
+
+    public void setEntryStatusDesc(String entryStatusDesc) {
+        this.entryStatusDesc = entryStatusDesc;
+    }
+
     public String getConfiguration() {
         return configuration;
     }

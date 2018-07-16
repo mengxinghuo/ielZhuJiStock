@@ -287,6 +287,10 @@ public class EntryServiceImpl implements IEntryService {
         entryDetailVo.setTypeCategoryId(entryDetail.getTypeCategoryId());
         entryDetailVo.setModelAlias(entryDetail.getModelAlias());
         entryDetailVo.setConfiguration(entryDetail.getConfiguration());
+
+        Entry entry = entryMapper.selectByPrimaryKey(entryDetail.getEntryId());
+        entryDetailVo.setEntryStatus(entry.getStatus());
+        entryDetailVo.setEntryStatusDesc(Const.EntryStatusEnum.codeOf(entry.getStatus()).getValue());
         return entryDetailVo;
     }
 }
