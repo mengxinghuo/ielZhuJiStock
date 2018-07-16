@@ -95,10 +95,13 @@ public class EntryServiceImpl implements IEntryService {
                 }
             }
         }*/
+        Entry entry = entryMapper.selectByPrimaryKey(entryDetail.getEntryId());
+        if(Const.EntryStatusEnum.FINISH.getCode() == entry.getStatus()){
+            return ServerResponse.createByErrorMessage("该单已入库，不可编辑");
+        }
         entryDetail.setInspectStatus(inspectStatus);
         int rowCount = entryDetailMapper.updateByPrimaryKeySelective(entryDetail);
         if(rowCount > 0){
-            Entry entry = entryMapper.selectByPrimaryKey(entryDetail.getEntryId());
             if(Const.EntryStatusEnum.STANDBY.getCode() == entry.getStatus()){
                 entry.setStatus(Const.EntryStatusEnum.CONFIRM.getCode());
                 entryMapper.updateByPrimaryKeySelective(entry);
@@ -113,13 +116,16 @@ public class EntryServiceImpl implements IEntryService {
             return ServerResponse.createByErrorMessage("更新入库详情数量错误");
         }
         EntryDetail entryDetail = entryDetailMapper.selectByPrimaryKey(entryDetailId);
+        Entry entry = entryMapper.selectByPrimaryKey(entryDetail.getEntryId());
+        if(Const.EntryStatusEnum.FINISH.getCode() == entry.getStatus()){
+            return ServerResponse.createByErrorMessage("该单已入库，不可编辑");
+        }
         if(entryDetail.getInspectStatus() == 1){
             return ServerResponse.createByErrorMessage("请更改状态");
         }
         entryDetail.setEntryNum(entryNum);
         int rowCount = entryDetailMapper.updateByPrimaryKeySelective(entryDetail);
         if(rowCount > 0){
-            Entry entry = entryMapper.selectByPrimaryKey(entryDetail.getEntryId());
             if(Const.EntryStatusEnum.STANDBY.getCode() == entry.getStatus()){
                 entry.setStatus(Const.EntryStatusEnum.CONFIRM.getCode());
                 entryMapper.updateByPrimaryKeySelective(entry);
@@ -134,6 +140,10 @@ public class EntryServiceImpl implements IEntryService {
             return ServerResponse.createByErrorMessage("更新入库详情位置错误");
         }
         EntryDetail entryDetail = entryDetailMapper.selectByPrimaryKey(entryDetailId);
+        Entry entry = entryMapper.selectByPrimaryKey(entryDetail.getEntryId());
+        if(Const.EntryStatusEnum.FINISH.getCode() == entry.getStatus()){
+            return ServerResponse.createByErrorMessage("该单已入库，不可编辑");
+        }
         entryDetail.setEntryPosition(entryPosition);
         int rowCount = entryDetailMapper.updateByPrimaryKeySelective(entryDetail);
         if(rowCount > 0){
@@ -147,6 +157,10 @@ public class EntryServiceImpl implements IEntryService {
             return ServerResponse.createByErrorMessage("更新入库详情问题描述错误");
         }
         EntryDetail entryDetail = entryDetailMapper.selectByPrimaryKey(entryDetailId);
+        Entry entry = entryMapper.selectByPrimaryKey(entryDetail.getEntryId());
+        if(Const.EntryStatusEnum.FINISH.getCode() == entry.getStatus()){
+            return ServerResponse.createByErrorMessage("该单已入库，不可编辑");
+        }
         if(typeCategoryId!=null){
             entryDetail.setTypeCategoryId(typeCategoryId);
         }
@@ -168,6 +182,10 @@ public class EntryServiceImpl implements IEntryService {
         if(search == null){
             return ServerResponse.createByErrorMessage("数据异常，该详情不存在");
         }
+        Entry entry = entryMapper.selectByPrimaryKey(search.getEntryId());
+        if(Const.EntryStatusEnum.FINISH.getCode() == entry.getStatus()){
+            return ServerResponse.createByErrorMessage("该单已入库，不可编辑");
+        }
         EntryDetail entryDetail = new EntryDetail();
         entryDetail.setId(entryDetailId);
         entryDetail.setConfiguration(configuration);
@@ -186,6 +204,9 @@ public class EntryServiceImpl implements IEntryService {
         Entry search = entryMapper.selectByPrimaryKey(entryId);
         if(search == null){
             return ServerResponse.createByErrorMessage("该单不存在");
+        }
+        if(Const.EntryStatusEnum.FINISH.getCode() == search.getStatus()){
+            return ServerResponse.createByErrorMessage("该单已入库，不可编辑");
         }
         List<EntryDetail> entryDetailList = entryDetailMapper.selectEntryDetail(entryId);
         if(entryDetailList.size() == 0){
