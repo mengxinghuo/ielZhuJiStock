@@ -91,7 +91,7 @@ public class OutServiceImpl implements IOutService {
             return ServerResponse.createByErrorMessage("生成出库单失败");
         }else{
             outMapper.deleteByPrimaryKey(out.getId());
-            return ServerResponse.createByErrorMessage("数据异常，合同建立失败");
+            return ServerResponse.createByErrorMessage(serverResponse.getMsg());
         }
     }
 
