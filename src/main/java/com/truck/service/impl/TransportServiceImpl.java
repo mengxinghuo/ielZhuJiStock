@@ -193,6 +193,9 @@ public class TransportServiceImpl implements ITransportService {
     public ServerResponse checkEntryByDeclareNum(String declareNum){
         Entry entry = entryMapper.selectByDeclareNum(declareNum);
         if(entry != null){
+            if(Const.EntryStatusEnum.FINISH.getCode() < entry.getStatus()){
+                return ServerResponse.createByErrorMessage("本单已入库，无法替换");
+            }
             entryDetailMapper.deleteByEntryId(entry.getId());
             List<EntryDetail> entryDetailList = entryDetailMapper.selectEntryDetail(entry.getId());
             if(entryDetailList.size() == 0){
