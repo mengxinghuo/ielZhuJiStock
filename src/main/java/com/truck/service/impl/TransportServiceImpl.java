@@ -200,12 +200,12 @@ public class TransportServiceImpl implements ITransportService {
             List<EntryDetail> entryDetailList = entryDetailMapper.selectEntryDetail(entry.getId());
             if(entryDetailList.size() == 0){
                 entryMapper.deleteByPrimaryKey(entry.getId());
-                return ServerResponse.createBySuccess();
+                return ServerResponse.createBySuccess("清除成功");
             }else{
                 return ServerResponse.createByErrorMessage("清除失败");
             }
         }
-        return ServerResponse.createBySuccess();
+        return ServerResponse.createBySuccess("清除成功");
     }
 
     private long generateEntryNo(){
