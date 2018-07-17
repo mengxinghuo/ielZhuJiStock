@@ -207,6 +207,12 @@
         and status = #{status}
       </if>
     </where>
-    order by pt_name asc
+  </select>
+
+  <select id="selectOrderByName" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from iel_customer
+    order by pt_name
   </select>
 </mapper>

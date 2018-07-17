@@ -95,6 +95,25 @@ public class CustomerManageController {
     }
 
     /**
+     * 按照字母排序
+     * @param session
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("get_customer_list_order.do")
+    @ResponseBody
+    public ServerResponse getCustomerListOrder(HttpSession session,
+                                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                               @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+        if(admin == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+        }
+        return iCustomerService.getCustomerListOrder(pageNum,pageSize);
+    }
+
+    /**
      * 查询启用的客户信息
      * @param session
      * @return

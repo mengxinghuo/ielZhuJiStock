@@ -21,4 +21,6 @@ public interface CustomerMapper {
     Customer checkOutCustomer(@Param("ptName") String ptName,@Param("customerNo") String customerNo,@Param("phoneNumber") String phoneNumber,@Param("customerId") Integer customerId);
 
     List<Customer> selectByNoAndName(@Param("customerNo") String customerNo,@Param("ptName") String ptName,@Param("status") Integer status);
+
+    List<Customer> selectOrderByName();
 }

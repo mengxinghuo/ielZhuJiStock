@@ -96,6 +96,23 @@ public class CustomerServiceImpl implements ICustomerService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
+    public ServerResponse getCustomerListOrder(int pageNum,int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Customer> customerList = customerMapper.selectOrderByName();
+        if(customerList.size() == 0){
+            return ServerResponse.createByErrorMessage("未查到数据");
+        }
+        List<CustomerVo> customerVoList = Lists.newArrayList();
+        for(Customer customerItem : customerList){
+            CustomerVo customerVo = this.assembleCustomer(customerItem);
+            customerVoList.add(customerVo);
+        }
+        PageInfo pageInfo = new PageInfo(customerList);
+        pageInfo.setList(customerVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
     public ServerResponse getEnableCustomer(){
         List<Customer> customerList = customerMapper.selectByNoAndName(null,null,0);
         if(customerList.size() == 0){
