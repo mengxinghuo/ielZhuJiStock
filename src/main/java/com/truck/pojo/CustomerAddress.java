@@ -9,16 +9,28 @@ public class CustomerAddress {
 
     private String address;
 
+    private String addressAbbr;
+
     private Date createTime;
 
     private Date updateTime;
 
-    public CustomerAddress(Integer addressId, Integer customerId, String address, Date createTime, Date updateTime) {
+    public CustomerAddress(Integer addressId, Integer customerId, String address, String addressAbbr, Date createTime, Date updateTime) {
         this.addressId = addressId;
         this.customerId = customerId;
         this.address = address;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.addressAbbr = addressAbbr;
+    }
+
+
+    public String getAddressAbbr() {
+        return addressAbbr;
+    }
+
+    public void setAddressAbbr(String addressAbbr) {
+        this.addressAbbr = addressAbbr;
     }
 
     public CustomerAddress() {

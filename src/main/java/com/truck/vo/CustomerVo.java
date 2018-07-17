@@ -27,6 +27,16 @@ public class CustomerVo {
 
     private String introduction;
 
+    private String dutyNo;
+
+    public String getDutyNo() {
+        return dutyNo;
+    }
+
+    public void setDutyNo(String dutyNo) {
+        this.dutyNo = dutyNo;
+    }
+
     public String getIntroduction() {
         return introduction;
     }

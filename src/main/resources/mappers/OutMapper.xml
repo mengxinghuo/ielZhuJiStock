@@ -14,10 +14,11 @@
       <arg column="pjb_contract_no" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="customer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="work_no" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, out_no, status, operator_id, create_time, update_time, repair_id, repair_no,pjb_contract_no,customer_name,address
+    id, out_no, status, operator_id, create_time, update_time, repair_id, repair_no,pjb_contract_no,customer_name,address,work_no
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,10 +33,10 @@
   <insert id="insert" parameterType="com.truck.pojo.Out" >
     insert into iel_out (id, out_no, status, 
       operator_id, create_time, update_time, 
-      repair_id, repair_no,pjb_contract_no,customer_name,address)
+      repair_id, repair_no,pjb_contract_no,customer_name,address,work_no)
     values (#{id,jdbcType=INTEGER}, #{outNo,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{operatorId,jdbcType=INTEGER},now(), now(),
-      #{repairId,jdbcType=INTEGER}, #{repairNo,jdbcType=VARCHAR},#{pjbContractNo},#{customerName},#{address})
+      #{repairId,jdbcType=INTEGER}, #{repairNo,jdbcType=VARCHAR},#{pjbContractNo},#{customerName},#{address},#{workNo})
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.Out" useGeneratedKeys="true" keyProperty="id">
     insert into iel_out
@@ -69,6 +70,9 @@
       <if test="address != null" >
         address,
       </if>
+      <if test="workNo != null" >
+        work_no,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -100,6 +104,9 @@
       <if test="address != null" >
         #{address},
       </if>
+      <if test="workNo != null" >
+        #{workNo},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Out" >
@@ -130,6 +137,9 @@
       <if test="address != null" >
         address=#{address},
       </if>
+      <if test="workNo != null" >
+        work_no=#{workNo},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -143,7 +153,8 @@
       repair_no = #{repairNo,jdbcType=VARCHAR},
       pjb_contract_no=#{pjbContractNo},
       customer_name=#{customerName},
-      address=#{address}
+      address=#{address},
+      work_no=#{workNo}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

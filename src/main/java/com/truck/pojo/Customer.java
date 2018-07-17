@@ -27,7 +27,9 @@ public class Customer {
 
     private String introduction;
 
-    public Customer(Integer customerId, String customerNo, String ptName, String customerLevel, String business, String area, String city, String phoneNumber, Integer status, Date createTime, Date updateTime,String introduction) {
+    private String dutyNo;
+
+    public Customer(Integer customerId, String customerNo, String ptName, String customerLevel, String business, String area, String city, String phoneNumber, Integer status, Date createTime, Date updateTime,String introduction,String dutyNo) {
         this.customerId = customerId;
         this.customerNo = customerNo;
         this.ptName = ptName;
@@ -40,8 +42,17 @@ public class Customer {
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.introduction = introduction;
+        this.dutyNo = dutyNo;
     }
 
+
+    public String getDutyNo() {
+        return dutyNo;
+    }
+
+    public void setDutyNo(String dutyNo) {
+        this.dutyNo = dutyNo;
+    }
 
     public String getIntroduction() {
         return introduction;

@@ -25,7 +25,9 @@ public class Out {
 
     private String address;
 
-    public Out(Integer id, String outNo, Integer status, Integer operatorId, Date createTime, Date updateTime, Integer repairId, String repairNo, String pjbContractNo, String customerName, String address) {
+    private String workNo;
+
+    public Out(Integer id, String outNo, Integer status, Integer operatorId, Date createTime, Date updateTime, Integer repairId, String repairNo, String pjbContractNo, String customerName, String address,String workNo) {
         this.id = id;
         this.outNo = outNo;
         this.status = status;
@@ -37,6 +39,15 @@ public class Out {
         this.pjbContractNo = pjbContractNo;
         this.customerName = customerName;
         this.address = address;
+        this.workNo = workNo;
+    }
+
+    public String getWorkNo() {
+        return workNo;
+    }
+
+    public void setWorkNo(String workNo) {
+        this.workNo = workNo;
     }
 
     public Out() {

@@ -27,6 +27,16 @@ public class OutVo {
 
     private String address;
 
+    private String workNo;
+
+    public String getWorkNo() {
+        return workNo;
+    }
+
+    public void setWorkNo(String workNo) {
+        this.workNo = workNo;
+    }
+
     public String getStatusDesc() {
         return statusDesc;
     }

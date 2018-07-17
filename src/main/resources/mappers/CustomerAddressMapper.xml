@@ -6,12 +6,13 @@
       <idArg column="address_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="customer_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="address_abbr" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    address_id, customer_id, address, create_time, update_time
+    address_id, customer_id, address,address_abbr, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,9 +25,9 @@
     where address_id = #{addressId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.truck.pojo.CustomerAddress" >
-    insert into iel_customer_address (address_id, customer_id, address, 
+    insert into iel_customer_address (address_id, customer_id, address, address_abbr,
       create_time, update_time)
-    values (#{addressId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+    values (#{addressId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{addressAbbr},
       now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.CustomerAddress" >
@@ -41,6 +42,9 @@
       <if test="address != null" >
         address,
       </if>
+      <if test="addressAbbr != null" >
+        address_abbr,
+      </if>
         create_time,
         update_time,
     </trim>
@@ -53,6 +57,9 @@
       </if>
       <if test="address != null" >
         #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressAbbr != null" >
+        #{addressAbbr,jdbcType=VARCHAR},
       </if>
       now(),
       now(),
@@ -67,6 +74,9 @@
       <if test="address != null" >
         address = #{address,jdbcType=VARCHAR},
       </if>
+      <if test="addressAbbr != null" >
+        address_abbr = #{addressAbbr,jdbcType=VARCHAR},
+      </if>
         update_time = now(),
     </set>
     where address_id = #{addressId,jdbcType=INTEGER}
@@ -75,6 +85,7 @@
     update iel_customer_address
     set customer_id = #{customerId,jdbcType=INTEGER},
       address = #{address,jdbcType=VARCHAR},
+      address_abbr = #{addressAbbr,jdbcType=VARCHAR},
       update_time = now()
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>

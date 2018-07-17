@@ -194,6 +194,7 @@ public class OutServiceImpl implements IOutService {
         outVo.setPjbContractNo(out.getPjbContractNo());
         outVo.setCustomerName(out.getCustomerName());
         outVo.setAddress(out.getAddress());
+        outVo.setWorkNo(out.getWorkNo());
         return outVo;
     }
 

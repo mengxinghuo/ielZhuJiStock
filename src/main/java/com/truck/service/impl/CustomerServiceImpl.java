@@ -23,7 +23,7 @@ public class CustomerServiceImpl implements ICustomerService {
     private CustomerMapper customerMapper;
 
     public ServerResponse addCustomer(Customer customer){
-        if(StringUtils.isEmpty(customer.getCustomerNo()) || StringUtils.isEmpty(customer.getPtName()) || StringUtils.isEmpty(customer.getPhoneNumber())){
+        if(StringUtils.isEmpty(customer.getCustomerNo()) || StringUtils.isEmpty(customer.getPtName()) || StringUtils.isEmpty(customer.getPhoneNumber()) || StringUtils.isEmpty(customer.getDutyNo())){
             return ServerResponse.createByErrorMessage("信息不完善");
         }
         Customer searchPt = customerMapper.checkOutCustomer(customer.getPtName(),null,null,null);
@@ -184,6 +184,7 @@ public class CustomerServiceImpl implements ICustomerService {
         customerVo.setCreateTime(DateTimeUtil.dateToStr(customer.getCreateTime()));
         customerVo.setUpdateTime(DateTimeUtil.dateToStr(customer.getUpdateTime()));
         customerVo.setIntroduction(customer.getIntroduction());
+        customerVo.setDutyNo(customer.getDutyNo());
         return customerVo;
     }
 }
