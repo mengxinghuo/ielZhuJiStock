@@ -190,6 +190,23 @@ public class TransportServiceImpl implements ITransportService {
         return ServerResponse.createByErrorMessage("创建失败");
     }
 
+    public ServerResponse updateEntry(String oldDeclareNum, String declareNum, String shipNum){
+        Entry search = entryMapper.selectByDeclareNum(oldDeclareNum);
+        if(search == null){
+            return ServerResponse.createBySuccess();
+        }
+        Entry entry = new Entry();
+        entry.setId(search.getId());
+        entry.setDeclareNum(declareNum);
+        entry.setShipNum(shipNum);
+        int resultCount = entryMapper.updateByPrimaryKeySelective(entry);
+        if(resultCount > 0){
+            return ServerResponse.createBySuccess();
+        }else{
+            return ServerResponse.createByErrorMessage("数据异常入库单更改失败");
+        }
+    }
+
     public ServerResponse checkEntryByDeclareNum(String declareNum){
         Entry entry = entryMapper.selectByDeclareNum(declareNum);
         if(entry != null){

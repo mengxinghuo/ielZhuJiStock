@@ -18,4 +18,6 @@ public interface ITransportService {
     ServerResponse createEntry(String entryStr);
 
     ServerResponse checkEntryByDeclareNum(String declareNum);
+
+    ServerResponse updateEntry(String oldDeclareNum, String declareNum, String shipNum);
 }

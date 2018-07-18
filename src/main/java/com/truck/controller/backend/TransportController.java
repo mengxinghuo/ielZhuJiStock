@@ -117,6 +117,20 @@ public class TransportController {
     }
 
     /**
+     * 同步报关船次
+     * @param oldDeclareNum
+     * @param declareNum
+     * @param shipNum
+     * @return
+     */
+    @RequestMapping("update_entry.do")
+    @ResponseBody
+    public ServerResponse updateEntry(String oldDeclareNum, String declareNum, String shipNum){
+        return iTransportService.updateEntry(oldDeclareNum, declareNum, shipNum);
+    }
+
+
+    /**
      * 查询所有列表，带分页 可根据状态查询
      * @param status
      * @param pageNum
