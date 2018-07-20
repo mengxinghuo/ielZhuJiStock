@@ -28,6 +28,16 @@ public class CartVo {
 
     private String defineModelNo;
 
+    private String defineStr;
+
+    public String getDefineStr() {
+        return defineStr;
+    }
+
+    public void setDefineStr(String defineStr) {
+        this.defineStr = defineStr;
+    }
+
     public CartVo() {
     }
 
