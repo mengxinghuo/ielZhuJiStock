@@ -198,7 +198,7 @@
     from iel_customer
     <where>
       <if test="customerNo != null">
-        and customer_no = #{customerNo}
+        and customer_no like #{customerNo}
       </if>
       <if test="ptName != null">
         and pt_name like #{ptName}

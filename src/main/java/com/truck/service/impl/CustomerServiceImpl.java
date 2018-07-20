@@ -82,6 +82,9 @@ public class CustomerServiceImpl implements ICustomerService {
         if(!StringUtils.isEmpty(customerNo)){
             customerNo = new StringBuilder().append("%").append(customerNo).append("%").toString();
         }
+        if(!StringUtils.isEmpty(ptName)){
+            ptName = new StringBuilder().append("%").append(ptName).append("%").toString();
+        }
         List<Customer> customerList = customerMapper.selectByNoAndName(customerNo,ptName,status);
         if(customerList.size() == 0){
             return ServerResponse.createByErrorMessage("未查到数据");
