@@ -137,10 +137,10 @@ public class CustomerManageController {
     @RequestMapping("get_customer_detail.do")
     @ResponseBody
     public ServerResponse getCustomerDetail(HttpSession session, Integer customerId){
-        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+     /*   Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
         if(admin == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
-        }
+        }*/
         return iCustomerService.getCustomerDetail(customerId);
     }
 
