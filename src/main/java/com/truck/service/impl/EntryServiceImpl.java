@@ -214,6 +214,10 @@ public class EntryServiceImpl implements IEntryService {
         }
         int resultCount = entryDetailMapper.updateByEntryId(entryId,status);
         if(resultCount > 0){
+            Entry entry = new Entry();
+            entry.setId(entryId);
+            entry.setStatus(Const.EntryStatusEnum.CONFIRM.getCode());
+            entryMapper.updateByPrimaryKeySelective(entry);
             return ServerResponse.createBySuccess("更改成功");
         }else{
             return ServerResponse.createByErrorMessage("更改失败");
