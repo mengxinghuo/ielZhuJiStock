@@ -43,7 +43,7 @@ public class StockServiceImpl implements IStockService {
             return ServerResponse.createByErrorMessage("本记录已入库，无法再次入库");
         }
         if(Const.EntryStatusEnum.STANDBY.getCode() == entry.getStatus()){
-            return ServerResponse.createByErrorMessage("未盘点，无法入库");
+            return ServerResponse.createByErrorMessage("未检验，无法入库");
         }
         List<EntryDetail> entryDetails = entryDetailMapper.selectEntryDetail(entryId);
         for (EntryDetail entryDetail : entryDetails) {
