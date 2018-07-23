@@ -58,6 +58,35 @@ public class Const {
 
     }
 
+    public enum StockStatusEnum{
+        UN_OUT(0,"在库"),
+        OVER_OUT(1,"已出库");
+
+        private String value;
+        private int code;
+        StockStatusEnum(int code,String value){
+            this.code = code;
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+        public static StockStatusEnum codeOf(int code){
+            for(StockStatusEnum stockStatusEnum : values()){
+                if(stockStatusEnum.getCode() == code){
+                    return stockStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+
+    }
+
     public enum OutStatusEnum{
         UN_OUT(0,"未出库"),
         OVER_OUT(1,"已出库");

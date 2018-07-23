@@ -223,6 +223,7 @@ public class StockServiceImpl implements IStockService {
                 stock.setModelAlias(entryDetailItem.getModelAlias());
             }
             stock.setConfiguration(entryDetailItem.getConfiguration());
+            stock.setStatus(Const.StockStatusEnum.UN_OUT.getCode());
             stockList.add(stock);
         }
         return stockList;

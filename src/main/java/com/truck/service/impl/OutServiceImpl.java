@@ -85,7 +85,12 @@ public class OutServiceImpl implements IOutService {
             resultCount = outDetailMapper.batchInsert(outDetailList);
             if(resultCount > 0){
                 cartMapper.deleteByAdminId(adminId);
-
+                for(OutDetail outDetailItem : outDetailList){
+                    Stock stock = new Stock();
+                    stock.setStatus(Const.StockStatusEnum.OVER_OUT.getCode());
+                    stock.setId(outDetailItem.getStockId());
+                    stockMapper.updateByPrimaryKeySelective(stock);
+                }
                 return ServerResponse.createBySuccess("建立销售合同，出库成功");
             }
             return ServerResponse.createByErrorMessage("生成出库单失败");
@@ -146,6 +151,7 @@ public class OutServiceImpl implements IOutService {
             if (cartItem.getDefineStr()!= null) {
                 outDetail.setDefineStr(cartItem.getDefineStr());
             }
+            outDetail.setStockId(cartItem.getStockId());
             outDetailList.add(outDetail);
         }
         return outDetailList;

@@ -30,13 +30,14 @@
       <arg column="define_str" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="define_model_no" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="configuration" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="stock_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, out_id, parts_no, parts_name, parts_en_name, unit, sales_price, device_type, 
     stock_position, status, out_num, create_time, update_time,define_sn,address,entry_time,destination, buy_contract_no, model, 
     sn, engine_no, xx_no, brand,model_alias, define_str,
-    define_model_no,configuration
+    define_model_no,configuration,stock_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -55,7 +56,7 @@
       status, out_num, create_time, 
       update_time,define_sn,address,entry_time,destination, buy_contract_no, model, 
     sn, engine_no, xx_no, brand,model_alias, define_str,
-    define_model_no,configuration)
+    define_model_no,configuration,stock_id)
     values (#{id,jdbcType=INTEGER}, #{outId,jdbcType=INTEGER}, #{partsNo,jdbcType=VARCHAR}, 
       #{partsName,jdbcType=VARCHAR}, #{partsEnName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
       #{salesPrice,jdbcType=DECIMAL}, #{deviceType,jdbcType=VARCHAR}, #{stockPosition,jdbcType=INTEGER}, 
@@ -63,7 +64,7 @@
       now(),#{defineSn},#{address},#{entryTime},#{destination}, #{buyContractNo,jdbcType=VARCHAR}, 
       #{model,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{engineNo,jdbcType=VARCHAR}, 
       #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{modelAlias},
-      #{defineStr,jdbcType=VARCHAR}, #{defineModelNo,jdbcType=VARCHAR},#{configuration})
+      #{defineStr,jdbcType=VARCHAR}, #{defineModelNo,jdbcType=VARCHAR},#{configuration},#{stockId})
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.OutDetail" >
     insert into iel_out_detail
@@ -145,6 +146,9 @@
       <if test="configuration != null" >
         configuration,
       </if>
+      <if test="stockId != null" >
+        stock_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -224,6 +228,9 @@
       <if test="configuration != null" >
         #{configuration,jdbcType=VARCHAR},
       </if>
+      <if test="stockId != null" >
+        #{stockId},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.OutDetail" >
@@ -302,6 +309,9 @@
       <if test="configuration != null" >
         configuration = #{configuration,jdbcType=VARCHAR},
       </if>
+      <if test="stockId != null" >
+        stock_id = #{stockId},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -321,6 +331,7 @@
       define_sn=#{defineSn},
       address=#{address}
       configuration=#{configuration}
+      stock_id=#{stockId}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -329,7 +340,7 @@
     sales_price, device_type, stock_position,
     out_num, create_time,
     update_time,define_sn,address,entry_time,destination, buy_contract_no, model,
-    sn, engine_no, xx_no, brand,model_alias,define_str,define_model_no,configuration)
+    sn, engine_no, xx_no, brand,model_alias,define_str,define_model_no,configuration,stock_id)
     values
     <foreach collection="outDetailList" index="index" item="item" separator=",">
       (#{item.outId,jdbcType=INTEGER},
@@ -337,7 +348,7 @@
       #{item.outNum,jdbcType=INTEGER}, now(),now(),
       #{item.defineSn},#{item.address},#{item.entryTime},#{item.destination}, #{item.buyContractNo,jdbcType=VARCHAR},
       #{item.model,jdbcType=VARCHAR}, #{item.sn,jdbcType=VARCHAR}, #{item.engineNo,jdbcType=VARCHAR},
-      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.modelAlias},#{item.defineStr},#{item.defineModelNo},#{item.configuration}
+      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.modelAlias},#{item.defineStr},#{item.defineModelNo},#{item.configuration},#{item.stockId}
       )
     </foreach>
   </insert>

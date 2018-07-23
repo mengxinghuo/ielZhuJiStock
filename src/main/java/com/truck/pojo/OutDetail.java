@@ -60,10 +60,12 @@ public class OutDetail {
 
     private String configuration;
 
+    private Integer stockId;
+
     public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType,
                      Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime, String defineSn,String address,  Date entryTime,
                      String destination, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String modelAlias,
-                     String defineStr,String defineModelNo,String configuration) {
+                     String defineStr,String defineModelNo,String configuration,Integer stockId) {
         this.id = id;
         this.outId = outId;
         this.partsNo = partsNo;
@@ -91,6 +93,16 @@ public class OutDetail {
         this.defineStr = defineStr;
         this.defineModelNo = defineModelNo;
         this.configuration = configuration;
+        this.stockId = stockId;
+    }
+
+
+    public Integer getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(Integer stockId) {
+        this.stockId = stockId;
     }
 
     public String getConfiguration() {

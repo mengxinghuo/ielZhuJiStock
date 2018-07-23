@@ -28,13 +28,14 @@
       <arg column="type_category_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="model_alias" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="configuration" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, entry_id, customs_clearance, destination, parts_no, parts_name, parts_en_name, 
     unit, quantity, sales_price, device_type, repertory, position, create_time, update_time,
     ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand,type_category_id,model_alias,configuration
+    sn, engine_no, xx_no, brand,type_category_id,model_alias,configuration,status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -53,7 +54,7 @@
       sales_price, device_type, repertory, 
       position, create_time, update_time,
       ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand,type_category_id,model_alias,configuration
+    sn, engine_no, xx_no, brand,type_category_id,model_alias,configuration,status
       )
     values (#{id,jdbcType=INTEGER}, #{entryId,jdbcType=INTEGER}, #{customsClearance,jdbcType=VARCHAR}, 
       #{destination,jdbcType=VARCHAR}, #{partsNo,jdbcType=VARCHAR}, #{partsName,jdbcType=VARCHAR}, 
@@ -61,7 +62,7 @@
       #{salesPrice,jdbcType=DECIMAL}, #{deviceType,jdbcType=VARCHAR}, #{repertory,jdbcType=INTEGER}, 
       #{position,jdbcType=INTEGER},now(), now(),#{shipNum}, #{buyContractNo,jdbcType=VARCHAR}, 
       #{model,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{engineNo,jdbcType=VARCHAR}, 
-      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{typeCategoryId},#{modelAlias},#{configuration}
+      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{typeCategoryId},#{modelAlias},#{configuration},#{status}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.Stock" >
@@ -138,6 +139,9 @@
       <if test="configuration != null" >
         configuration,
       </if>
+      <if test="status != null" >
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -211,6 +215,9 @@
       <if test="configuration != null" >
         #{configuration},
       </if>
+      <if test="status != null" >
+        #{status},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Stock" >
@@ -283,6 +290,9 @@
       <if test="configuration != null" >
         configuration=#{configuration},
       </if>
+      <if test="status != null" >
+        status=#{status},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -309,6 +319,7 @@
       xx_no = #{xxNo,jdbcType=VARCHAR},
       brand = #{brand,jdbcType=VARCHAR}
       configuration = #{configuration,jdbcType=VARCHAR}
+      status = #{status}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -331,7 +342,7 @@
       position, create_time, update_time,
       ship_num,buy_contract_no,
     model, sn, engine_no,
-    xx_no, brand,type_category_id,model_alias,configuration
+    xx_no, brand,type_category_id,model_alias,configuration,status
       )
     values
     <foreach collection="stockList" index="index" item="item" separator=",">
@@ -342,7 +353,7 @@
       #{item.position,jdbcType=INTEGER}, now(),now(),#{item.shipNum},
        #{item.buyContractNo,jdbcType=VARCHAR},
       #{item.model,jdbcType=VARCHAR}, #{item.sn,jdbcType=VARCHAR}, #{item.engineNo,jdbcType=VARCHAR},
-      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.typeCategoryId},#{item.modelAlias},#{item.configuration}
+      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.typeCategoryId},#{item.modelAlias},#{item.configuration},#{item.status}
       )
     </foreach>
   </insert>
@@ -351,7 +362,7 @@
     select
     <include refid="Base_Column_List" />
     from iel_stock
-    <where>
+    where status = 0
       <if test="stock.entryId != null" >
         and entry_id=#{stock.entryId,jdbcType=INTEGER}
       </if>
@@ -418,14 +429,13 @@
       <if test="stock.configuration != null" >
         and configuration=#{stock.configuration}
       </if>
-    </where>
   </select>
 
   <select id="selectByStockSelectiveLike" parameterType="com.truck.pojo.Stock" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from iel_stock
-    <where>
+    where status = 0
       <if test="stock.entryId != null" >
         and entry_id like concat('%',#{stock.entryId},'%')
       </if>
@@ -492,7 +502,6 @@
       <if test="stock.configuration != null" >
         and configuration like concat('%',#{stock.configuration},'%')
       </if>
-    </where>
   </select>
 
 </mapper>
