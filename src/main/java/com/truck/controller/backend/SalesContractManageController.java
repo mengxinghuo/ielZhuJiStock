@@ -105,4 +105,23 @@ public class SalesContractManageController {
         }
         return iSalesContractService.getOutSalesContract(id);
     }
+
+    /**
+     * 查询所有已售设备列表
+     * @param session
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("get_sales_device_list.do")
+    @ResponseBody
+    public ServerResponse getSalesDeviceList(HttpSession session,
+                                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                               @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+        if(admin == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+        }
+        return iSalesContractService.getSalesDeviceList(pageNum,pageSize);
+    }
 }

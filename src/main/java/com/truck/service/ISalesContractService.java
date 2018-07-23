@@ -13,5 +13,7 @@ public interface ISalesContractService {
 
     ServerResponse getSalesContractList(int pageNum,int pageSize);
 
+    ServerResponse getSalesDeviceList(int pageNum,int pageSize);
+
     ServerResponse getOutSalesContract(Integer id);
 }

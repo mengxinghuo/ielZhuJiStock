@@ -106,10 +106,29 @@ public class SalesContractServiceImpl implements ISalesContractService {
         List<SalesContractVo> salesContractVoList = Lists.newArrayList();
         for(SalesContract salesContractItem : salesContractList){
             SalesContractVo salesContractVo = this.assembleSalesContract(salesContractItem);
-            salesContractVoList.add(salesContractVo);
+            if (salesContractVo.getOutVo()!=null) {
+                salesContractVoList.add(salesContractVo);
+            }
         }
         PageInfo pageInfo = new PageInfo(salesContractList);
         pageInfo.setList(salesContractVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
+    public ServerResponse getSalesDeviceList(int pageNum,int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        List<SalesContract> salesContractList = salesContractMapper.selectSalesContractList();
+        if(salesContractList.size() == 0){
+            return ServerResponse.createByErrorMessage("未查到结果");
+        }
+        List<OutDetail> outDetailList = Lists.newArrayList();
+        for(SalesContract salesContractItem : salesContractList){
+            List<OutDetail> outDetailList2 = outDetailMapper.selectByOutId(salesContractItem.getOutId());
+            if (outDetailList2.size()>0) {
+                outDetailList.addAll(outDetailList2);
+            }
+        }
+        PageInfo pageInfo = new PageInfo(outDetailList);
         return ServerResponse.createBySuccess(pageInfo);
     }
 
@@ -137,10 +156,12 @@ public class SalesContractServiceImpl implements ISalesContractService {
         salesContractVo.setDate(DateTimeUtil.dateToStr(salesContract.getDate()));
         salesContractVo.setOutId(salesContract.getOutId());
         Out out = outMapper.selectByPrimaryKey(salesContract.getOutId());
-        OutVo outVo = iOutService.assembleOut(out);
-        salesContractVo.setOutVo(outVo);
-        List<OutDetail> outDetailList = outDetailMapper.selectByOutId(out.getId());
-        salesContractVo.setOutDetailList(outDetailList);
+        if (out != null) {
+            OutVo outVo = iOutService.assembleOut(out);
+            salesContractVo.setOutVo(outVo);
+            List<OutDetail> outDetailList = outDetailMapper.selectByOutId(out.getId());
+            salesContractVo.setOutDetailList(outDetailList);
+        }
         salesContractVo.setOutNo(salesContract.getOutNo());
         salesContractVo.setBpkNo(salesContract.getBpkNo());
         salesContractVo.setSalesContractNo(salesContract.getSalesContractNo());
