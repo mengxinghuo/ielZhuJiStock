@@ -34,6 +34,8 @@ public class SalesContractServiceImpl implements ISalesContractService {
     @Autowired
     private OutDetailMapper outDetailMapper;
     @Autowired
+    private ProjectMapper projectMapper;
+    @Autowired
     private IOutService iOutService;
 
     public ServerResponse addSalesContract(SalesContract salesContract){
@@ -160,6 +162,10 @@ public class SalesContractServiceImpl implements ISalesContractService {
             OutVo outVo = iOutService.assembleOut(out);
             salesContractVo.setOutVo(outVo);
             List<OutDetail> outDetailList = outDetailMapper.selectByOutId(out.getId());
+            for (OutDetail outDetail : outDetailList) {
+                Project project = projectMapper.selectByProductId(outDetail.getId());
+                outDetail.setProject(project);
+            }
             salesContractVo.setOutDetailList(outDetailList);
         }
         salesContractVo.setOutNo(salesContract.getOutNo());

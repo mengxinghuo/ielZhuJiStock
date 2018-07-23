@@ -62,6 +62,8 @@ public class OutDetail {
 
     private Integer stockId;
 
+    private Project project;
+
     public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType,
                      Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime, String defineSn,String address,  Date entryTime,
                      String destination, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String modelAlias,
@@ -331,5 +333,13 @@ public class OutDetail {
 
     public void setDefineModelNo(String defineModelNo) {
         this.defineModelNo = defineModelNo;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

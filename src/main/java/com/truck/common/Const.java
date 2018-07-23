@@ -116,6 +116,138 @@ public class Const {
 
     }
 
+
+    public enum ServiceStatusEnum {
+        REPAIR(1, "维修"),
+        MAINTAIN(0, "保养");
+        private String value;
+        private int code;
+
+        ServiceStatusEnum(int code, String value) {
+            this.code = code;
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public static ServiceStatusEnum codeOf(int code) {
+            for (ServiceStatusEnum serviceStatusEnum : values()) {
+                if (serviceStatusEnum.getCode() == code) {
+                    return serviceStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+    }
+    public enum ServiceProgressStatusEnum {
+        NAN(1, "未进行"),
+        ING(2, "进行中"),
+        DONE(3, "已完成");
+        private String value;
+        private int code;
+
+        ServiceProgressStatusEnum(int code, String value) {
+            this.code = code;
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public static ServiceProgressStatusEnum codeOf(int code) {
+            for (ServiceProgressStatusEnum serviceProgressStatusEnum : values()) {
+                if (serviceProgressStatusEnum.getCode() == code) {
+                    return serviceProgressStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+    }
+
+
+    public enum OrderStatusEnum {
+        CANCELED(0, "已取消"),
+        NO_PAY(10, "未支付"),
+        PAID(20, "已付款"),
+        SHIPPING(30,"发货中"),
+        SHIPPED(40, "已发货"),
+        ORDER_SUCCESS(50, "订单完成"),
+        SERVICE_ING(70, "正在服务"),
+        SERVICE_CLOSE(80, "完成服务");
+
+
+        OrderStatusEnum(int code, String value) {
+            this.code = code;
+            this.value = value;
+        }
+
+        private String value;
+        private int code;
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public static OrderStatusEnum codeOf(int code) {
+            for (OrderStatusEnum orderStatusEnum : values()) {
+                if (orderStatusEnum.getCode() == code) {
+                    return orderStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+    }
+
+    public enum OrderDetailStatusEnum {
+        CANCELED(0, "已取消"),
+        NO_SHIPPING(20,"未发货"),
+        DISTRIBUTION(30,"已配货"),
+        SHIPPED(40, "已发货"),
+        ORDER_SUCCESS(50, "已接收");
+
+
+        OrderDetailStatusEnum(int code, String value) {
+            this.code = code;
+            this.value = value;
+        }
+
+        private String value;
+        private int code;
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public static OrderDetailStatusEnum codeOf(int code) {
+            for (OrderDetailStatusEnum orderDetailStatusEnum : values()) {
+                if (orderDetailStatusEnum.getCode() == code) {
+                    return orderDetailStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+    }
+
+
     public enum InventoryStatusEnum{
         OVER_INVENTORY(1,"已盘点");
 

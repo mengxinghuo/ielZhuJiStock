@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  <mapper namespace="com.truck.dao.ProjectMapper" >
+    <resultMap id="BaseResultMap" type="com.truck.pojo.Project" >
+      <constructor >
+        <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <arg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+        <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+        <arg column="admin_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      </constructor>
+    </resultMap>
+    <sql id="Base_Column_List" >
+      id, product_id, name, create_time, update_time,admin_id
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+      select
+      <include refid="Base_Column_List" />
+      from truck_project
+      where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByProductId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+      select
+      <include refid="Base_Column_List" />
+      from truck_project
+      where product_id = #{productId,jdbcType=INTEGER}
+    </select>
+    <select id="listByAdminId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+      select
+      <include refid="Base_Column_List" />
+      from truck_project
+      where admin_id = #{adminId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="string" >
+      select
+      <include refid="Base_Column_List" />
+      from truck_project
+      where name=#{name}
+    </select>
+    <select id="listNameByAdminId" resultType="string" parameterType="java.lang.Integer" >
+      select
+      distinct(name)
+      from truck_project
+      where admin_id = #{adminId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer" >
+      delete from truck_project
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.truck.pojo.Project" useGeneratedKeys="true" keyProperty="id">
+      insert into truck_project (id, product_id, name,
+      create_time, update_time)
+      values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      now(), now())
+    </insert>
+    <insert id="insertSelective" parameterType="com.truck.pojo.Project" useGeneratedKeys="true" keyProperty="id">
+      insert into truck_project
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null" >
+          id,
+        </if>
+        <if test="productId != null" >
+          product_id,
+        </if>
+        <if test="name != null" >
+          name,
+        </if>
+        <if test="createTime != null" >
+          create_time,
+        </if>
+        <if test="updateTime != null" >
+          update_time,
+        </if>
+        <if test="adminId != null" >
+          admin_id,
+        </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null" >
+          #{id,jdbcType=INTEGER},
+        </if>
+        <if test="productId != null" >
+          #{productId,jdbcType=INTEGER},
+        </if>
+        <if test="name != null" >
+          #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="createTime != null" >
+          now(),
+        </if>
+        <if test="updateTime != null" >
+          now(),
+        </if>
+        <if test="adminId != null" >
+          #{adminId},
+        </if>
+      </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Project" >
+      update truck_project
+      <set >
+        <if test="productId != null" >
+          product_id = #{productId,jdbcType=INTEGER},
+        </if>
+        <if test="name != null" >
+          name = #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="createTime != null" >
+          create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updateTime != null" >
+          update_time = #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="adminId != null" >
+          admin_id=#{adminId},
+        </if>
+      </set>
+      where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.truck.pojo.Project" >
+      update truck_project
+      set product_id = #{productId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByProject" parameterType="com.truck.pojo.Project">
+     update truck_project
+      set product_id = #{productId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = now(),
+      admin_id=#{adminId}
+      where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
