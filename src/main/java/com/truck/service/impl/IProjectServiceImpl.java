@@ -109,6 +109,16 @@ public class IProjectServiceImpl implements IProjectService {
                     return ServerResponse.createBySuccess("更新工程信息成功");
                 }
                 return ServerResponse.createByErrorMessage("更新工程信息失败");
+            }else if(project.getProductId()!=project4.getProductId()){
+                Project project5 = projectMapper.selectByProductId(project.getProductId());
+                if(project5!=null){
+                    project5.setName(project.getName());
+                    int rowCount = projectMapper.updateByPrimaryKeySelective(project5);
+                    if (rowCount > 0) {
+                        return ServerResponse.createBySuccess("更新工程信息成功");
+                    }
+                    return ServerResponse.createByErrorMessage("更新工程信息失败");
+                }
             }
         }
         List<Project> project1 = projectMapper.selectByName(project.getName());
