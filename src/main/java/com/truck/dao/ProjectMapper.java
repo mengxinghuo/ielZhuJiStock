@@ -17,6 +17,8 @@ public interface ProjectMapper {
 
     Project selectByProductId(Integer productId);
 
+    Project selectByProductIdName(@Param("productId")Integer productId,@Param("name") String name);
+
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);

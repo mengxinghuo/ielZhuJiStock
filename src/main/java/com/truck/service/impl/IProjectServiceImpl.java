@@ -97,8 +97,12 @@ public class IProjectServiceImpl implements IProjectService {
 
 
     public ServerResponse update(Project project) {
-        if(project.getId() == null){
+        if(project.getId() == null ){
             return ServerResponse.createByErrorMessage("请选择工程");
+        }
+        Project project6 = projectMapper.selectByProductIdName(project.getProductId(),project.getName());
+        if(project6!=null){
+            return ServerResponse.createByErrorMessage("该设备已经在该工程下");
         }
         Project project4 = projectMapper.selectByPrimaryKey(project.getId());
         if(project4.getProductId()!=null){
@@ -121,6 +125,7 @@ public class IProjectServiceImpl implements IProjectService {
                 }
             }
         }
+
         List<Project> project1 = projectMapper.selectByName(project.getName());
         for (Project project2 : project1) {
             if(StringUtils.isEmpty(project2.getProductId())){

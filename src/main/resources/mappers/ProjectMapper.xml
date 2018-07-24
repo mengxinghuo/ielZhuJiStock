@@ -26,6 +26,13 @@
       from truck_project
       where product_id = #{productId,jdbcType=INTEGER}
     </select>
+    <select id="selectByProductIdName" resultMap="BaseResultMap" parameterType="map" >
+      select
+      <include refid="Base_Column_List" />
+      from truck_project
+      where product_id = #{productId,jdbcType=INTEGER}
+      and name=#{name}
+    </select>
     <select id="listByAdminId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
       select
       <include refid="Base_Column_List" />
