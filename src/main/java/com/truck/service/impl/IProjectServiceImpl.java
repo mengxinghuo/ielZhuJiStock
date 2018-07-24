@@ -100,6 +100,17 @@ public class IProjectServiceImpl implements IProjectService {
         if(project.getId() == null){
             return ServerResponse.createByErrorMessage("请选择工程");
         }
+        Project project4 = projectMapper.selectByPrimaryKey(project.getId());
+        if(project4.getProductId()!=null){
+            if(!project.getName().equals(project4.getName())){
+                project4.setName(project.getName());
+                int rowCount = projectMapper.updateByPrimaryKeySelective(project);
+                if (rowCount > 0) {
+                    return ServerResponse.createBySuccess("更新工程信息成功");
+                }
+                return ServerResponse.createByErrorMessage("更新工程信息失败");
+            }
+        }
         List<Project> project1 = projectMapper.selectByName(project.getName());
         for (Project project2 : project1) {
             if(StringUtils.isEmpty(project2.getProductId())){
