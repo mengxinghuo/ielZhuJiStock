@@ -66,12 +66,8 @@
         <if test="name != null" >
           name,
         </if>
-        <if test="createTime != null" >
           create_time,
-        </if>
-        <if test="updateTime != null" >
           update_time,
-        </if>
         <if test="adminId != null" >
           admin_id,
         </if>
@@ -86,12 +82,8 @@
         <if test="name != null" >
           #{name,jdbcType=VARCHAR},
         </if>
-        <if test="createTime != null" >
           now(),
-        </if>
-        <if test="updateTime != null" >
           now(),
-        </if>
         <if test="adminId != null" >
           #{adminId},
         </if>
@@ -109,9 +101,7 @@
         <if test="createTime != null" >
           create_time = #{createTime,jdbcType=TIMESTAMP},
         </if>
-        <if test="updateTime != null" >
-          update_time = #{updateTime,jdbcType=TIMESTAMP},
-        </if>
+          update_time = now(),
         <if test="adminId != null" >
           admin_id=#{adminId},
         </if>

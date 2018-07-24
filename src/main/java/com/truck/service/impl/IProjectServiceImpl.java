@@ -55,6 +55,9 @@ public class IProjectServiceImpl implements IProjectService {
             ProjectVo projectVo = new ProjectVo();
             projectVo.setName(name);
             List<Project> projectList = projectMapper.selectByName(name);
+            if(projectList.size()>0){
+                projectVo.setId(projectList.get(0).getId());
+            }
             List<OutDetail> outDetailList = Lists.newArrayList();
             for (Project project : projectList) {
                 OutDetail outDetail = outDetailMapper.selectByPrimaryKey(project.getProductId());
