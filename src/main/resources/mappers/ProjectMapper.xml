@@ -99,9 +99,7 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Project" >
       update truck_project
       <set >
-        <if test="productId != null" >
           product_id = #{productId,jdbcType=INTEGER},
-        </if>
         <if test="name != null" >
           name = #{name,jdbcType=VARCHAR},
         </if>

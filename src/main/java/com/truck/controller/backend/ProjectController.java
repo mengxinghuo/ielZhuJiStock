@@ -29,20 +29,12 @@ public class ProjectController {
                                          @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                          @RequestParam(value = "pageNum",defaultValue = "10") int pageSize,
                                          Integer customerId){
-        Admin admin = (Admin) session.getAttribute(Const.CURRENT_ADMIN);
-        if (admin == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "管理员用户未登录，请登录");
-        }
         return iProjectService.listByProductId(customerId,pageNum,pageSize);
     }
 
     @RequestMapping("add.do")
     @ResponseBody
     public ServerResponse add(HttpSession session, Project project) {
-        Admin admin = (Admin) session.getAttribute(Const.CURRENT_ADMIN);
-        if (admin == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "管理员用户未登录，请登录");
-        }
         return iProjectService.add(project);
     }
 
@@ -51,20 +43,12 @@ public class ProjectController {
     @RequestMapping("del.do")
     @ResponseBody
     public ServerResponse del(HttpSession session, Integer id) {
-        Admin admin = (Admin) session.getAttribute(Const.CURRENT_ADMIN);
-        if (admin == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "管理员用户未登录，请登录");
-        }
         return iProjectService.del(id);
     }
 
     @RequestMapping("update.do")
     @ResponseBody
     public ServerResponse update(HttpSession session, Project project) {
-        Admin admin = (Admin) session.getAttribute(Const.CURRENT_ADMIN);
-        if (admin == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "管理员用户未登录，请登录");
-        }
         return iProjectService.update(project);
     }
 

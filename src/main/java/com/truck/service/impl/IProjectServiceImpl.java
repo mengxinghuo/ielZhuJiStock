@@ -126,6 +126,12 @@ public class IProjectServiceImpl implements IProjectService {
             }
         }
 
+        Project project7 = projectMapper.selectByProductId(project.getProductId());
+        if(project7!=null){
+            project7.setProductId(null);
+            projectMapper.updateByPrimaryKeySelective(project7);
+        }
+
         List<Project> project1 = projectMapper.selectByName(project.getName());
         for (Project project2 : project1) {
             if(StringUtils.isEmpty(project2.getProductId())){
