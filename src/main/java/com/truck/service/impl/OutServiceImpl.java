@@ -184,6 +184,13 @@ public class OutServiceImpl implements IOutService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
+    public ServerResponse getOutDetailById(Integer outDetailId){
+        OutDetail outDetail = outDetailMapper.selectByPrimaryKey(outDetailId);
+        if(outDetail !=null)
+        return ServerResponse.createBySuccess(outDetail);
+        return ServerResponse.createByErrorMessage("没有查到出库详情");
+    }
+
     public OutVo assembleOut(Out out){
         OutVo outVo = new OutVo();
         outVo.setId(out.getId());

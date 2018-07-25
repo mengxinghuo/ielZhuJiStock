@@ -70,4 +70,15 @@ public class OutController {
                                        @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         return iOutService.getOutDetail(outId,pageNum,pageSize);
     }
+
+    /**
+     * 查询出库详情outDetailId
+     * @param outDetailId
+     * @return
+     */
+    @RequestMapping("getOutDetailById.do")
+    @ResponseBody
+    public ServerResponse getOutDetailById(Integer outDetailId){
+        return iOutService.getOutDetailById(outDetailId);
+    }
 }
