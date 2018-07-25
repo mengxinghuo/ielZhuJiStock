@@ -341,9 +341,9 @@ public class Const {
     }
 
     public enum EntryStatusEnum{
-        STANDBY(0,"未入库"),
-        CONFIRM(1,"检查中"),
-        FINISH(2,"已入库");
+        STANDBY(0,"UN-CHECKED"),
+        CONFIRM(1,"CHECKING"),
+        FINISH(2,"STOCKED");
 
         private String value;
         private int code;
