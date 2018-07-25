@@ -84,7 +84,34 @@ public class Const {
             }
             throw new RuntimeException("么有找到对应的枚举");
         }
+    }
 
+    public enum ProjectOutStatusEnum{
+        NON_WORKING(0,"未工作"),
+        IN_WORKING(1,"正在工作");
+
+        private String value;
+        private int code;
+        ProjectOutStatusEnum(int code,String value){
+            this.code = code;
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+        public static ProjectOutStatusEnum codeOf(int code){
+            for(ProjectOutStatusEnum projectOutStatusEnum : values()){
+                if(projectOutStatusEnum.getCode() == code){
+                    return projectOutStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
     }
 
     public enum OutStatusEnum{
