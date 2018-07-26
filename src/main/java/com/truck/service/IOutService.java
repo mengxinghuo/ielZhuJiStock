@@ -4,6 +4,7 @@ import com.truck.common.ServerResponse;
 import com.truck.pojo.Out;
 import com.truck.pojo.OutDetail;
 import com.truck.pojo.SalesContract;
+import com.truck.pojo.Stock;
 import com.truck.vo.OutVo;
 
 public interface IOutService {
@@ -13,6 +14,8 @@ public interface IOutService {
     ServerResponse getOutList(Integer adminId,int pageNum,int pageSize);
 
     ServerResponse getOutDetail(Integer outId,int pageNum,int pageSize);
+
+    ServerResponse searchLikeDetailList(Integer adminId, OutDetail outDetail, int pageNum, int pageSize);
 
     ServerResponse getOutDetailById(Integer outDetailId);
 

@@ -360,4 +360,65 @@
     where out_id = #{outId}
     order by create_time desc
   </select>
+
+  <select id="selectByOutDetailSelectiveLike" parameterType="com.truck.pojo.OutDetail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from iel_out_detail
+    where out_num = 1
+    <if test="outDetail.destination != null" >
+      and destination like concat('%',#{outDetail.destination},'%')
+    </if>
+    <if test="outDetail.partsNo != null" >
+      and parts_no like concat('%',#{outDetail.partsNo},'%')
+    </if>
+    <if test="outDetail.partsName != null" >
+      and parts_name like concat('%',#{outDetail.partsName},'%')
+    </if>
+    <if test="outDetail.partsEnName != null" >
+      and parts_en_name like concat('%',#{outDetail.partsEnName},'%')
+    </if>
+    <if test="outDetail.unit != null" >
+      and unit like concat('%',#{outDetail.unit},'%')
+    </if>
+    <if test="outDetail.salesPrice != null" >
+      and sales_price like concat('%',#{outDetail.salesPrice},'%')
+    </if>
+    <if test="outDetail.deviceType != null" >
+      and device_type like concat('%',#{outDetail.salesPrice},'%')
+    </if>
+    <if test="outDetail.buyContractNo != null" >
+      and buy_contract_no like concat('%',#{outDetail.buyContractNo},'%')
+    </if>
+    <if test="outDetail.model != null" >
+      and model like concat('%',#{outDetail.model},'%')
+    </if>
+    <if test="outDetail.sn != null" >
+      and sn like concat('%',#{outDetail.sn},'%')
+    </if>
+    <if test="outDetail.defineSn != null" >
+      and define_sn like concat('%',#{outDetail.defineSn},'%')
+    </if>
+    <if test="outDetail.engineNo != null" >
+      and engine_no like concat('%',#{outDetail.engineNo},'%')
+    </if>
+    <if test="outDetail.xxNo != null" >
+      and xx_no like concat('%',#{outDetail.xxNo},'%')
+    </if>
+    <if test="outDetail.brand != null" >
+      and brand like concat('%',#{outDetail.brand},'%')
+    </if>
+    <if test="outDetail.modelAlias != null" >
+      and model_alias like concat('%',#{outDetail.modelAlias},'%')
+    </if>
+    <if test="outDetail.configuration != null" >
+      and configuration like concat('%',#{outDetail.configuration},'%')
+    </if>
+    <if test="outDetail.defineStr != null" >
+      and define_str like concat('%',#{outDetail.defineStr},'%')
+    </if>
+    <if test="outDetail.defineModelNo != null" >
+      and define_model_no like concat('%',#{outDetail.defineModelNo},'%')
+    </if>
+  </select>
 </mapper>

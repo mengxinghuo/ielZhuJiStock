@@ -12,6 +12,7 @@ import com.truck.service.IRepertoryService;
 import com.truck.service.ISalesContractService;
 import com.truck.util.DateTimeUtil;
 import com.truck.vo.OutVo;
+import com.truck.vo.StockVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -179,6 +180,16 @@ public class OutServiceImpl implements IOutService {
         List<OutDetail> outDetailList = outDetailMapper.selectByOutId(outId);
         for (OutDetail outDetail : outDetailList) {
             outDetail.setEntryTimeStr(DateTimeUtil.dateToStr(outDetail.getEntryTime()));
+        }
+        PageInfo pageInfo = new PageInfo(outDetailList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+    
+    public ServerResponse searchLikeDetailList(Integer adminId, OutDetail outDetail, int pageNum, int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        List<OutDetail> outDetailList =outDetailMapper.selectByOutDetailSelectiveLike(outDetail);
+        if(outDetailList.size() == 0){
+            return ServerResponse.createByErrorMessage("未查到任何记录");
         }
         PageInfo pageInfo = new PageInfo(outDetailList);
         return ServerResponse.createBySuccess(pageInfo);

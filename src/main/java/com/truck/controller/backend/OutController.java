@@ -3,9 +3,7 @@ package com.truck.controller.backend;
 import com.truck.common.Const;
 import com.truck.common.ResponseCode;
 import com.truck.common.ServerResponse;
-import com.truck.pojo.Admin;
-import com.truck.pojo.Out;
-import com.truck.pojo.SalesContract;
+import com.truck.pojo.*;
 import com.truck.service.IOutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,5 +78,22 @@ public class OutController {
     @ResponseBody
     public ServerResponse getOutDetailById(Integer outDetailId){
         return iOutService.getOutDetailById(outDetailId);
+    }
+
+
+    /**
+     * 模糊搜索查询出库详情
+     * @param outDetail
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("search_like_detail_list.do")
+    @ResponseBody
+    public ServerResponse searchLikeDetailList(HttpSession session,
+                                              OutDetail outDetail,
+                                              @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                              @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+        return iOutService.searchLikeDetailList(null,outDetail, pageNum, pageSize);
     }
 }
