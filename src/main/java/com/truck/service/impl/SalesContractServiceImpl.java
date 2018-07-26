@@ -10,8 +10,12 @@ import com.truck.pojo.*;
 import com.truck.service.IOutService;
 import com.truck.service.ISalesContractService;
 import com.truck.util.DateTimeUtil;
+import com.truck.util.JsonUtil;
+import com.truck.util.Post4;
 import com.truck.vo.OutVo;
+import com.truck.vo.ProjectOutVo;
 import com.truck.vo.SalesContractVo;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -163,8 +167,15 @@ public class SalesContractServiceImpl implements ISalesContractService {
             salesContractVo.setOutVo(outVo);
             List<OutDetail> outDetailList = outDetailMapper.selectByOutId(out.getId());
             for (OutDetail outDetail : outDetailList) {
-                Project project = projectMapper.selectByProductId(outDetail.getId());
-                outDetail.setProject(project);
+                ServerResponse serverResponse = this.getProjectByOutDetailId(outDetail.getId());
+                if(serverResponse.isSuccess()){
+                    ProjectOutVo projectOutVo =(ProjectOutVo)serverResponse.getData();
+                    if (projectOutVo != null) {
+                        if(projectOutVo.getProjectVo()!=null)
+                        outDetail.setProjectVo(projectOutVo.getProjectVo());
+                    }
+                }
+
             }
             salesContractVo.setOutDetailList(outDetailList);
         }
@@ -177,4 +188,28 @@ public class SalesContractServiceImpl implements ISalesContractService {
         salesContractVo.setUpdateTime(DateTimeUtil.dateToStr(salesContract.getUpdateTime()));
         return salesContractVo;
     }
+
+    public ServerResponse getProjectByOutDetailId(Integer outDetailId){
+//        String url = "http://149.129.220.43:8085/manage/projectOut/list_by_outdetailId_ing.do";
+        String url = "http://39.104.139.229:8087/manage/projectOut/list_by_outdetailId_ing.do";
+//        String url = "http://localhost:8085/manage/projectOut/list_by_outdetailId_ing.do";
+        StringBuffer sb = new StringBuffer();
+        sb.append("outDetailId=").append(outDetailId);
+        String str = Post4.connectionUrl(url, sb,null);
+        if (str.equals("error")) {
+            return ServerResponse.createByErrorMessage("iel服务系统异常，查询工程信息失败");
+        }
+        JSONObject jsonObject = JSONObject.fromObject(str);
+        String statuss = jsonObject.get("status").toString();
+        if (statuss.equals("1")) {
+            String errMsg = jsonObject.get("msg").toString();
+            return ServerResponse.createByErrorMessage(errMsg);
+        }
+        String Str = jsonObject.get("data").toString();
+        ProjectOutVo projectOutVo = JsonUtil.string2Obj(Str,ProjectOutVo.class);
+        return ServerResponse.createBySuccess(projectOutVo);
+    }
+
+
+
 }

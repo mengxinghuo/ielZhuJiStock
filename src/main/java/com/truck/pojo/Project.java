@@ -5,23 +5,23 @@ import java.util.Date;
 public class Project {
     private Integer id;
 
-    private Integer productId;
-
     private String name;
+
+    private Integer customerId;
+
+    private Integer status;
 
     private Date createTime;
 
     private Date updateTime;
 
-    private Integer adminId;
-
-    public Project(Integer id, Integer productId, String name, Date createTime, Date updateTime,Integer adminId) {
+    public Project(Integer id, String name, Integer customerId, Integer status, Date createTime, Date updateTime) {
         this.id = id;
-        this.productId = productId;
         this.name = name;
+        this.customerId = customerId;
+        this.status = status;
         this.createTime = createTime;
         this.updateTime = updateTime;
-        this.adminId = adminId;
     }
 
     public Project() {
@@ -36,28 +36,28 @@ public class Project {
         this.id = id;
     }
 
-    public Integer getAdminId() {
-        return adminId;
-    }
-
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {

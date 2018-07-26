@@ -15,6 +15,9 @@ public class ProjectOut {
 
     private Date updateTime;
 
+    private String createTimeStr;
+    private String updateTimeStr;
+
     public ProjectOut(Integer id, Integer outDetailId, Integer projectId, Integer status, Date createTime, Date updateTime) {
         this.id = id;
         this.outDetailId = outDetailId;
@@ -74,5 +77,21 @@ public class ProjectOut {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getCreateTimeStr() {
+        return createTimeStr;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
+    }
+
+    public String getUpdateTimeStr() {
+        return updateTimeStr;
+    }
+
+    public void setUpdateTimeStr(String updateTimeStr) {
+        this.updateTimeStr = updateTimeStr;
     }
 }

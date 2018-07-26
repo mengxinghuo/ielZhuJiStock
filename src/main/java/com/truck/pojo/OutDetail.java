@@ -1,5 +1,7 @@
 package com.truck.pojo;
 
+import com.truck.vo.ProjectVo;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -62,7 +64,7 @@ public class OutDetail {
 
     private Integer stockId;
 
-    private Project project;
+    private ProjectVo projectVo;
 
     public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType,
                      Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime, String defineSn,String address,  Date entryTime,
@@ -335,11 +337,11 @@ public class OutDetail {
         this.defineModelNo = defineModelNo;
     }
 
-    public Project getProject() {
-        return project;
+    public ProjectVo getProjectVo() {
+        return projectVo;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectVo(ProjectVo projectVo) {
+        this.projectVo = projectVo;
     }
 }

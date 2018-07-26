@@ -9,17 +9,15 @@ import java.util.List;
 public class ProjectVo {
     private Integer id;
 
-    private Integer productId;
-
     private String name;
+
+    private Integer customerId;
+
+    private Integer status;
 
     private String createTime;
 
     private String updateTime;
-
-    private Integer AdminId;
-
-    private List<OutDetail> outDetails;
 
 
     public Integer getId() {
@@ -30,20 +28,28 @@ public class ProjectVo {
         this.id = id;
     }
 
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getCreateTime() {
@@ -60,21 +66,5 @@ public class ProjectVo {
 
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Integer getAdminId() {
-        return AdminId;
-    }
-
-    public void setAdminId(Integer adminId) {
-        AdminId = adminId;
-    }
-
-    public List<OutDetail> getOutDetails() {
-        return outDetails;
-    }
-
-    public void setOutDetails(List<OutDetail> outDetails) {
-        this.outDetails = outDetails;
     }
 }

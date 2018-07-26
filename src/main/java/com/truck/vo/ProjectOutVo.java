@@ -1,15 +1,21 @@
 package com.truck.vo;
 
-import java.util.Date;
+import com.truck.pojo.OutDetail;
 
 public class ProjectOutVo {
     private Integer id;
 
     private Integer outDetailId;
 
+    private OutDetail outDetail;
+
     private Integer projectId;
 
+    private ProjectVo projectVo;
+
     private Integer status;
+
+    private String statusStr;
 
     private String createTime;
 
@@ -65,5 +71,29 @@ public class ProjectOutVo {
 
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getStatusStr() {
+        return statusStr;
+    }
+
+    public void setStatusStr(String statusStr) {
+        this.statusStr = statusStr;
+    }
+
+    public ProjectVo getProjectVo() {
+        return projectVo;
+    }
+
+    public void setProjectVo(ProjectVo projectVo) {
+        this.projectVo = projectVo;
+    }
+
+    public OutDetail getOutDetail() {
+        return outDetail;
+    }
+
+    public void setOutDetail(OutDetail outDetail) {
+        this.outDetail = outDetail;
     }
 }
