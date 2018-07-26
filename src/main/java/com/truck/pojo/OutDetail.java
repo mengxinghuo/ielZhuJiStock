@@ -66,6 +66,8 @@ public class OutDetail {
 
     private ProjectVo projectVo;
 
+    private SalesContract salesContract;
+
     public OutDetail(Integer id, Integer outId, String partsNo, String partsName, String partsEnName, String unit, BigDecimal salesPrice, String deviceType,
                      Integer stockPosition, Integer status, Integer outNum, Date createTime, Date updateTime, String defineSn,String address,  Date entryTime,
                      String destination, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String modelAlias,
@@ -343,5 +345,13 @@ public class OutDetail {
 
     public void setProjectVo(ProjectVo projectVo) {
         this.projectVo = projectVo;
+    }
+
+    public SalesContract getSalesContract() {
+        return salesContract;
+    }
+
+    public void setSalesContract(SalesContract salesContract) {
+        this.salesContract = salesContract;
     }
 }

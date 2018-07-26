@@ -12,6 +12,7 @@ import com.truck.service.IRepertoryService;
 import com.truck.service.ISalesContractService;
 import com.truck.util.DateTimeUtil;
 import com.truck.vo.OutVo;
+import com.truck.vo.ProjectOutVo;
 import com.truck.vo.StockVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,8 @@ public class OutServiceImpl implements IOutService {
     private ISalesContractService iSalesContractService;
     @Autowired
     private CustomerMapper customerMapper;
+    @Autowired
+    private SalesContractMapper salesContractMapper;
 
     public ServerResponse outStock(Integer adminId,Out out,SalesContract salesContract){
         if(StringUtils.isEmpty(out.getPjbContractNo())){
@@ -153,6 +156,16 @@ public class OutServiceImpl implements IOutService {
                 outDetail.setDefineStr(cartItem.getDefineStr());
             }
             outDetail.setStockId(cartItem.getStockId());
+            ServerResponse serverResponse = iSalesContractService.getProjectByOutDetailId(outDetail.getId());
+            if(serverResponse.isSuccess()){
+                ProjectOutVo projectOutVo =(ProjectOutVo)serverResponse.getData();
+                if (projectOutVo != null) {
+                    if(projectOutVo.getProjectVo()!=null)
+                        outDetail.setProjectVo(projectOutVo.getProjectVo());
+                }
+            }
+
+
             outDetailList.add(outDetail);
         }
         return outDetailList;
@@ -190,6 +203,21 @@ public class OutServiceImpl implements IOutService {
         List<OutDetail> outDetailList =outDetailMapper.selectByOutDetailSelectiveLike(outDetail);
         if(outDetailList.size() == 0){
             return ServerResponse.createByErrorMessage("未查到任何记录");
+        }
+        for (OutDetail detail : outDetailList) {
+            Out out = outMapper.selectByPrimaryKey(detail.getOutId());
+            SalesContract salesContract = salesContractMapper.selectByOutId(out.getId());
+            if(salesContract!=null){
+                outDetail.setSalesContract(salesContract);
+            }
+            ServerResponse serverResponse = iSalesContractService.getProjectByOutDetailId(outDetail.getId());
+            if(serverResponse.isSuccess()){
+                ProjectOutVo projectOutVo =(ProjectOutVo)serverResponse.getData();
+                if (projectOutVo != null) {
+                    if(projectOutVo.getProjectVo()!=null)
+                        outDetail.setProjectVo(projectOutVo.getProjectVo());
+                }
+            }
         }
         PageInfo pageInfo = new PageInfo(outDetailList);
         return ServerResponse.createBySuccess(pageInfo);

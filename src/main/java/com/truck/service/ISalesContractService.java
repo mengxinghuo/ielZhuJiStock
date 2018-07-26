@@ -16,4 +16,6 @@ public interface ISalesContractService {
     ServerResponse getSalesDeviceList(int pageNum,int pageSize);
 
     ServerResponse getOutSalesContract(Integer id);
+
+    ServerResponse getProjectByOutDetailId(Integer outDetailId);
 }
