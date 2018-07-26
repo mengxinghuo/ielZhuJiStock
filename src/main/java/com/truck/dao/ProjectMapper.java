@@ -15,21 +15,12 @@ public interface ProjectMapper {
 
     Project selectByPrimaryKey(Integer id);
 
-    Project selectByProductId(Integer productId);
-
-    Project selectByProductIdName(@Param("productId")Integer productId,@Param("name") String name);
-
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);
 
-    List<Project> listByAdminId(Integer adminId);
+    List<Project> selectByCustomerId(@Param("customerId") Integer customerId);
 
-    List<Project> selectByName(@Param("name") String name);
+    List<Project> selectByNameCusIdStatus(@Param("name") String name, @Param("customerId") Integer customerId, @Param("status") Integer status);
 
-    List<String> listNameByAdminId(Integer adminId);
-
-    int deleteById(@Param("id") Integer id);
-
-    int updateByProject(Project project);
 }

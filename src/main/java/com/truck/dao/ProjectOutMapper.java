@@ -14,9 +14,9 @@ public interface ProjectOutMapper {
 
     ProjectOut selectByPrimaryKey(Integer id);
 
-    List<ProjectOut> selectByOutIdProIdStatus(@Param("outDetailId") Integer outDetailId,@Param("projectId") Integer projectId,@Param("status") Integer status);
+    List<ProjectOut> selectByOutIdProIdStatus(@Param("outDetailId") Integer outDetailId, @Param("projectId") Integer projectId, @Param("status") Integer status);
 
-    List<ProjectOut> list(@Param("projectId") Integer projectId);
+    List<ProjectOut> list(@Param("projectId") Integer projectId, @Param("status") Integer status);
 
     int updateByPrimaryKeySelective(ProjectOut record);
 

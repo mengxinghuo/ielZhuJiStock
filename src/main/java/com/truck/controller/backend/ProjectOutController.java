@@ -1,14 +1,9 @@
 package com.truck.controller.backend;
 
 import com.github.pagehelper.PageInfo;
-import com.truck.common.Const;
-import com.truck.common.ResponseCode;
 import com.truck.common.ServerResponse;
-import com.truck.pojo.Admin;
-import com.truck.pojo.Project;
 import com.truck.pojo.ProjectOut;
 import com.truck.service.IProjectOutService;
-import com.truck.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,21 +25,13 @@ public class ProjectOutController {
     public ServerResponse<PageInfo> list(HttpSession session,
                                          @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                          @RequestParam(value = "pageNum",defaultValue = "10") int pageSize,
-                                         Integer projectId){
-        Admin admin = (Admin) session.getAttribute(Const.CURRENT_ADMIN);
-        if (admin == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "管理员用户未登录，请登录");
-        }
-        return iProjectOutService.listByProjectId(projectId,pageNum,pageSize);
+                                         Integer projectId, Integer status){
+        return iProjectOutService.listByProjectId(projectId,status,pageNum,pageSize);
     }
 
     @RequestMapping("add.do")
     @ResponseBody
     public ServerResponse add(HttpSession session, ProjectOut projectOut) {
-        Admin admin = (Admin) session.getAttribute(Const.CURRENT_ADMIN);
-        if (admin == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "管理员用户未登录，请登录");
-        }
         return iProjectOutService.add(projectOut);
     }
 
@@ -53,21 +40,35 @@ public class ProjectOutController {
     @RequestMapping("del.do")
     @ResponseBody
     public ServerResponse del(HttpSession session, Integer id) {
-        Admin admin = (Admin) session.getAttribute(Const.CURRENT_ADMIN);
-        if (admin == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "管理员用户未登录，请登录");
-        }
         return iProjectOutService.del(id);
     }
 
+    /**
+     * 解绑
+     * @param session
+     * @param projectOut
+     * @return
+     */
     @RequestMapping("update.do")
     @ResponseBody
     public ServerResponse update(HttpSession session, ProjectOut projectOut) {
-        Admin admin = (Admin) session.getAttribute(Const.CURRENT_ADMIN);
-        if (admin == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "管理员用户未登录，请登录");
-        }
         return iProjectOutService.update(projectOut);
+    }
+
+    @RequestMapping("list_by_outdetailId.do")
+    @ResponseBody
+    public ServerResponse<PageInfo> listByOutDetailId(HttpSession session,
+                                                      @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                                      @RequestParam(value = "pageNum",defaultValue = "10") int pageSize,
+                                                      Integer outDetailId){
+        return iProjectOutService.listByOutDetailId(outDetailId,pageNum,pageSize);
+    }
+
+    @RequestMapping("list_by_outdetailId_ing.do")
+    @ResponseBody
+    public ServerResponse<PageInfo> listByOutDetailIdIng(HttpSession session,
+                                                         Integer outDetailId){
+        return iProjectOutService.listByOutDetailIdIng(outDetailId);
     }
 
 
