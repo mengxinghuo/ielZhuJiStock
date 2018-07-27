@@ -209,15 +209,17 @@ public class OutServiceImpl implements IOutService {
             if(out !=null){
                 SalesContract salesContract = salesContractMapper.selectByOutId(out.getId());
                 if(salesContract!=null){
-                    outDetail.setSalesContract(salesContract);
+                    detail.setSalesContract(salesContract);
+                    Customer customer = customerMapper.selectByPrimaryKey(salesContract.getCustomerId());
+                    detail.setCustomer(customer);
                 }
             }
-            ServerResponse serverResponse = iSalesContractService.getProjectByOutDetailId(outDetail.getId());
+            ServerResponse serverResponse = iSalesContractService.getProjectByOutDetailId(detail.getId());
             if(serverResponse.isSuccess()){
                 ProjectOutVo projectOutVo =(ProjectOutVo)serverResponse.getData();
                 if (projectOutVo != null) {
                     if(projectOutVo.getProjectVo()!=null)
-                        outDetail.setProjectVo(projectOutVo.getProjectVo());
+                        detail.setProjectVo(projectOutVo.getProjectVo());
                 }
             }
         }
