@@ -206,9 +206,11 @@ public class OutServiceImpl implements IOutService {
         }
         for (OutDetail detail : outDetailList) {
             Out out = outMapper.selectByPrimaryKey(detail.getOutId());
-            SalesContract salesContract = salesContractMapper.selectByOutId(out.getId());
-            if(salesContract!=null){
-                outDetail.setSalesContract(salesContract);
+            if(out !=null){
+                SalesContract salesContract = salesContractMapper.selectByOutId(out.getId());
+                if(salesContract!=null){
+                    outDetail.setSalesContract(salesContract);
+                }
             }
             ServerResponse serverResponse = iSalesContractService.getProjectByOutDetailId(outDetail.getId());
             if(serverResponse.isSuccess()){
