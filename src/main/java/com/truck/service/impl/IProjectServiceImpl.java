@@ -6,10 +6,14 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.truck.common.ServerResponse;
 import com.truck.dao.ProjectMapper;
+import com.truck.pojo.Customer;
 import com.truck.pojo.Project;
 import com.truck.service.IProjectService;
 import com.truck.util.DateTimeUtil;
+import com.truck.util.JsonUtil;
+import com.truck.util.Post4;
 import com.truck.vo.ProjectVo;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,14 +47,30 @@ public class IProjectServiceImpl implements IProjectService {
     }
 
     public ServerResponse<PageInfo> listByCustomerId(Integer customerId, int pageNum, int pageSize){
-        PageHelper.startPage(pageNum, pageSize);
+        String url = "http://39.104.139.229:8087/manage/project/list.do";
+//        String url = "http://localhost:8090/manage/customer/get_customer_detail.do";
+        StringBuffer sb = new StringBuffer();
+        sb.append("customerId=").append(customerId).append("&pageNum=").append(pageNum).append("&pageSize=").append(pageSize);
+        String str = Post4.connectionUrl(url, sb,null);
+        if (str.equals("error")) {
+            return ServerResponse.createByErrorMessage("iel配件系统异常，查询工程信息失败");
+        }
+        JSONObject jsonObject = JSONObject.fromObject(str);
+        String statuss = jsonObject.get("status").toString();
+        if (statuss.equals("1")) {
+            String errMsg = jsonObject.get("msg").toString();
+            return ServerResponse.createByErrorMessage(errMsg);
+        }
+        String Str = jsonObject.get("data").toString();
+        PageInfo pageResult = JsonUtil.string2Obj(Str,PageInfo.class);
+     /*   PageHelper.startPage(pageNum, pageSize);
         List<Project> projectList = projectMapper.selectByCustomerId(customerId);
         List<ProjectVo> projectVos = Lists.newArrayList();
         for (Project project : projectList) {
             ProjectVo projectVo = this.assembleProjectVo(project);
             projectVos.add(projectVo);
         }
-        PageInfo pageResult = new PageInfo(projectVos);
+        PageInfo pageResult = new PageInfo(projectVos);*/
         return ServerResponse.createBySuccess(pageResult);
     }
 
