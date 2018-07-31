@@ -229,8 +229,17 @@ public class OutServiceImpl implements IOutService {
 
     public ServerResponse getOutDetailById(Integer outDetailId){
         OutDetail outDetail = outDetailMapper.selectByPrimaryKey(outDetailId);
-        if(outDetail !=null)
-        return ServerResponse.createBySuccess(outDetail);
+        if(outDetail !=null){
+            SalesContract salesContract = salesContractMapper.selectByOutId(outDetail.getOutId());
+            if (salesContract != null) {
+                outDetail.setSalesContract(salesContract);
+                Customer customer = customerMapper.selectByPrimaryKey(salesContract.getCustomerId());
+                if (customer != null) {
+                    outDetail.setCustomer(customer);
+                }
+            }
+            return ServerResponse.createBySuccess(outDetail);
+        }
         return ServerResponse.createByErrorMessage("没有查到出库详情");
     }
 
