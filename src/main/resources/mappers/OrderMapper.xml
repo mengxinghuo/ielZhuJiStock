@@ -279,6 +279,7 @@
     from truck_order
     where product_id=#{productId}
     and service_type=#{serviceType}
+    order by create_time desc
   </select>
 
   <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="String">
