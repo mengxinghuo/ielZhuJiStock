@@ -8,7 +8,7 @@ public class StockInventory {
 
     private Integer quantity;
 
-    private Integer pandian;
+//    private Integer pandian;
 
 //    private String errorDescs;
 
@@ -30,14 +30,6 @@ public class StockInventory {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public Integer getPandian() {
-        return pandian;
-    }
-
-    public void setPandian(Integer pandian) {
-        this.pandian = pandian;
     }
 
     public String getPartsName() {

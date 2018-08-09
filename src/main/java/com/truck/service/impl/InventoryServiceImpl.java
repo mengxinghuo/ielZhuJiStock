@@ -58,12 +58,12 @@ public class InventoryServiceImpl implements IInventoryService {
         List<InventoryDetail> inventoryDetailList = getInventoryDetailList(stockInventoryList,inventory.getId());
         resultCount = inventoryDetailMapper.batchInsert(inventoryDetailList);
         if(resultCount > 0){
-            for(StockInventory stockInventoryItme : stockInventoryList){
+        /*    for(StockInventory stockInventoryItme : stockInventoryList){
                 Stock stock = new Stock();
                 stock.setId(stockInventoryItme.getId());
                 stock.setQuantity(stockInventoryItme.getPandian());
                 stockMapper.updateByPrimaryKeySelective(stock);
-            }
+            }*/
             return ServerResponse.createBySuccess("生成成功");
         }
         return ServerResponse.createByErrorMessage("数据异常，记录生成失败");
@@ -76,7 +76,7 @@ public class InventoryServiceImpl implements IInventoryService {
             inventoryDetail.setInventoryId(inventoryId);
             inventoryDetail.setStockId(stockInventoryItem.getId());
             inventoryDetail.setStockNum(stockInventoryItem.getQuantity());
-            inventoryDetail.setInventoryNum(stockInventoryItem.getPandian());
+//            inventoryDetail.setInventoryNum(stockInventoryItem.getPandian());
             inventoryDetail.setStatus(Const.InventoryDetailStatusEnum.NORMAL.getCode());
             if(inventoryDetail.getStockNum() > inventoryDetail.getInventoryNum()){
                 inventoryDetail.setStatus(Const.InventoryDetailStatusEnum.LESS.getCode());
