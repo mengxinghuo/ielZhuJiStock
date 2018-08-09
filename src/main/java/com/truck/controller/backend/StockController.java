@@ -106,4 +106,16 @@ public class StockController {
     public ServerResponse updateStockConfiguration(Integer stockId,String configuration){
         return iStockService.updateStockConfiguration(stockId,configuration);
     }
+
+    /**
+     * 修改在库booking_code
+     * @param stockId
+     * @param unit
+     * @return
+     */
+    @RequestMapping("update_stock_book_code.do")
+    @ResponseBody
+    public ServerResponse updateStockUnit(Integer stockId,String unit){
+        return iStockService.updateStockUnit(stockId,unit);
+    }
 }

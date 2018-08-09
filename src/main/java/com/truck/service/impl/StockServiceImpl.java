@@ -130,6 +130,24 @@ public class StockServiceImpl implements IStockService {
         return ServerResponse.createBySuccess("更改成功");
     }
 
+    public ServerResponse updateStockUnit(Integer stockId,String unit){
+        Stock search = stockMapper.selectByPrimaryKey(stockId);
+        if(search == null){
+            return ServerResponse.createByErrorMessage("该条记录不存在");
+        }
+        if(StringUtils.isEmpty(unit)){
+            return ServerResponse.createByErrorMessage("请填写预定号码");
+        }
+        Stock stock = new Stock();
+        stock.setId(stockId);
+        stock.setUnit(unit);
+        int resultCount = stockMapper.updateByPrimaryKeySelective(stock);
+        if(resultCount == 0){
+            return ServerResponse.createByErrorMessage("更改失败");
+        }
+        return ServerResponse.createBySuccess("更改成功");
+    }
+
 
     public StockVo assembleStockVo(Integer adminId,Stock stock){
         StockVo stockVo = new StockVo();
