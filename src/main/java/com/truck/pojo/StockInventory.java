@@ -2,6 +2,7 @@ package com.truck.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class StockInventory {
     private Integer id;
@@ -14,7 +15,7 @@ public class StockInventory {
 
     private String partsName;
     //errorImg
-    private String partsEnName;
+    private List<String> partsEnName;
 
     public Integer getId() {
         return id;
@@ -40,11 +41,11 @@ public class StockInventory {
         this.partsName = partsName;
     }
 
-    public String getPartsEnName() {
+    public List<String> getPartsEnName() {
         return partsEnName;
     }
 
-    public void setPartsEnName(String partsEnName) {
+    public void setPartsEnName(List<String> partsEnName) {
         this.partsEnName = partsEnName;
     }
 }
