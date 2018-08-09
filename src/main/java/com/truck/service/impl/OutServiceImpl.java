@@ -93,7 +93,6 @@ public class OutServiceImpl implements IOutService {
                     Stock stock = new Stock();
                     stock.setStatus(Const.StockStatusEnum.OVER_OUT.getCode());
                     stock.setId(outDetailItem.getStockId());
-                    stock.setQuantity(stock.getQuantity()-outDetailItem.getOutNum());
                     stockMapper.updateByPrimaryKeySelective(stock);
                 }
                 return ServerResponse.createBySuccess("建立销售合同，出库成功");
