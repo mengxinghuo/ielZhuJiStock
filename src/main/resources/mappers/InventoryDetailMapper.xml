@@ -139,12 +139,12 @@
 
   <insert id="batchInsert" parameterType="list" >
     insert into iel_inventory_detail (inventory_id,stock_id, stock_num,
-    inventory_num, create_time, update_time,error_descs,status
+    inventory_num, create_time, update_time,error_descs,status,error_img
     )
     values
     <foreach collection="inventoryDetailList" index="index" item="item" separator=",">
     (#{item.inventoryId,jdbcType=INTEGER},#{item.stockId,jdbcType=INTEGER}, #{item.stockNum,jdbcType=INTEGER},
-    #{item.inventoryNum,jdbcType=INTEGER}, now(), now(),#{item.errorDescs},#{item.status}
+    #{item.inventoryNum,jdbcType=INTEGER}, now(), now(),#{item.errorDescs},#{item.status},#{item.errorImg}
     )
     </foreach>
   </insert>
