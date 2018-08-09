@@ -21,7 +21,10 @@ public class InventoryDetail {
 
     private Integer status;
 
-    public InventoryDetail(Integer id,Integer inventoryId, Integer stockId, Integer stockNum, Integer inventoryNum, Date createTime, Date updateTime,String errorDescs,Integer status) {
+    private String errorImg;
+
+    public InventoryDetail(Integer id,Integer inventoryId, Integer stockId, Integer stockNum, Integer inventoryNum,
+                           Date createTime, Date updateTime,String errorDescs,Integer status,String errorImg) {
         this.id = id;
         this.inventoryId = inventoryId;
         this.stockId = stockId;
@@ -31,6 +34,7 @@ public class InventoryDetail {
         this.updateTime = updateTime;
         this.errorDescs = errorDescs;
         this.status = status;
+        this.errorImg = errorImg;
     }
 
     public Integer getInventoryId() {
@@ -107,5 +111,13 @@ public class InventoryDetail {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getErrorImg() {
+        return errorImg;
+    }
+
+    public void setErrorImg(String errorImg) {
+        this.errorImg = errorImg;
     }
 }

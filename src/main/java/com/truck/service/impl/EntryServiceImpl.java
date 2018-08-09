@@ -2,6 +2,7 @@ package com.truck.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.truck.common.Const;
 import com.truck.common.ServerResponse;
@@ -295,6 +296,8 @@ public class EntryServiceImpl implements IEntryService {
         Entry entry = entryMapper.selectByPrimaryKey(entryDetail.getEntryId());
         entryDetailVo.setEntryStatus(entry.getStatus());
         entryDetailVo.setEntryStatusDesc(Const.EntryStatusEnum.codeOf(entry.getStatus()).getValue());
+        if(org.apache.commons.lang3.StringUtils.isNotBlank(entryDetail.getErrorImg()))
+        entryDetailVo.setErrorImgList(Splitter.on(",").splitToList(entryDetail.getErrorImg()));
         return entryDetailVo;
     }
 }

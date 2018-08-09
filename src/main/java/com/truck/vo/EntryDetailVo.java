@@ -1,6 +1,7 @@
 package com.truck.vo;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class EntryDetailVo {
     private Integer id;
@@ -67,6 +68,8 @@ public class EntryDetailVo {
 
     private Integer entryStatus;
     private String entryStatusDesc;
+
+    private List<String> errorImgList;
 
     public Integer getEntryStatus() {
         return entryStatus;
@@ -330,5 +333,13 @@ public class EntryDetailVo {
 
     public void setModelAlias(String modelAlias) {
         this.modelAlias = modelAlias;
+    }
+
+    public List<String> getErrorImgList() {
+        return errorImgList;
+    }
+
+    public void setErrorImgList(List<String> errorImgList) {
+        this.errorImgList = errorImgList;
     }
 }

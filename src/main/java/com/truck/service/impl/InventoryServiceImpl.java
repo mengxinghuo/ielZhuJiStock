@@ -2,6 +2,7 @@ package com.truck.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.truck.common.Const;
 import com.truck.common.ServerResponse;
@@ -149,6 +150,8 @@ public class InventoryServiceImpl implements IInventoryService {
         inventoryDetailVo.setErrorDescs(inventoryDetail.getErrorDescs());
         inventoryDetailVo.setStatus(inventoryDetail.getStatus());
         inventoryDetailVo.setStatusDesc(Const.InventoryDetailStatusEnum.codeOf(inventoryDetail.getStatus()).getValue());
+        if(org.apache.commons.lang3.StringUtils.isNotBlank(inventoryDetail.getErrorImg()))
+            inventoryDetailVo.setErrorImgList(Splitter.on(",").splitToList(inventoryDetail.getErrorImg()));
         return inventoryDetailVo;
     }
 

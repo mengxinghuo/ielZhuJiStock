@@ -33,13 +33,14 @@
       <arg column="type_category_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="model_alias" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="configuration" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="error_img" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, entry_id, customs_clearance, destination, package_no, serial_no, parts_no, parts_name, 
     parts_en_name, unit, purchase_num, purchase_price, sales_price, device_type, entry_position, 
     inspect_status, entry_num, create_time, update_time,ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand,error_descs, type_category_id,model_alias,configuration
+    sn, engine_no, xx_no, brand,error_descs, type_category_id,model_alias,configuration,error_img
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -59,7 +60,7 @@
       sales_price, device_type, entry_position, 
       inspect_status, entry_num, create_time, 
       update_time,ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand,error_descs,type_category_id,model_alias,configuration)
+    sn, engine_no, xx_no, brand,error_descs,type_category_id,model_alias,configuration,error_img)
     values (#{id,jdbcType=INTEGER}, #{entryId,jdbcType=INTEGER}, #{customsClearance,jdbcType=VARCHAR}, 
       #{destination,jdbcType=VARCHAR}, #{packageNo,jdbcType=VARCHAR}, #{serialNo,jdbcType=VARCHAR}, 
       #{partsNo,jdbcType=VARCHAR}, #{partsName,jdbcType=VARCHAR}, #{partsEnName,jdbcType=VARCHAR}, 
@@ -68,7 +69,8 @@
       #{inspectStatus,jdbcType=INTEGER}, #{entryNum,jdbcType=INTEGER}, now(),
       now(),#{shipNum}, #{buyContractNo,jdbcType=VARCHAR}, 
       #{model,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{engineNo,jdbcType=VARCHAR}, 
-      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{errorDescs},#{typeCategoryId},#{modelAlias},#{configuration})
+      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{errorDescs},#{typeCategoryId},#{modelAlias},
+      #{configuration},#{errorImg})
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.EntryDetail" >
     insert into iel_entry_detail
@@ -159,6 +161,9 @@
       <if test="configuration != null" >
         configuration,
       </if>
+      <if test="errorImg != null" >
+        error_img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -247,6 +252,9 @@
       <if test="configuration != null" >
         #{configuration},
       </if>
+      <if test="errorImg != null" >
+        #{errorImg},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.EntryDetail" >
@@ -334,6 +342,9 @@
       <if test="configuration != null" >
         configuration=#{configuration},
       </if>
+      <if test="errorImg != null" >
+        error_img=#{errorImg},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -366,7 +377,8 @@
       error_descs=#{errorDescs},
       type_category_id = #{typeCategoryId,jdbcType=INTEGER},
       model_alias = #{modelAlias},
-      configuration = #{configuration}
+      configuration = #{configuration},
+      error_img=#{errorImg}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

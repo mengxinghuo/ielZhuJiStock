@@ -1,6 +1,7 @@
 package com.truck.vo;
 
 import java.util.Date;
+import java.util.List;
 
 public class InventoryDetailVo {
     private Integer id;
@@ -24,6 +25,8 @@ public class InventoryDetailVo {
     private Integer status;
 
     private String statusDesc;
+
+    private List<String> errorImgList;
 
     public Integer getId() {
         return id;
@@ -111,5 +114,13 @@ public class InventoryDetailVo {
 
     public void setStatusDesc(String statusDesc) {
         this.statusDesc = statusDesc;
+    }
+
+    public List<String> getErrorImgList() {
+        return errorImgList;
+    }
+
+    public void setErrorImgList(List<String> errorImgList) {
+        this.errorImgList = errorImgList;
     }
 }

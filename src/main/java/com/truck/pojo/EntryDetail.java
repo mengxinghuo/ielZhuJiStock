@@ -64,7 +64,16 @@ public class EntryDetail {
 
     private String configuration;
 
-    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination, String packageNo, String serialNo, String partsNo, String partsName, String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice, BigDecimal salesPrice, String deviceType, Integer entryPosition, Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,String errorDescs,Integer typeCategoryId,String modelAlias,String configuration) {
+    private String errorImg;
+
+    public EntryDetail(Integer id, Integer entryId, String customsClearance, String destination,
+                       String packageNo, String serialNo, String partsNo, String partsName,
+                       String partsEnName, String unit, Integer purchaseNum, BigDecimal purchasePrice,
+                       BigDecimal salesPrice, String deviceType, Integer entryPosition,
+                       Integer inspectStatus, Integer entryNum, Date createTime, Date updateTime,
+                       String shipNum, String buyContractNo, String model, String sn, String engineNo,
+                       String xxNo, String brand,String errorDescs,Integer typeCategoryId,
+                       String modelAlias,String configuration,String errorImg) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -95,6 +104,7 @@ public class EntryDetail {
         this.typeCategoryId = typeCategoryId;
         this.modelAlias = modelAlias;
         this.configuration = configuration;
+        this.errorImg = errorImg;
     }
 
     public String getConfiguration() {
@@ -339,5 +349,13 @@ public class EntryDetail {
 
     public void setModelAlias(String modelAlias) {
         this.modelAlias = modelAlias;
+    }
+
+    public String getErrorImg() {
+        return errorImg;
+    }
+
+    public void setErrorImg(String errorImg) {
+        this.errorImg = errorImg;
     }
 }

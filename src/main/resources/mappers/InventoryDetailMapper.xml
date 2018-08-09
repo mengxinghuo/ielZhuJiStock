@@ -12,10 +12,11 @@
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="error_descs" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="error_img" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id,inventory_id, stock_id, stock_num, inventory_num, create_time, update_time,error_descs,status
+    id,inventory_id, stock_id, stock_num, inventory_num, create_time, update_time,error_descs,status,error_img
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -29,10 +30,10 @@
   </delete>
   <insert id="insert" parameterType="com.truck.pojo.InventoryDetail" >
     insert into iel_inventory_detail (id,inventory_id, stock_id, stock_num,
-      inventory_num, create_time, update_time,error_descs,status
+      inventory_num, create_time, update_time,error_descs,status,error_img
       )
     values (#{id,jdbcType=INTEGER}, #{inventoryId,jdbcType=INTEGER},#{stockId,jdbcType=INTEGER}, #{stockNum,jdbcType=INTEGER},
-      #{inventoryNum,jdbcType=INTEGER}, now(), now(),#{errorDescs},#{status}
+      #{inventoryNum,jdbcType=INTEGER}, now(), now(),#{errorDescs},#{status},#{errorImg}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.InventoryDetail" >
@@ -61,6 +62,9 @@
       <if test="status != null" >
         status,
       </if>
+      <if test="errorImg != null" >
+        error_img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -86,6 +90,9 @@
       <if test="status != null" >
         #{status},
       </if>
+      <if test="errorImg != null" >
+        #{errorImg},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.InventoryDetail" >
@@ -110,6 +117,9 @@
       <if test="status != null" >
         status=#{status},
       </if>
+      <if test="errorImg != null" >
+        error_img=#{errorImg},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -122,7 +132,8 @@
       inventory_num = #{inventoryNum,jdbcType=INTEGER},
       update_time = now(),
       error_descs=#{errorDescs},
-      status=#{status}
+      status=#{status},
+      error_img=#{errorImg}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
