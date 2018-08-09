@@ -37,14 +37,13 @@ public class SalesContract {
     private String accessory3;
 
     public SalesContract(Integer salesContractId, Integer customerId, Integer addressId, Integer contactId, Date date,
-                         String salesDate, Integer outId, String outNo, String bpkNo, String salesContractNo, Integer type,
+                          Integer outId, String outNo, String bpkNo, String salesContractNo, Integer type,
                          Integer status, Date createTime, Date updateTime, String accessory1, String accessory2, String accessory3) {
         this.salesContractId = salesContractId;
         this.customerId = customerId;
         this.addressId = addressId;
         this.contactId = contactId;
         this.date = date;
-        this.salesDate = salesDate;
         this.outId = outId;
         this.outNo = outNo;
         this.bpkNo = bpkNo;
