@@ -30,12 +30,21 @@ public class SalesContract {
 
     private Date updateTime;
 
-    public SalesContract(Integer salesContractId, Integer customerId, Integer addressId, Integer contactId, Date date, Integer outId, String outNo, String bpkNo, String salesContractNo, Integer type, Integer status, Date createTime, Date updateTime) {
+    private String accessory1;
+
+    private String accessory2;
+
+    private String accessory3;
+
+    public SalesContract(Integer salesContractId, Integer customerId, Integer addressId, Integer contactId, Date date,
+                         String salesDate, Integer outId, String outNo, String bpkNo, String salesContractNo, Integer type,
+                         Integer status, Date createTime, Date updateTime, String accessory1, String accessory2, String accessory3) {
         this.salesContractId = salesContractId;
         this.customerId = customerId;
         this.addressId = addressId;
         this.contactId = contactId;
         this.date = date;
+        this.salesDate = salesDate;
         this.outId = outId;
         this.outNo = outNo;
         this.bpkNo = bpkNo;
@@ -44,15 +53,12 @@ public class SalesContract {
         this.status = status;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.accessory1 = accessory1;
+        this.accessory2 = accessory2;
+        this.accessory3 = accessory3;
     }
 
-    public String getSalesDate() {
-        return salesDate;
-    }
 
-    public void setSalesDate(String salesDate) {
-        this.salesDate = salesDate;
-    }
 
     public SalesContract() {
         super();
@@ -98,6 +104,14 @@ public class SalesContract {
         this.date = date;
     }
 
+    public String getSalesDate() {
+        return salesDate;
+    }
+
+    public void setSalesDate(String salesDate) {
+        this.salesDate = salesDate;
+    }
+
     public Integer getOutId() {
         return outId;
     }
@@ -111,7 +125,7 @@ public class SalesContract {
     }
 
     public void setOutNo(String outNo) {
-        this.outNo = outNo == null ? null : outNo.trim();
+        this.outNo = outNo;
     }
 
     public String getBpkNo() {
@@ -119,7 +133,7 @@ public class SalesContract {
     }
 
     public void setBpkNo(String bpkNo) {
-        this.bpkNo = bpkNo == null ? null : bpkNo.trim();
+        this.bpkNo = bpkNo;
     }
 
     public String getSalesContractNo() {
@@ -127,7 +141,7 @@ public class SalesContract {
     }
 
     public void setSalesContractNo(String salesContractNo) {
-        this.salesContractNo = salesContractNo == null ? null : salesContractNo.trim();
+        this.salesContractNo = salesContractNo;
     }
 
     public Integer getType() {
@@ -160,5 +174,29 @@ public class SalesContract {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getAccessory1() {
+        return accessory1;
+    }
+
+    public void setAccessory1(String accessory1) {
+        this.accessory1 = accessory1;
+    }
+
+    public String getAccessory2() {
+        return accessory2;
+    }
+
+    public void setAccessory2(String accessory2) {
+        this.accessory2 = accessory2;
+    }
+
+    public String getAccessory3() {
+        return accessory3;
+    }
+
+    public void setAccessory3(String accessory3) {
+        this.accessory3 = accessory3;
     }
 }

@@ -41,6 +41,12 @@ public class SalesContractVo {
 
     private String updateTime;
 
+    private String accessory1;
+
+    private String accessory2;
+
+    private String accessory3;
+
     public Integer getSalesContractId() {
         return salesContractId;
     }
@@ -191,5 +197,29 @@ public class SalesContractVo {
 
     public void setStatusDesc(String statusDesc) {
         this.statusDesc = statusDesc;
+    }
+
+    public String getAccessory1() {
+        return accessory1;
+    }
+
+    public void setAccessory1(String accessory1) {
+        this.accessory1 = accessory1;
+    }
+
+    public String getAccessory2() {
+        return accessory2;
+    }
+
+    public void setAccessory2(String accessory2) {
+        this.accessory2 = accessory2;
+    }
+
+    public String getAccessory3() {
+        return accessory3;
+    }
+
+    public void setAccessory3(String accessory3) {
+        this.accessory3 = accessory3;
     }
 }

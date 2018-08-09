@@ -186,6 +186,10 @@ public class SalesContractServiceImpl implements ISalesContractService {
         salesContractVo.setStatusDesc(Const.SalesContractStatusEnum.codeOf(salesContract.getStatus()).getValue());
         salesContractVo.setCreateTime(DateTimeUtil.dateToStr(salesContract.getCreateTime()));
         salesContractVo.setUpdateTime(DateTimeUtil.dateToStr(salesContract.getUpdateTime()));
+
+        salesContractVo.setAccessory1(salesContract.getAccessory1());
+        salesContractVo.setAccessory2(salesContract.getAccessory2());
+        salesContractVo.setAccessory3(salesContract.getAccessory3());
         return salesContractVo;
     }
 
