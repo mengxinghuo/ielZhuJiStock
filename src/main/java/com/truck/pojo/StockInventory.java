@@ -10,17 +10,11 @@ public class StockInventory {
 
     private Integer pandian;
 
-    private String errorDescs;
+//    private String errorDescs;
 
-    public StockInventory(Integer id, Integer quantity, Integer pandian,String errorDescs) {
-        this.id = id;
-        this.quantity = quantity;
-        this.pandian = pandian;
-        this.errorDescs = errorDescs;
-    }
-
-    public StockInventory() {
-    }
+    private String partsName;
+    //errorImg
+    private String partsEnName;
 
     public Integer getId() {
         return id;
@@ -46,11 +40,19 @@ public class StockInventory {
         this.pandian = pandian;
     }
 
-    public String getErrorDescs() {
-        return errorDescs;
+    public String getPartsName() {
+        return partsName;
     }
 
-    public void setErrorDescs(String errorDescs) {
-        this.errorDescs = errorDescs;
+    public void setPartsName(String partsName) {
+        this.partsName = partsName;
+    }
+
+    public String getPartsEnName() {
+        return partsEnName;
+    }
+
+    public void setPartsEnName(String partsEnName) {
+        this.partsEnName = partsEnName;
     }
 }

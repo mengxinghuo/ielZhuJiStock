@@ -81,10 +81,12 @@ public class InventoryServiceImpl implements IInventoryService {
             if(inventoryDetail.getStockNum() > inventoryDetail.getInventoryNum()){
                 inventoryDetail.setStatus(Const.InventoryDetailStatusEnum.LESS.getCode());
             }
-            logger.info("errorDescs=======:{}",stockInventoryItem.getErrorDescs());
-            if (org.apache.commons.lang3.StringUtils.isNotBlank(stockInventoryItem.getErrorDescs())) {
+            logger.info("errorDescs=======:{}",stockInventoryItem.getPartsName());
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(stockInventoryItem.getPartsName()) ||
+                    org.apache.commons.lang3.StringUtils.isNotBlank(stockInventoryItem.getPartsEnName())  ) {
                 logger.info("errorDescs不是空");
-                inventoryDetail.setErrorDescs(stockInventoryItem.getErrorDescs());
+                inventoryDetail.setErrorDescs(stockInventoryItem.getPartsName());
+                inventoryDetail.setErrorImg(stockInventoryItem.getPartsEnName());
                 inventoryDetail.setStatus(Const.InventoryDetailStatusEnum.ERROR_ZHUJI.getCode());
             }
             inventoryDetailList.add(inventoryDetail);
