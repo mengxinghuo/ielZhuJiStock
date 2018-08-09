@@ -2,6 +2,7 @@ package com.truck.vo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class StockVo {
     private Integer id;
@@ -16,7 +17,7 @@ public class StockVo {
 
     private String partsName;
 
-    private String partsEnName;
+    private List<String> partsEnName;
 
     private String unit;
 
@@ -115,15 +116,15 @@ public class StockVo {
     }
 
     public void setPartsName(String partsName) {
-        this.partsName = partsName == null ? null : partsName.trim();
+        this.partsName = partsName;
     }
 
-    public String getPartsEnName() {
+    public List<String> getPartsEnName() {
         return partsEnName;
     }
 
-    public void setPartsEnName(String partsEnName) {
-        this.partsEnName = partsEnName == null ? null : partsEnName.trim();
+    public void setPartsEnName(List<String> partsEnName) {
+        this.partsEnName = partsEnName;
     }
 
     public String getUnit() {

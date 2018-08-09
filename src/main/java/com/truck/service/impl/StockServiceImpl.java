@@ -2,6 +2,7 @@ package com.truck.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.truck.common.Const;
 import com.truck.common.ServerResponse;
@@ -175,7 +176,8 @@ public class StockServiceImpl implements IStockService {
         stockVo.setDestination(stock.getDestination());
         stockVo.setPartsNo(stock.getPartsNo());
         stockVo.setPartsName(stock.getPartsName());
-        stockVo.setPartsEnName(stock.getPartsEnName());
+        if(org.apache.commons.lang3.StringUtils.isNotBlank(stock.getPartsEnName()))
+        stockVo.setPartsEnName(Splitter.on(",").splitToList(stock.getPartsEnName()));
         stockVo.setUnit(stock.getUnit());
         stockVo.setQuantity(stock.getQuantity());
         stockVo.setSalesPrice(stock.getSalesPrice());
