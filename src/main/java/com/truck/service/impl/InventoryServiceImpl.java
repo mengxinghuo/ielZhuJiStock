@@ -78,9 +78,9 @@ public class InventoryServiceImpl implements IInventoryService {
             inventoryDetail.setStockNum(stockInventoryItem.getQuantity());
 //            inventoryDetail.setInventoryNum(stockInventoryItem.getPandian());
             inventoryDetail.setStatus(Const.InventoryDetailStatusEnum.NORMAL.getCode());
-            if(inventoryDetail.getStockNum() > inventoryDetail.getInventoryNum()){
+          /*  if(inventoryDetail.getStockNum() > inventoryDetail.getInventoryNum()){
                 inventoryDetail.setStatus(Const.InventoryDetailStatusEnum.LESS.getCode());
-            }
+            }*/
             logger.info("errorDescs=======:{}",stockInventoryItem.getPartsName());
             if (org.apache.commons.lang3.StringUtils.isNotBlank(stockInventoryItem.getPartsName()) ||
                     stockInventoryItem.getPartsEnName().size()>0  ) {
