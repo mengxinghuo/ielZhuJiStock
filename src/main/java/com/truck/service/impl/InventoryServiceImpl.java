@@ -163,7 +163,8 @@ public class InventoryServiceImpl implements IInventoryService {
         stockVo.setDestination(stock.getDestination());
         stockVo.setPartsNo(stock.getPartsNo());
         stockVo.setPartsName(stock.getPartsName());
-        stockVo.setPartsEnName(stock.getPartsEnName());
+        if(org.apache.commons.lang3.StringUtils.isNotBlank(stock.getPartsEnName()))
+            stockVo.setPartsEnName(Splitter.on(",").splitToList(stock.getPartsEnName()));
         stockVo.setUnit(stock.getUnit());
         stockVo.setQuantity(stock.getQuantity());
         stockVo.setSalesPrice(stock.getSalesPrice());
