@@ -118,4 +118,17 @@ public class StockController {
     public ServerResponse updateStockUnit(Integer stockId,String unit){
         return iStockService.updateStockUnit(stockId,unit);
     }
+
+    /**
+     * 存储盘点记录
+     * @param stockId
+     * @return
+     */
+    @RequestMapping("update_stock_error_img.do")
+    @ResponseBody
+    public ServerResponse updateStockError(Integer stockId,
+                                           @RequestParam(value = "errorDescs")String partsName,
+                                           @RequestParam(value = "errorImg")String partsEnName){
+        return iStockService.updateStockError(stockId,partsName,partsEnName);
+    }
 }

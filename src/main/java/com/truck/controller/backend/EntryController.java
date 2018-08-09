@@ -111,8 +111,9 @@ public class EntryController {
     @ResponseBody
     public ServerResponse updateEntryDetailIdOrDescs(Integer entryDetailId,
                                               @RequestParam(value = "typeCategoryId", required = false) Integer typeCategoryId,
-                                              @RequestParam(value = "errorDescs", required = false) String errorDescs){
-        return iEntryService.updateEntryDetailIdOrDescs(entryDetailId,typeCategoryId,errorDescs);
+                                              @RequestParam(value = "errorDescs", required = false) String errorDescs,
+                                               @RequestParam(value = "errorImg", required = false) String errorImg){
+        return iEntryService.updateEntryDetailIdOrDescs(entryDetailId,typeCategoryId,errorDescs,errorImg);
     }
 
     /**

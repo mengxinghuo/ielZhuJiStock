@@ -148,6 +148,24 @@ public class StockServiceImpl implements IStockService {
         return ServerResponse.createBySuccess("更改成功");
     }
 
+    public ServerResponse updateStockError(Integer stockId,String partsName,String partsEnName){
+        Stock search = stockMapper.selectByPrimaryKey(stockId);
+        if(search == null){
+            return ServerResponse.createByErrorMessage("该条记录不存在");
+        }
+        Stock stock = new Stock();
+        stock.setId(stockId);
+        if(org.apache.commons.lang3.StringUtils.isNotBlank(partsName))
+        stock.setPartsName(partsName);
+        if(org.apache.commons.lang3.StringUtils.isNotBlank(partsEnName))
+        stock.setPartsEnName(partsEnName);
+        int resultCount = stockMapper.updateByPrimaryKeySelective(stock);
+        if(resultCount == 0){
+            return ServerResponse.createByErrorMessage("更改失败");
+        }
+        return ServerResponse.createBySuccess("更改成功");
+    }
+
 
     public StockVo assembleStockVo(Integer adminId,Stock stock){
         StockVo stockVo = new StockVo();
