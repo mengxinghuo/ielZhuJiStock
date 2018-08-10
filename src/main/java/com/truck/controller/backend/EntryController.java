@@ -71,6 +71,17 @@ public class EntryController {
     }
 
     /**
+     * 查询入库具体详情,带状态
+     * @param id
+     * @return
+     */
+    @RequestMapping("get_entry_detail_one.do")
+    @ResponseBody
+    public ServerResponse getEntryDetailOne(Integer id){
+        return iEntryService.getEntryDetailOne(id);
+    }
+
+    /**
      * 检验实际入库量,修改状态
      * @return
      */

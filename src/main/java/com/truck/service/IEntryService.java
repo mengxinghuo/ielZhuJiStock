@@ -21,4 +21,6 @@ public interface IEntryService {
     ServerResponse updateEntryDetailConfiguration(Integer entryDetailId,String configuration);
 
     ServerResponse changeAll(Integer entryId,Integer status);
+
+    ServerResponse getEntryDetailOne(Integer id);
 }

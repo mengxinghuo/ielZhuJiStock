@@ -71,6 +71,15 @@ public class EntryServiceImpl implements IEntryService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
+    public ServerResponse getEntryDetailOne(Integer id){
+        EntryDetail entryDetail = entryDetailMapper.selectByPrimaryKey(id);
+        EntryDetailVo entryDetailVo = new EntryDetailVo();
+        if (entryDetail != null) {
+            entryDetailVo = this.assembleEntryDetail(entryDetail);
+        }
+        return ServerResponse.createBySuccess(entryDetailVo);
+    }
+
     public ServerResponse getEntryDetail(Integer entryId,int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         List<EntryDetail> entryDetailList = entryDetailMapper.selectEntryDetail(entryId);
