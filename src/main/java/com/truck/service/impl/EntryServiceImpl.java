@@ -72,6 +72,8 @@ public class EntryServiceImpl implements IEntryService {
     }
 
     public ServerResponse getEntryDetailOne(Integer id){
+        if(id ==null)
+        return ServerResponse.createByErrorMessage("请选择入库详情记录");
         EntryDetail entryDetail = entryDetailMapper.selectByPrimaryKey(id);
         EntryDetailVo entryDetailVo = new EntryDetailVo();
         if (entryDetail != null) {
