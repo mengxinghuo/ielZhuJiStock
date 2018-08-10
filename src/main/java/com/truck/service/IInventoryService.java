@@ -12,4 +12,6 @@ public interface IInventoryService {
     ServerResponse getInventoryList(int pageNum,int pageSize);
 
     ServerResponse getInventoryDetail(Integer inventoryId,Integer status,int pageNum,int pageSize);
+
+    ServerResponse getInventoryDetailOne(Integer id);
 }

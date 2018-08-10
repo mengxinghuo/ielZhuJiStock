@@ -126,6 +126,17 @@ public class InventoryServiceImpl implements IInventoryService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
+    public ServerResponse getInventoryDetailOne(Integer id){
+        if(id ==null){
+            return ServerResponse.createByErrorMessage("请选择要查询的记录");
+        }
+        InventoryDetail inventoryDetail = inventoryDetailMapper.selectByPrimaryKey(id);
+        InventoryDetailVo inventoryDetailVo = new InventoryDetailVo();
+        if(inventoryDetail!=null)
+            inventoryDetailVo = this.assembleInventoryDetail(inventoryDetail);
+        return ServerResponse.createBySuccess(inventoryDetailVo);
+    }
+
     public InventoryVo assembleInventory(Inventory inventory){
         InventoryVo inventoryVo = new InventoryVo();
         inventoryVo.setId(inventory.getId());

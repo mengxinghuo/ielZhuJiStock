@@ -76,4 +76,14 @@ public class InventoryController {
         return iInventoryService.getInventoryDetail(inventoryId,status,pageNum,pageSize);
     }
 
+    /**
+     * 查询盘点具体详情
+     * @return
+     */
+    @RequestMapping("get_inventory_detail_one.do")
+    @ResponseBody
+    public ServerResponse getInventoryDetailOne(Integer id){
+        return iInventoryService.getInventoryDetailOne(id);
+    }
+
 }
