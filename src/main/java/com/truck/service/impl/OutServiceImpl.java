@@ -62,7 +62,7 @@ public class OutServiceImpl implements IOutService {
         }
         for(Cart cartItem : cartList){
             if(StringUtils.isEmpty(cartItem.getDefineModelNo())){
-                return ServerResponse.createByErrorMessage("请填写客户主机编号");
+                return ServerResponse.createByErrorMessage("请填写运输费");
             }
             if(cartItem.getCartPrice().compareTo(new BigDecimal(0))==0){
                 return ServerResponse.createByErrorMessage("请填写合同中的销售价格");
