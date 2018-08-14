@@ -1,5 +1,6 @@
 package com.truck.pojo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class CustomerAddress {
@@ -15,13 +16,20 @@ public class CustomerAddress {
 
     private Date updateTime;
 
-    public CustomerAddress(Integer addressId, Integer customerId, String address, String addressAbbr, Date createTime, Date updateTime) {
+    private BigDecimal positionLongitude;
+
+    private BigDecimal positionLatitude;
+
+    public CustomerAddress(Integer addressId, Integer customerId, String address, String addressAbbr,
+                           Date createTime, Date updateTime,BigDecimal positionLongitude,BigDecimal positionLatitude) {
         this.addressId = addressId;
         this.customerId = customerId;
         this.address = address;
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.addressAbbr = addressAbbr;
+        this.positionLongitude = positionLongitude;
+        this.positionLatitude = positionLatitude;
     }
 
 
@@ -75,5 +83,21 @@ public class CustomerAddress {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public BigDecimal getPositionLongitude() {
+        return positionLongitude;
+    }
+
+    public void setPositionLongitude(BigDecimal positionLongitude) {
+        this.positionLongitude = positionLongitude;
+    }
+
+    public BigDecimal getPositionLatitude() {
+        return positionLatitude;
+    }
+
+    public void setPositionLatitude(BigDecimal positionLatitude) {
+        this.positionLatitude = positionLatitude;
     }
 }
