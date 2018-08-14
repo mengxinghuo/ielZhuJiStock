@@ -2,6 +2,7 @@ package com.truck.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 
 public class CustomerAddress {
     private Integer addressId;
@@ -19,6 +20,8 @@ public class CustomerAddress {
     private BigDecimal positionLongitude;
 
     private BigDecimal positionLatitude;
+
+    private Map distanceMap;
 
     public CustomerAddress(Integer addressId, Integer customerId, String address, String addressAbbr,
                            Date createTime, Date updateTime,BigDecimal positionLongitude,BigDecimal positionLatitude) {
@@ -99,5 +102,13 @@ public class CustomerAddress {
 
     public void setPositionLatitude(BigDecimal positionLatitude) {
         this.positionLatitude = positionLatitude;
+    }
+
+    public Map getDistanceMap() {
+        return distanceMap;
+    }
+
+    public void setDistanceMap(Map distanceMap) {
+        this.distanceMap = distanceMap;
     }
 }
