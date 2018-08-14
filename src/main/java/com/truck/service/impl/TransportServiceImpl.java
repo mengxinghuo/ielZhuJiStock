@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.sun.org.apache.regexp.internal.RE;
 import com.truck.common.Const;
 import com.truck.common.ServerResponse;
 import com.truck.dao.EntryDetailMapper;

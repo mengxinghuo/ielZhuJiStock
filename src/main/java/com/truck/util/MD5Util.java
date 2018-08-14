@@ -1,6 +1,11 @@
 package com.truck.util;
 
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
+
 import java.security.MessageDigest;
+import java.util.List;
 
 /**
  * Created by geely

@@ -331,6 +331,7 @@
       <if test="entryId !=null">
        and entry_id = #{entryId}
       </if>
+      and status=0
     </where>
   </select>
 

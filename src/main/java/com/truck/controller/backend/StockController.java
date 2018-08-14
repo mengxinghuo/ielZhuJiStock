@@ -36,7 +36,7 @@ public class StockController {
     }
 
     /**
-     * 查询库详情
+     * 查询在库详情
      *
      * @param entryId
      * @param pageNum
