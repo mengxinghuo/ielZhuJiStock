@@ -291,31 +291,7 @@ public class OrderServiceImpl implements IOrderService {
                 orderDetailVoList.add(orderDetailVo);
             }
             OrderVo orderVo = new OrderVo();
-            orderVo.setOrderId(order.getOrderId());
-            orderVo.setOrderNo(order.getOrderNo());
-            orderVo.setUserId(order.getUserId());
-            orderVo.setShopId(order.getShopId());
-            orderVo.setPaymentType(order.getPaymentType());
-            orderVo.setOrderPrice(order.getOrderPrice());
-            orderVo.setPaymentPrice(order.getPaymentPrice());
-            orderVo.setPaymentTypeDesc(Const.PaymentTypeEnum.codeOf(order.getPaymentType()).getValue());
-            orderVo.setFreight(order.getFreight());
-            orderVo.setOrderStatus(order.getOrderStatus());
-            orderVo.setStatusDesc(Const.OrderStatusEnum.codeOf(order.getOrderStatus()).getValue());
-            orderVo.setPaymentTime(DateTimeUtil.dateToStr(order.getPaymentTime()));
-            orderVo.setCreateTime(DateTimeUtil.dateToStr(order.getCreateTime()));
-            orderVo.setUpdateTime(DateTimeUtil.dateToStr(order.getUpdateTime()));
-
-            orderVo.setServiceType(order.getServiceType());
-            orderVo.setServiceTypeDesc(Const.ServiceStatusEnum.codeOf(order.getServiceType()).getValue());
-            orderVo.setServiceProgress(order.getServiceProgress());
-            orderVo.setProductId(order.getProductId());
-
-            OutDetail outDetail = outDetailMapper.selectByPrimaryKey(order.getProductId());
-            orderVo.setOrderName(outDetail.getModel()+orderVo.getServiceTypeDesc());
-
-            orderVo.setOutDetail(outDetail);
-            orderVo.setOrderDetailVoList(orderDetailVoList);
+            orderVo = this.assembleOrderVo(order);
             orderVos.add(orderVo);
         }
         return orderVos;
