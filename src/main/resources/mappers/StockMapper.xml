@@ -465,10 +465,10 @@
         and sales_price like concat('%',#{stock.salesPrice},'%')
       </if>
       <if test="stock.deviceType != null" >
-        and device_type like concat('%',#{stock.salesPrice},'%')
+        and device_type like concat('%',#{stock.deviceType},'%')
       </if>
       <if test="stock.repertory != null" >
-        and repertory like concat('%',#{stock.salesPrice},'%')
+        and repertory like concat('%',#{stock.repertory},'%')
       </if>
       <if test="stock.position != null" >
         and position = #{stock.position,jdbcType=INTEGER}
