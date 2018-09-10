@@ -61,9 +61,9 @@ public class OutServiceImpl implements IOutService {
             return ServerResponse.createByErrorMessage("合同信息不完善，请完善");
         }
         for(Cart cartItem : cartList){
-            if(StringUtils.isEmpty(cartItem.getDefineModelNo())){
+         /*   if(StringUtils.isEmpty(cartItem.getDefineModelNo())){
                 return ServerResponse.createByErrorMessage("请填写运输费");
-            }
+            }*/
             if(cartItem.getCartPrice().compareTo(new BigDecimal(0))==0){
                 return ServerResponse.createByErrorMessage("请填写合同中的销售价格");
             }
