@@ -251,7 +251,7 @@ public class EntryServiceImpl implements IEntryService {
         entryVo.setStatus(entry.getStatus());
         entryVo.setStatusDesc(Const.EntryStatusEnum.codeOf(entry.getStatus()).getValue());
         entryVo.setInspector(entry.getInspector());
-        entryVo.setCreateTime(DateTimeUtil.dateToStr(entry.getCreateTime()));
+        entryVo.setCreateTime(DateTimeUtil.dateToStr(entry.getCreateTime(),"yyyy-MM-dd"));
         entryVo.setUpdateTime(DateTimeUtil.dateToStr(entry.getUpdateTime()));
         
         entryVo.setShipNum(entry.getShipNum());
