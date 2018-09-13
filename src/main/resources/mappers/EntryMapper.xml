@@ -56,7 +56,9 @@
       <if test="inspector != null" >
         inspector,
       </if>
+      <if test="createTime != null" >
         create_time,
+      </if>
         update_time,
       <if test="shipNum != null" >
         ship_num,
@@ -81,7 +83,9 @@
       <if test="inspector != null" >
         #{inspector,jdbcType=VARCHAR},
       </if>
-        now(),
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
         now(),
       <if test="shipNum != null" >
         #{shipNum},
