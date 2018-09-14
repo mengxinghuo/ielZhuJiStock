@@ -210,6 +210,7 @@ public class InventoryServiceImpl implements IInventoryService {
         }
         stockVo.setModelAlias(stock.getModelAlias());
         stockVo.setConfiguration(stock.getConfiguration());
+        stockVo.setBookStatus(stock.getBookStatus());
         return stockVo;
     }
 }

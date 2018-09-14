@@ -61,6 +61,8 @@ public class StockVo {
 
     private String repertoryStr;
 
+    private Integer bookStatus;
+
     public String getConfiguration() {
         return configuration;
     }
@@ -287,5 +289,13 @@ public class StockVo {
 
     public void setRepertoryStr(String repertoryStr) {
         this.repertoryStr = repertoryStr;
+    }
+
+    public Integer getBookStatus() {
+        return bookStatus;
+    }
+
+    public void setBookStatus(Integer bookStatus) {
+        this.bookStatus = bookStatus;
     }
 }

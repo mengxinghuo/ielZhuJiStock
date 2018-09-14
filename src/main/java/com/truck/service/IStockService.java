@@ -27,5 +27,7 @@ public interface IStockService {
 
     ServerResponse updateStockUnit(Integer stockId,String unit);
 
+    ServerResponse updateStockUnitStatus(Integer stockId,Integer bookStatus);
+
     ServerResponse updateStockError(Integer stockId,String partsName,String partsEnName);
 }

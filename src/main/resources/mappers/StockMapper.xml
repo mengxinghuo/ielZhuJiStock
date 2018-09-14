@@ -29,13 +29,14 @@
       <arg column="model_alias" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="configuration" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="book_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, entry_id, customs_clearance, destination, parts_no, parts_name, parts_en_name, 
     unit, quantity, sales_price, device_type, repertory, position, create_time, update_time,
     ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand,type_category_id,model_alias,configuration,status
+    sn, engine_no, xx_no, brand,type_category_id,model_alias,configuration,status, book_status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -54,7 +55,7 @@
       sales_price, device_type, repertory, 
       position, create_time, update_time,
       ship_num, buy_contract_no, model, 
-    sn, engine_no, xx_no, brand,type_category_id,model_alias,configuration,status
+    sn, engine_no, xx_no, brand,type_category_id,model_alias,configuration,status, book_status
       )
     values (#{id,jdbcType=INTEGER}, #{entryId,jdbcType=INTEGER}, #{customsClearance,jdbcType=VARCHAR}, 
       #{destination,jdbcType=VARCHAR}, #{partsNo,jdbcType=VARCHAR}, #{partsName,jdbcType=VARCHAR}, 
@@ -62,7 +63,8 @@
       #{salesPrice,jdbcType=DECIMAL}, #{deviceType,jdbcType=VARCHAR}, #{repertory,jdbcType=INTEGER}, 
       #{position,jdbcType=INTEGER},now(), now(),#{shipNum}, #{buyContractNo,jdbcType=VARCHAR}, 
       #{model,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{engineNo,jdbcType=VARCHAR}, 
-      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{typeCategoryId},#{modelAlias},#{configuration},#{status}
+      #{xxNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},#{typeCategoryId},#{modelAlias},#{configuration},#{status},
+      #{bookStatus,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.Stock" >
@@ -142,6 +144,9 @@
       <if test="status != null" >
         status,
       </if>
+      <if test="bookStatus != null" >
+        book_status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -218,6 +223,9 @@
       <if test="status != null" >
         #{status},
       </if>
+      <if test="bookStatus != null" >
+        #{bookStatus,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.truck.pojo.Stock" >
@@ -293,6 +301,9 @@
       <if test="status != null" >
         status=#{status},
       </if>
+      <if test="bookStatus != null" >
+        book_status = #{bookStatus,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -319,7 +330,8 @@
       xx_no = #{xxNo,jdbcType=VARCHAR},
       brand = #{brand,jdbcType=VARCHAR}
       configuration = #{configuration,jdbcType=VARCHAR}
-      status = #{status}
+      status = #{status},
+      book_status = #{bookStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -430,6 +442,9 @@
       <if test="stock.configuration != null" >
         and configuration=#{stock.configuration}
       </if>
+      <if test="stock.bookStatus != null" >
+        and book_status=#{stock.bookStatus}
+      </if>
   </select>
 
   <select id="selectByStockSelectiveLike" parameterType="com.truck.pojo.Stock" resultMap="BaseResultMap">
@@ -502,6 +517,9 @@
       </if>
       <if test="stock.configuration != null" >
         and configuration like concat('%',#{stock.configuration},'%')
+      </if>
+      <if test="stock.bookStatus != null" >
+        and book_status like concat('%',#{stock.bookStatus},'%')
       </if>
   </select>
 

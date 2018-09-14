@@ -149,6 +149,25 @@ public class StockServiceImpl implements IStockService {
         return ServerResponse.createBySuccess("更改成功");
     }
 
+    @Override
+    public ServerResponse updateStockUnitStatus(Integer stockId, Integer bookStatus) {
+        Stock search = stockMapper.selectByPrimaryKey(stockId);
+        if(search == null){
+            return ServerResponse.createByErrorMessage("该条记录不存在");
+        }
+        if(bookStatus == null){
+            return ServerResponse.createByErrorMessage("请填写预定状态");
+        }
+        Stock stock = new Stock();
+        stock.setId(stockId);
+        stock.setBookStatus(bookStatus);
+        int resultCount = stockMapper.updateByPrimaryKeySelective(stock);
+        if(resultCount == 0){
+            return ServerResponse.createByErrorMessage("更改失败");
+        }
+        return ServerResponse.createBySuccess("更改成功");
+    }
+
     public ServerResponse updateStockError(Integer stockId,String partsName,String partsEnName){
         Stock search = stockMapper.selectByPrimaryKey(stockId);
         if(search == null){
@@ -222,6 +241,7 @@ public class StockServiceImpl implements IStockService {
         stockVo.setTypeCategoryId(stock.getTypeCategoryId());
         stockVo.setModelAlias(stock.getModelAlias());
         stockVo.setConfiguration(stock.getConfiguration());
+        stockVo.setBookStatus(stock.getBookStatus());
         return stockVo;
     }
     

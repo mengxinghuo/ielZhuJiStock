@@ -120,6 +120,18 @@ public class StockController {
     }
 
     /**
+     * 修改在库booking 状态
+     * @param stockId
+     * @param bookStatus
+     * @return
+     */
+    @RequestMapping("update_stock_book_status.do")
+    @ResponseBody
+    public ServerResponse updateStockUnitStatus(Integer stockId,Integer bookStatus){
+        return iStockService.updateStockUnitStatus(stockId,bookStatus);
+    }
+
+    /**
      * 存储盘点记录
      * @param stockId
      * @return

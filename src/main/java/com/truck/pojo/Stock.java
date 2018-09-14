@@ -55,8 +55,14 @@ public class Stock {
     private String configuration;
 
     private Integer status;
+    //预订的状态
+    private Integer bookStatus;
 
-    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName, String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory, Integer position, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn, String engineNo, String xxNo, String brand,Integer typeCategoryId,String modelAlias,String configuration,Integer status) {
+    public Stock(Integer id, Integer entryId, String customsClearance, String destination, String partsNo, String partsName,
+                 String partsEnName, String unit, Integer quantity, BigDecimal salesPrice, String deviceType, Integer repertory,
+                 Integer position, Date createTime, Date updateTime, String shipNum, String buyContractNo, String model, String sn,
+                 String engineNo, String xxNo, String brand,Integer typeCategoryId,String modelAlias,String configuration,Integer status,
+                 Integer bookStatus) {
         this.id = id;
         this.entryId = entryId;
         this.customsClearance = customsClearance;
@@ -83,6 +89,7 @@ public class Stock {
         this.modelAlias = modelAlias;
         this.configuration = configuration;
         this.status = status;
+        this.bookStatus = bookStatus;
     }
 
     public Integer getStatus() {
@@ -295,5 +302,13 @@ public class Stock {
 
     public void setModelAlias(String modelAlias) {
         this.modelAlias = modelAlias;
+    }
+
+    public Integer getBookStatus() {
+        return bookStatus;
+    }
+
+    public void setBookStatus(Integer bookStatus) {
+        this.bookStatus = bookStatus;
     }
 }
