@@ -355,7 +355,9 @@
       position, create_time, update_time,
       ship_num,buy_contract_no,
     model, sn, engine_no,
-    xx_no, brand,type_category_id,model_alias,configuration,status
+    xx_no, brand,type_category_id,
+    model_alias,configuration,status,
+    book_status
       )
     values
     <foreach collection="stockList" index="index" item="item" separator=",">
@@ -366,7 +368,9 @@
       #{item.position,jdbcType=INTEGER}, now(),now(),#{item.shipNum},
        #{item.buyContractNo,jdbcType=VARCHAR},
       #{item.model,jdbcType=VARCHAR}, #{item.sn,jdbcType=VARCHAR}, #{item.engineNo,jdbcType=VARCHAR},
-      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},#{item.typeCategoryId},#{item.modelAlias},#{item.configuration},#{item.status}
+      #{item.xxNo,jdbcType=VARCHAR}, #{item.brand,jdbcType=VARCHAR},
+      #{item.typeCategoryId},#{item.modelAlias},#{item.configuration},#{item.status},
+      #{item.bookStatus}
       )
     </foreach>
   </insert>
