@@ -136,18 +136,12 @@ public class StockServiceImpl implements IStockService {
         if(search == null){
             return ServerResponse.createByErrorMessage("该条记录不存在");
         }
-//        if(StringUtils.isEmpty(unit)){
-//            return ServerResponse.createByErrorMessage("请填写预定号码");
-//        }
+        if(StringUtils.isEmpty(unit)){
+            return ServerResponse.createByErrorMessage("请填写预定号码");
+        }
         Stock stock = new Stock();
         stock.setId(stockId);
         stock.setUnit(unit);
-        //1 Ready  2Not Ready
-        if(!StringUtils.isEmpty(unit)){
-            stock.setBookStatus(1);
-        }else{
-            stock.setBookStatus(2);
-        }
         int resultCount = stockMapper.updateByPrimaryKeySelective(stock);
         if(resultCount == 0){
             return ServerResponse.createByErrorMessage("更改失败");
@@ -291,6 +285,12 @@ public class StockServiceImpl implements IStockService {
             }
             stock.setConfiguration(entryDetailItem.getConfiguration());
             stock.setStatus(Const.StockStatusEnum.UN_OUT.getCode());
+            //1 Ready   2 Not Ready
+            if(!StringUtils.isEmpty(entryDetailItem.getErrorDescs()) || !StringUtils.isEmpty(entryDetailItem.getErrorImg())){
+                stock.setBookStatus(2);
+            }else{
+                stock.setBookStatus(1);
+            }
             stockList.add(stock);
         }
         return stockList;
