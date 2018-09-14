@@ -183,6 +183,9 @@ public class StockServiceImpl implements IStockService {
         stockVo.setSalesPrice(stock.getSalesPrice());
         stockVo.setDeviceType(stock.getDeviceType());
         stockVo.setRepertory(stock.getRepertory());
+        //仓库名字
+        Repertory repertorys = repertoryMapper.selectByPrimaryKey(stock.getRepertory());
+        stockVo.setRepertoryStr(repertorys.getName());
         stockVo.setPosition(stock.getPosition());
         Cart cart = cartMapper.selectCartByAdminIdStockId(adminId,stock.getId());
         if (cart != null) {

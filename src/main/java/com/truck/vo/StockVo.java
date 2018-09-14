@@ -59,6 +59,8 @@ public class StockVo {
 
     private String configuration;
 
+    private String repertoryStr;
+
     public String getConfiguration() {
         return configuration;
     }
@@ -277,5 +279,13 @@ public class StockVo {
 
     public void setTypeCategoryId(Integer typeCategoryId) {
         this.typeCategoryId = typeCategoryId;
+    }
+
+    public String getRepertoryStr() {
+        return repertoryStr;
+    }
+
+    public void setRepertoryStr(String repertoryStr) {
+        this.repertoryStr = repertoryStr;
     }
 }
