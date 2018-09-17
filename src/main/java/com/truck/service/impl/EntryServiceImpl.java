@@ -57,6 +57,7 @@ public class EntryServiceImpl implements IEntryService {
         List<EntryVo> entryVoList = Lists.newArrayList();
         for(Entry entryItem : entryList){
             EntryVo entryVo = this.assembleEntry(entryItem);
+            if(!StringUtils.isEmpty(entryVo.getEntryNo()))
             entryVoList.add(entryVo);
         }
         PageInfo pageInfo = new PageInfo(entryList);
@@ -251,6 +252,9 @@ public class EntryServiceImpl implements IEntryService {
     public EntryVo assembleEntry(Entry entry){
         EntryVo entryVo = new EntryVo();
         entryVo.setId(entry.getId());
+        if(entry.getEntryNo() ==null)
+            return entryVo;
+
         entryVo.setEntryNo(entry.getEntryNo());
 
 //        Transport transport = (Transport)GetTransport.getTranport(entry).getData();
