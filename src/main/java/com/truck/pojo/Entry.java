@@ -21,7 +21,9 @@ public class Entry {
 
     private String shipNum;
 
-    public Entry(Integer id, String entryNo, String declareNum, String destination, Integer status, String inspector, Date createTime, Date updateTime, String shipNum) {
+    private Integer transportId;
+
+    public Entry(Integer id, String entryNo, String declareNum, String destination, Integer status, String inspector, Date createTime, Date updateTime, String shipNum, Integer transportId) {
         this.id = id;
         this.entryNo = entryNo;
         this.declareNum = declareNum;
@@ -31,6 +33,7 @@ public class Entry {
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.shipNum = shipNum;
+        this.transportId = transportId;
     }
 
     public Entry() {
@@ -107,5 +110,13 @@ public class Entry {
 
     public void setShipNum(String shipNum) {
         this.shipNum = shipNum;
+    }
+
+    public Integer getTransportId() {
+        return transportId;
+    }
+
+    public void setTransportId(Integer transportId) {
+        this.transportId = transportId;
     }
 }

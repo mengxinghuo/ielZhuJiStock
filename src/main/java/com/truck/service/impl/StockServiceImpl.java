@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.truck.common.Const;
+import com.truck.common.GetTransport;
 import com.truck.common.ServerResponse;
 import com.truck.dao.*;
 import com.truck.pojo.*;
@@ -188,11 +189,22 @@ public class StockServiceImpl implements IStockService {
 
 
     public StockVo assembleStockVo(Integer adminId,Stock stock){
+        Entry entry = entryMapper.selectByPrimaryKey(stock.getEntryId());
+
         StockVo stockVo = new StockVo();
         stockVo.setId(stock.getId());
         stockVo.setEntryId(stock.getEntryId());
-        stockVo.setCustomsClearance(stock.getCustomsClearance());
-        stockVo.setDestination(stock.getDestination());
+//        Transport transport = (Transport) GetTransport.getTranport(entry).getData();
+//        if (transport == null) {
+            stockVo.setCustomsClearance(stock.getCustomsClearance());
+            stockVo.setDestination(stock.getDestination());
+            stockVo.setShipNum(stock.getShipNum());
+//        } else {
+//            stockVo.setCustomsClearance(transport.getDeclareNum());
+//            stockVo.setDestination(transport.getDestination());
+//            stockVo.setShipNum(transport.getShipNum());
+//        }
+
         stockVo.setPartsNo(stock.getPartsNo());
         stockVo.setPartsName(stock.getPartsName());
         if(org.apache.commons.lang3.StringUtils.isNotBlank(stock.getPartsEnName()))
@@ -229,7 +241,6 @@ public class StockServiceImpl implements IStockService {
             stockVo.setAddress(stock.getCustomsClearance()+stringBuilder.toString());
         }
 
-        stockVo.setShipNum(stock.getShipNum());
         stockVo.setBuyContractNo(stock.getBuyContractNo());
         stockVo.setModel(stock.getModel());
         stockVo.setSn(stock.getSn());

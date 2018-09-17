@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.truck.common.Const;
+import com.truck.common.GetTransport;
 import com.truck.common.ServerResponse;
 import com.truck.dao.EntryDetailMapper;
 import com.truck.dao.EntryMapper;
@@ -12,6 +13,7 @@ import com.truck.dao.RepertoryMapper;
 import com.truck.pojo.Entry;
 import com.truck.pojo.EntryDetail;
 import com.truck.pojo.Repertory;
+import com.truck.pojo.Transport;
 import com.truck.service.IEntryService;
 import com.truck.service.IRepertoryService;
 import com.truck.util.DateTimeUtil;
@@ -246,24 +248,44 @@ public class EntryServiceImpl implements IEntryService {
         EntryVo entryVo = new EntryVo();
         entryVo.setId(entry.getId());
         entryVo.setEntryNo(entry.getEntryNo());
-        entryVo.setDeclareNum(entry.getDeclareNum());
-        entryVo.setDestination(entry.getDestination());
+
+//        Transport transport = (Transport)GetTransport.getTranport(entry).getData();
+//        if(transport==null){
+            entryVo.setShipNum(entry.getShipNum());
+            entryVo.setDeclareNum(entry.getDeclareNum());
+            entryVo.setDestination(entry.getDestination());
+//        }else{
+//            entryVo.setShipNum(transport.getShipNum());
+//            entryVo.setDeclareNum(transport.getDeclareNum());
+//            entryVo.setDestination(transport.getDestination());
+//        }
+
         entryVo.setStatus(entry.getStatus());
         entryVo.setStatusDesc(Const.EntryStatusEnum.codeOf(entry.getStatus()).getValue());
         entryVo.setInspector(entry.getInspector());
         entryVo.setCreateTime(DateTimeUtil.dateToStr(entry.getCreateTime(),"yyyy-MM-dd"));
         entryVo.setUpdateTime(DateTimeUtil.dateToStr(entry.getUpdateTime()));
         
-        entryVo.setShipNum(entry.getShipNum());
         return entryVo;
     }
 
     public EntryDetailVo assembleEntryDetail(EntryDetail entryDetail){
+        Entry entry = entryMapper.selectByPrimaryKey(entryDetail.getEntryId());
         EntryDetailVo entryDetailVo = new EntryDetailVo();
         entryDetailVo.setId(entryDetail.getId());
         entryDetailVo.setEntryId(entryDetail.getEntryId());
-        entryDetailVo.setCustomsClearance(entryDetail.getCustomsClearance());
-        entryDetailVo.setDestination(entryDetail.getDestination());
+
+//        Transport transport = (Transport)GetTransport.getTranport(entry).getData();
+//        if(transport==null){
+            entryDetailVo.setShipNum(entryDetail.getShipNum());
+            entryDetailVo.setCustomsClearance(entryDetail.getCustomsClearance());
+            entryDetailVo.setDestination(entryDetail.getDestination());
+//        }else{
+//            entryDetailVo.setShipNum(transport.getShipNum());
+//            entryDetailVo.setCustomsClearance(transport.getDeclareNum());
+//            entryDetailVo.setDestination(transport.getDestination());
+//        }
+
         entryDetailVo.setPackageNo(entryDetail.getPackageNo());
         //entryDetailVo.setSerialNo(entryDetail.getSerialNo());
         entryDetailVo.setPartsNo(entryDetail.getPartsNo());
@@ -297,7 +319,7 @@ public class EntryServiceImpl implements IEntryService {
         }
         entryDetailVo.setCreateTime(DateTimeUtil.dateToStr(entryDetail.getCreateTime()));
         entryDetailVo.setUpdateTime(DateTimeUtil.dateToStr(entryDetail.getUpdateTime()));
-        entryDetailVo.setShipNum(entryDetail.getShipNum());
+
         entryDetailVo.setBuyContractNo(entryDetail.getBuyContractNo());
         entryDetailVo.setModel(entryDetail.getModel());
         entryDetailVo.setSn(entryDetail.getSn());
@@ -310,9 +332,9 @@ public class EntryServiceImpl implements IEntryService {
         entryDetailVo.setModelAlias(entryDetail.getModelAlias());
         entryDetailVo.setConfiguration(entryDetail.getConfiguration());
 
-        Entry entry = entryMapper.selectByPrimaryKey(entryDetail.getEntryId());
-        entryDetailVo.setEntryStatus(entry.getStatus());
-        entryDetailVo.setEntryStatusDesc(Const.EntryStatusEnum.codeOf(entry.getStatus()).getValue());
+        Entry entry2 = entryMapper.selectByPrimaryKey(entryDetail.getEntryId());
+        entryDetailVo.setEntryStatus(entry2.getStatus());
+        entryDetailVo.setEntryStatusDesc(Const.EntryStatusEnum.codeOf(entry2.getStatus()).getValue());
         if(org.apache.commons.lang3.StringUtils.isNotBlank(entryDetail.getErrorImg()))
         entryDetailVo.setErrorImgList(Splitter.on(",").splitToList(entryDetail.getErrorImg()));
         return entryDetailVo;
