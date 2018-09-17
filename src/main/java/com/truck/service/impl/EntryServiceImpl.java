@@ -258,7 +258,7 @@ public class EntryServiceImpl implements IEntryService {
         if(entry.getTransportId() !=null){
             transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
         }
-        if(transport==null){
+        if(transport.getId()==null){
             entryVo.setShipNum(entry.getShipNum());
             entryVo.setDeclareNum(entry.getDeclareNum());
             entryVo.setDestination(entry.getDestination());
@@ -289,7 +289,7 @@ public class EntryServiceImpl implements IEntryService {
         if(entry.getTransportId() !=null){
             transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
         }
-        if(transport==null){
+        if(transport.getId()==null){
             entryDetailVo.setShipNum(entryDetail.getShipNum());
             entryDetailVo.setCustomsClearance(entryDetail.getCustomsClearance());
             entryDetailVo.setDestination(entryDetail.getDestination());

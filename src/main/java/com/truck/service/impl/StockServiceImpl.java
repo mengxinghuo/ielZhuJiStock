@@ -206,7 +206,7 @@ public class StockServiceImpl implements IStockService {
         if(entry.getTransportId() !=null){
             transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
         }
-        if(transport==null){
+        if(transport.getId()==null){
             stockVo.setShipNum(entry.getShipNum());
             stockVo.setCustomsClearance(entry.getDeclareNum());
             stockVo.setDestination(entry.getDestination());
