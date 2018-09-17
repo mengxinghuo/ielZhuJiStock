@@ -24,5 +24,7 @@ public interface StockMapper {
 
     List<Stock> selectByStockSelectiveLike(@Param("stock") Stock stock);
 
+    List<Stock> selectByStockSelectiveLikeSync(@Param("stock") Stock stock);
+
     int batchInsert(@Param("stockList")List<Stock> stockList);
 }

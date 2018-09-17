@@ -527,4 +527,21 @@
       </if>
   </select>
 
+  <select id="selectByStockSelectiveLikeSync" parameterType="com.truck.pojo.Stock" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from iel_stock a , iel_transport b
+    where status = 0
+      <if test="stock.customsClearance != null" >
+        and b.customs_clearance like concat('%',#{stock.customsClearance},'%')
+      </if>
+      <if test="stock.destination != null" >
+        and b.destination like concat('%',#{stock.destination},'%')
+      </if>
+
+      <if test="stock.shipNum != null" >
+        and b.ship_num like concat('%',#{stock.shipNum},'%')
+      </if>
+  </select>
+
 </mapper>

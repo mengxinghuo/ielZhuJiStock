@@ -15,6 +15,7 @@ import com.truck.util.Post4;
 import com.truck.vo.OutVo;
 import com.truck.vo.ProjectOutVo;
 import com.truck.vo.SalesContractVo;
+import com.truck.vo.SoldVo;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -118,6 +119,39 @@ public class SalesContractServiceImpl implements ISalesContractService {
         }
         PageInfo pageInfo = new PageInfo(salesContractList);
         pageInfo.setList(salesContractVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
+    @Override
+    public ServerResponse getSalesContractSold(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<SalesContract> salesContractList = salesContractMapper.selectSalesContractList();
+        if(salesContractList.size() == 0){
+            return ServerResponse.createByErrorMessage("未查到结果");
+        }
+        List<SalesContractVo> salesContractVoList = Lists.newArrayList();
+        for(SalesContract salesContractItem : salesContractList){
+            SalesContractVo salesContractVo = this.assembleSalesContract(salesContractItem);
+            if (salesContractVo.getOutVo()!=null) {
+                salesContractVoList.add(salesContractVo);
+            }
+        }
+        List<SoldVo> soldVos = Lists.newArrayList();
+        for (SalesContractVo salesContractVo : salesContractVoList) {
+            for (OutDetail outDetail : salesContractVo.getOutDetailList()) {
+                SoldVo soldVo = new SoldVo();
+                soldVo.setOutDetailId(outDetail.getId());
+                soldVo.setDeviceType(outDetail.getDeviceType());
+                soldVo.setModel(outDetail.getModel());
+                soldVo.setSn(outDetail.getSn());
+                if(salesContractVo.getCustomer() !=null)
+                soldVo.setPtName(salesContractVo.getCustomer().getPtName());
+                if(outDetail.getCustomer() !=null)
+                soldVo.setPtName(outDetail.getCustomer().getPtName());
+                soldVos.add(soldVo);
+            }
+        }
+        PageInfo pageInfo = new PageInfo(soldVos);
         return ServerResponse.createBySuccess(pageInfo);
     }
 

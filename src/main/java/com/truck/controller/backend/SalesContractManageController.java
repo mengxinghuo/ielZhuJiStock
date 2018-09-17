@@ -87,6 +87,21 @@ public class SalesContractManageController {
     }
 
     /**
+     * 查询所有已售设备
+     * @param session
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("get_sales_contract_sold.do")
+    @ResponseBody
+    public ServerResponse getSalesContractSold(HttpSession session,
+                                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                               @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+        return iSalesContractService.getSalesContractSold(pageNum,pageSize);
+    }
+
+    /**
      * 根据出库单查询该合同信息
      * @param session
      * @param id

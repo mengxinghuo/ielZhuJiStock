@@ -10,6 +10,7 @@ import com.truck.common.ServerResponse;
 import com.truck.dao.EntryDetailMapper;
 import com.truck.dao.EntryMapper;
 import com.truck.dao.RepertoryMapper;
+import com.truck.dao.TransportMapper;
 import com.truck.pojo.Entry;
 import com.truck.pojo.EntryDetail;
 import com.truck.pojo.Repertory;
@@ -19,6 +20,7 @@ import com.truck.service.IRepertoryService;
 import com.truck.util.DateTimeUtil;
 import com.truck.vo.EntryDetailVo;
 import com.truck.vo.EntryVo;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -30,6 +32,8 @@ public class EntryServiceImpl implements IEntryService {
 
     @Autowired
     private EntryMapper entryMapper;
+    @Autowired
+    private TransportMapper transportMapper;
     @Autowired
     private EntryDetailMapper entryDetailMapper;
     @Autowired
@@ -250,15 +254,19 @@ public class EntryServiceImpl implements IEntryService {
         entryVo.setEntryNo(entry.getEntryNo());
 
 //        Transport transport = (Transport)GetTransport.getTranport(entry).getData();
-//        if(transport==null){
+        Transport transport = new Transport();
+        if(entry.getTransportId() !=null){
+            transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
+        }
+        if(transport==null){
             entryVo.setShipNum(entry.getShipNum());
             entryVo.setDeclareNum(entry.getDeclareNum());
             entryVo.setDestination(entry.getDestination());
-//        }else{
-//            entryVo.setShipNum(transport.getShipNum());
-//            entryVo.setDeclareNum(transport.getDeclareNum());
-//            entryVo.setDestination(transport.getDestination());
-//        }
+        }else{
+            entryVo.setShipNum(transport.getShipNum());
+            entryVo.setDeclareNum(transport.getDeclareNum());
+            entryVo.setDestination(transport.getDestination());
+        }
 
         entryVo.setStatus(entry.getStatus());
         entryVo.setStatusDesc(Const.EntryStatusEnum.codeOf(entry.getStatus()).getValue());
@@ -276,15 +284,20 @@ public class EntryServiceImpl implements IEntryService {
         entryDetailVo.setEntryId(entryDetail.getEntryId());
 
 //        Transport transport = (Transport)GetTransport.getTranport(entry).getData();
-//        if(transport==null){
+
+        Transport transport = new Transport();
+        if(entry.getTransportId() !=null){
+            transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
+        }
+        if(transport==null){
             entryDetailVo.setShipNum(entryDetail.getShipNum());
             entryDetailVo.setCustomsClearance(entryDetail.getCustomsClearance());
             entryDetailVo.setDestination(entryDetail.getDestination());
-//        }else{
-//            entryDetailVo.setShipNum(transport.getShipNum());
-//            entryDetailVo.setCustomsClearance(transport.getDeclareNum());
-//            entryDetailVo.setDestination(transport.getDestination());
-//        }
+        }else{
+            entryDetailVo.setShipNum(transport.getShipNum());
+            entryDetailVo.setCustomsClearance(transport.getDeclareNum());
+            entryDetailVo.setDestination(transport.getDestination());
+        }
 
         entryDetailVo.setPackageNo(entryDetail.getPackageNo());
         //entryDetailVo.setSerialNo(entryDetail.getSerialNo());

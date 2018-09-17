@@ -35,6 +35,8 @@ public class StockServiceImpl implements IStockService {
     private CartMapper cartMapper;
     @Autowired
     private RepertoryMapper repertoryMapper;
+    @Autowired
+    private TransportMapper transportMapper;
 
     public ServerResponse batchStockIn(Integer entryId){
         if (entryId == null ) {
@@ -100,7 +102,12 @@ public class StockServiceImpl implements IStockService {
 
     public ServerResponse searchLikeStockList(Integer adminId,Stock stock, int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
-        List<Stock> stockList =stockMapper.selectByStockSelectiveLike(stock);
+        List<Stock> stockList = Lists.newArrayList();
+//        if(!StringUtils.isEmpty(stock.getShipNum())|| !StringUtils.isEmpty(stock.getDestination()) || !StringUtils.isEmpty(stock.getCustomsClearance()) ){
+//            stockList =stockMapper.selectByStockSelectiveLikeSync(stock);
+//        }else {
+            stockList =stockMapper.selectByStockSelectiveLike(stock);
+//        }
         if(stockList.size() == 0){
             return ServerResponse.createByErrorMessage("未查到任何记录");
         }
@@ -194,16 +201,20 @@ public class StockServiceImpl implements IStockService {
         StockVo stockVo = new StockVo();
         stockVo.setId(stock.getId());
         stockVo.setEntryId(stock.getEntryId());
-//        Transport transport = (Transport) GetTransport.getTranport(entry).getData();
-//        if (transport == null) {
-            stockVo.setCustomsClearance(stock.getCustomsClearance());
-            stockVo.setDestination(stock.getDestination());
-            stockVo.setShipNum(stock.getShipNum());
-//        } else {
-//            stockVo.setCustomsClearance(transport.getDeclareNum());
-//            stockVo.setDestination(transport.getDestination());
-//            stockVo.setShipNum(transport.getShipNum());
-//        }
+        
+        Transport transport = new Transport();
+        if(entry.getTransportId() !=null){
+            transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
+        }
+        if(transport==null){
+            stockVo.setShipNum(entry.getShipNum());
+            stockVo.setCustomsClearance(entry.getDeclareNum());
+            stockVo.setDestination(entry.getDestination());
+        }else{
+            stockVo.setShipNum(transport.getShipNum());
+            stockVo.setCustomsClearance(transport.getDeclareNum());
+            stockVo.setDestination(transport.getDestination());
+        }
 
         stockVo.setPartsNo(stock.getPartsNo());
         stockVo.setPartsName(stock.getPartsName());
