@@ -103,11 +103,11 @@ public class StockServiceImpl implements IStockService {
     public ServerResponse searchLikeStockList(Integer adminId,Stock stock, int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         List<Stock> stockList = Lists.newArrayList();
-//        if(!StringUtils.isEmpty(stock.getShipNum())|| !StringUtils.isEmpty(stock.getDestination()) || !StringUtils.isEmpty(stock.getCustomsClearance()) ){
-//            stockList =stockMapper.selectByStockSelectiveLikeSync(stock);
-//        }else {
+        if(!StringUtils.isEmpty(stock.getShipNum())|| !StringUtils.isEmpty(stock.getDestination()) || !StringUtils.isEmpty(stock.getCustomsClearance()) ){
+            stockList =stockMapper.selectByStockSelectiveLikeSync(stock);
+        }else {
             stockList =stockMapper.selectByStockSelectiveLike(stock);
-//        }
+        }
         if(stockList.size() == 0){
             return ServerResponse.createByErrorMessage("未查到任何记录");
         }

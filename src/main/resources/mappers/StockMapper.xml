@@ -529,19 +529,23 @@
 
   <select id="selectByStockSelectiveLikeSync" parameterType="com.truck.pojo.Stock" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
-    from iel_stock a , iel_transport b
-    where status = 0
+    a.id,  a.entry_id,  c.declare_num as customs_clearance,  c.destination as destination,  a.parts_no,  a.parts_name,  a.parts_en_name,
+    a.unit,  a.quantity,  a.sales_price,  a.device_type,  a.repertory,  a.position,  a.create_time,  a.update_time,
+    c.ship_num as ship_num,  a.buy_contract_no,  a.model,a.sn,  a.engine_no,  a.xx_no,  a.brand,a.type_category_id,
+    a.model_alias,a.configuration,a.status,  a.book_status
+    from iel_stock a join iel_entry b on a.entry_id=b.id
+    join iel_transport c on b.transport_id=c.id
+    where a.status = 0
       <if test="stock.customsClearance != null" >
-        and b.customs_clearance like concat('%',#{stock.customsClearance},'%')
+        and c.declare_num like concat('%',#{stock.customsClearance},'%')
       </if>
       <if test="stock.destination != null" >
-        and b.destination like concat('%',#{stock.destination},'%')
+        and c.destination like concat('%',#{stock.destination},'%')
       </if>
-
       <if test="stock.shipNum != null" >
-        and b.ship_num like concat('%',#{stock.shipNum},'%')
+        and c.ship_num like concat('%',#{stock.shipNum},'%')
       </if>
   </select>
+
 
 </mapper>

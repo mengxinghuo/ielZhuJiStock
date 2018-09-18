@@ -182,9 +182,12 @@ public class TransportServiceImpl implements ITransportService {
      */
     public ServerResponse createEntry(String  entryStr){
         Entry entry = JsonUtil.string2Obj(entryStr,Entry.class);
-        int resultCount = entryMapper.insertSelective(entry);
-        if(resultCount > 0){
-            return ServerResponse.createBySuccess(entry.getId());
+        logger.info("配件系统传过来的entry================={}",entry);
+        if (entry != null) {
+            int resultCount = entryMapper.insertSelective(entry);
+            if(resultCount > 0){
+                return ServerResponse.createBySuccess(entry.getId());
+            }
         }
         return ServerResponse.createByErrorMessage("创建失败");
     }
