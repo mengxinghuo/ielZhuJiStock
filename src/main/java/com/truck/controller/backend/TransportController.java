@@ -6,12 +6,14 @@ import com.truck.common.ResponseCode;
 import com.truck.common.ServerResponse;
 import com.truck.dao.TransportMapper;
 import com.truck.pojo.Admin;
+import com.truck.pojo.Entry;
 import com.truck.pojo.Transport;
 import com.truck.service.FileService;
 import com.truck.service.IExportsListsService;
 import com.truck.service.ITransportService;
 import com.truck.util.JsonUtil;
 import com.truck.util.PropertiesUtil;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,12 +55,13 @@ public class TransportController {
      */
     @RequestMapping("add_transport.do")
     @ResponseBody
-    public ServerResponse addTransport(HttpSession session, Transport transport){
+    public ServerResponse addTransport(HttpSession session, String transport){
 //        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
 //        if(admin == null){
 //            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
 //        }
-        return iTransportService.addTransport(2,transport);
+        Transport transport2 = JsonUtil.string2Obj(transport,Transport.class);
+        return iTransportService.addTransport(2,transport2);
     }
 
     /**
@@ -69,12 +72,13 @@ public class TransportController {
      */
     @RequestMapping("update_transport.do")
     @ResponseBody
-    public ServerResponse updateTransport(HttpSession session,Transport transport){
+    public ServerResponse updateTransport(HttpSession session,String transport){
 //        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
 //        if(admin == null){
 //            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
 //        }
-        return iTransportService.updateTransport(2,transport);
+        Transport transport2 = JsonUtil.string2Obj(transport,Transport.class);
+        return iTransportService.updateTransport(2,transport2);
     }
 
     /**

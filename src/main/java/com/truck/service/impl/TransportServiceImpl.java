@@ -47,6 +47,7 @@ public class TransportServiceImpl implements ITransportService {
      * @return
      */
     public ServerResponse addTransport(Integer adminId, Transport transport){
+
         if(StringUtils.isEmpty(transport.getDeclareNum())){
             return ServerResponse.createByErrorMessage("请填写报关次数");
         }
