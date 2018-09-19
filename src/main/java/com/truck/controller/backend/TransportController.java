@@ -60,6 +60,7 @@ public class TransportController {
 //        if(admin == null){
 //            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
 //        }
+        logger.info("主机接收==transport====={}",transport);
         Transport transport2 = JsonUtil.string2Obj(transport,Transport.class);
         return iTransportService.addTransport(2,transport2);
     }
