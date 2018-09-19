@@ -70,11 +70,11 @@ public class TransportController {
     @RequestMapping("update_transport.do")
     @ResponseBody
     public ServerResponse updateTransport(HttpSession session,Transport transport){
-        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
-        if(admin == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
-        }
-        return iTransportService.updateTransport(admin.getAdminId(),transport);
+//        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+//        if(admin == null){
+//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+//        }
+        return iTransportService.updateTransport(2,transport);
     }
 
     /**
@@ -86,11 +86,11 @@ public class TransportController {
     @RequestMapping("del_transport.do")
     @ResponseBody
     public ServerResponse updateTransport(HttpSession session,Integer id){
-        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
-        if(admin == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
-        }
-        return iTransportService.delTransport(admin.getAdminId(),id);
+//        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+//        if(admin == null){
+//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+//        }
+        return iTransportService.delTransport(2,id);
     }
 
     /**
