@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -66,6 +67,11 @@ public class TransportServiceImpl implements ITransportService {
             return ServerResponse.createByErrorMessage("上传信息不足，请完善");
         }*/
         transport.setStatus(Const.TransportStatusEnum.OVER_EXIT.getCode());
+        if(!StringUtils.isEmpty(transport.getCreateTimeStr())){
+            transport.setCreateTime(DateTimeUtil.strToDate(transport.getCreateTimeStr(),"yyyy-MM-dd"));
+        }else{
+            transport.setCreateTime(new Date());
+        }
         int resultCount = transportMapper.insertSelective(transport);
         if(resultCount > 0){
             return ServerResponse.createBySuccess("信息录入成功");
