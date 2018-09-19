@@ -54,11 +54,11 @@ public class TransportController {
     @RequestMapping("add_transport.do")
     @ResponseBody
     public ServerResponse addTransport(HttpSession session, Transport transport){
-        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
-        if(admin == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
-        }
-        return iTransportService.addTransport(admin.getAdminId(),transport);
+//        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+//        if(admin == null){
+//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+//        }
+        return iTransportService.addTransport(2,transport);
     }
 
     /**

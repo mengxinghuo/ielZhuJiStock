@@ -21,8 +21,6 @@ public class AdminController {
 
     /**
      * 管理员登陆
-     * @param adminName
-     * @param password
      * @param session
      * @return
      */
