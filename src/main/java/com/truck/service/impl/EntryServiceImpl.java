@@ -261,15 +261,13 @@ public class EntryServiceImpl implements IEntryService {
         Transport transport = new Transport();
         if(entry.getTransportId() !=null){
             transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
-        }
-        if(transport.getId()==null){
-            entryVo.setShipNum(entry.getShipNum());
-            entryVo.setDeclareNum(entry.getDeclareNum());
-            entryVo.setDestination(entry.getDestination());
-        }else{
             entryVo.setShipNum(transport.getShipNum());
             entryVo.setDeclareNum(transport.getDeclareNum());
             entryVo.setDestination(transport.getDestination());
+        }else{
+            entryVo.setShipNum(entry.getShipNum());
+            entryVo.setDeclareNum(entry.getDeclareNum());
+            entryVo.setDestination(entry.getDestination());
         }
 
         entryVo.setStatus(entry.getStatus());
