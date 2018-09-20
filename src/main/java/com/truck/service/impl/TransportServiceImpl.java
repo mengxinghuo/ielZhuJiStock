@@ -191,6 +191,10 @@ public class TransportServiceImpl implements ITransportService {
         Entry entry = JsonUtil.string2Obj(entryStr,Entry.class);
         logger.info("配件系统传过来的entry================={}",entry);
         if (entry != null) {
+            Transport transport = transportMapper.selectByPrimaryKey(entry.getTransportId());
+            if (transport != null) {
+                entry.setCreateTime(transport.getCreateTime());
+            }
             int resultCount = entryMapper.insertSelective(entry);
             if(resultCount > 0){
                 return ServerResponse.createBySuccess(entry.getId());
