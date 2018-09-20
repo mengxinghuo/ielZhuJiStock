@@ -47,7 +47,7 @@ public class IProjectServiceImpl implements IProjectService {
     }
 
     public ServerResponse<PageInfo> listByCustomerId(Integer customerId, int pageNum, int pageSize){
-        String url = "http://39.104.139.229:8087/manage/project/list.do";
+        String url = "http://47.100.240.34:8087/manage/project/list.do";
 //        String url = "http://localhost:8090/manage/customer/get_customer_detail.do";
         StringBuffer sb = new StringBuffer();
         sb.append("customerId=").append(customerId).append("&pageNum=").append(pageNum).append("&pageSize=").append(pageSize);

@@ -229,7 +229,7 @@ public class SalesContractServiceImpl implements ISalesContractService {
 
     public ServerResponse getProjectByOutDetailId(Integer outDetailId){
 //        String url = "http://149.129.220.43:8085/manage/projectOut/list_by_outdetailId_ing.do";
-        String url = "http://39.104.139.229:8087/manage/projectOut/list_by_outdetailId_ing.do";
+        String url = "http://47.100.240.34:8087/manage/projectOut/list_by_outdetailId_ing.do";
 //        String url = "http://localhost:8085/manage/projectOut/list_by_outdetailId_ing.do";
         StringBuffer sb = new StringBuffer();
         sb.append("outDetailId=").append(outDetailId);
