@@ -18,15 +18,16 @@
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="ship_num" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="zhu_ji_sales_list" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, declare_num, destination, arrival_list, purchase_list, sales_contract, invoice, 
+    id, declare_num, destination, arrival_list, purchase_list, sales_contract, invoice,
     purchase_contract, export_cost, sales_list, entrance_cost, status, create_time, update_time,
-    ship_num
+    ship_num,zhu_ji_sales_list
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from iel_transport
     where id = #{id,jdbcType=INTEGER}
@@ -36,16 +37,16 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.truck.pojo.Transport" >
-    insert into iel_transport (id, declare_num, destination, 
-      arrival_list, purchase_list, sales_contract, 
-      invoice, purchase_contract, export_cost, 
-      sales_list, entrance_cost, status, 
-      create_time, update_time,ship_num)
+    insert into iel_transport (id, declare_num, destination,
+    arrival_list, purchase_list, sales_contract,
+    invoice, purchase_contract, export_cost,
+    sales_list, entrance_cost, status,
+    create_time, update_time,ship_num,zhu_ji_sales_list)
     values (#{id,jdbcType=INTEGER}, #{declareNum,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR},
-      #{arrivalList,jdbcType=VARCHAR}, #{purchaseList,jdbcType=VARCHAR}, #{salesContract,jdbcType=VARCHAR}, 
-      #{invoice,jdbcType=VARCHAR}, #{purchaseContract,jdbcType=VARCHAR}, #{exportCost,jdbcType=VARCHAR}, 
-      #{salesList,jdbcType=VARCHAR}, #{entranceCost,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      now(), now(),#{shipNum})
+    #{arrivalList,jdbcType=VARCHAR}, #{purchaseList,jdbcType=VARCHAR}, #{salesContract,jdbcType=VARCHAR},
+    #{invoice,jdbcType=VARCHAR}, #{purchaseContract,jdbcType=VARCHAR}, #{exportCost,jdbcType=VARCHAR},
+    #{salesList,jdbcType=VARCHAR}, #{entranceCost,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+    now(), now(),#{shipNum},#{zhuJiSalesList})
   </insert>
   <insert id="insertSelective" parameterType="com.truck.pojo.Transport" useGeneratedKeys="true" keyProperty="id">
     insert into iel_transport
@@ -86,10 +87,15 @@
       <if test="status != null" >
         status,
       </if>
+      <if test="createTime != null" >
         create_time,
-        update_time,
+      </if>
+      update_time,
       <if test="shipNum != null" >
         ship_num,
+      </if>
+      <if test="zhuJiSalesList != null" >
+        zhu_ji_sales_list,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -129,10 +135,15 @@
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
       </if>
-        now(),
-        now(),
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+      now(),
       <if test="shipNum != null" >
         #{shipNum},
+      </if>
+      <if test="zhuJiSalesList != null" >
+        #{zhuJiSalesList},
       </if>
     </trim>
   </insert>
@@ -172,9 +183,15 @@
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
-        update_time = now(),
+      <if test="createTime != null" >
+        create_time =#{createTime},
+      </if>
+      update_time = now(),
       <if test="shipNum != null" >
         ship_num=#{shipNum},
+      </if>
+      <if test="zhuJiSalesList != null" >
+        zhu_ji_sales_list=#{zhuJiSalesList},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -200,6 +217,26 @@
   <select id="selectByDeclareNum" parameterType="map" resultType="int">
     select count(1) from iel_transport
     where declare_num = #{declareNum}
+  </select>
+
+  <select id="getByDeclareNum" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from iel_transport
+    where declare_num = #{declareNum}
+  </select>
+
+  <select id="selectByEntry" parameterType="com.truck.pojo.Transport" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from iel_transport
+    <where>
+      <if test="declareNum != null" >
+        and declare_num = #{declareNum,jdbcType=VARCHAR}
+      </if>
+      <if test="destination != null" >
+        and destination = #{destination,jdbcType=VARCHAR}
+      </if>
+      <if test="shipNum != null" >
+        and ship_num=#{shipNum}
+      </if>
+    </where>
   </select>
 
   <select id="checkoutDeclareNum" parameterType="map" resultType="int">
