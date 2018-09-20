@@ -102,7 +102,7 @@ public class CustomerAddressServiceImpl implements ICustomerAddressService {
     }
 
     public ServerResponse getRepertory(){
-        String url = "http://47.100.240.34:8085/manage/repertory/get.do";
+        String url = "http://localhost:8085/manage/repertory/get.do";
         StringBuffer sb = new StringBuffer();
 //        sb.append("outDetailId=").append(outDetailId);
         String str = Post4.connectionUrl(url, sb,null);
