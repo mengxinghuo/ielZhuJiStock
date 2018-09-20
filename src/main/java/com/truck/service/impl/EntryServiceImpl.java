@@ -259,15 +259,15 @@ public class EntryServiceImpl implements IEntryService {
 
 //        Transport transport = (Transport)GetTransport.getTranport(entry).getData();
         Transport transport = new Transport();
-        if(entry.getTransportId() !=null){
+        if(entry.getTransportId() ==null){
+            entryVo.setShipNum(entry.getShipNum());
+            entryVo.setDeclareNum(entry.getDeclareNum());
+            entryVo.setDestination(entry.getDestination());
+        }else{
             transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
             entryVo.setShipNum(transport.getShipNum());
             entryVo.setDeclareNum(transport.getDeclareNum());
             entryVo.setDestination(transport.getDestination());
-        }else{
-            entryVo.setShipNum(entry.getShipNum());
-            entryVo.setDeclareNum(entry.getDeclareNum());
-            entryVo.setDestination(entry.getDestination());
         }
 
         entryVo.setStatus(entry.getStatus());
