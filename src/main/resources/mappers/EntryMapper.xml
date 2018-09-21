@@ -28,6 +28,10 @@
     delete from iel_entry
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByTransId" parameterType="java.lang.Integer" >
+    delete from iel_entry
+    where transport_id = #{transportId,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.truck.pojo.Entry" >
     insert into iel_entry (id, entry_no, declare_num, 
       destination, status, inspector, 

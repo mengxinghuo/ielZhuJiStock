@@ -130,6 +130,7 @@ public class TransportServiceImpl implements ITransportService {
         //待定判断
         int resultCount = transportMapper.deleteByPrimaryKey(id);
         if(resultCount > 0){
+            entryMapper.deleteByTransId(id);
             return ServerResponse.createBySuccess("删除成功");
         }
         return ServerResponse.createByErrorMessage("删除失败");

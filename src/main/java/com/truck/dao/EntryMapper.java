@@ -8,6 +8,8 @@ import java.util.List;
 public interface EntryMapper {
     int deleteByPrimaryKey(Integer id);
 
+    int deleteByTransId(@Param("transportId") Integer transportId);
+
     int insert(Entry record);
 
     int insertSelective(Entry record);
