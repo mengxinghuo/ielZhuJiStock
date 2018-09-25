@@ -5,6 +5,7 @@ import com.truck.common.ResponseCode;
 import com.truck.common.ServerResponse;
 import com.truck.pojo.Admin;
 import com.truck.pojo.Customer;
+import com.truck.pojo.Stock;
 import com.truck.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -111,6 +112,22 @@ public class CustomerManageController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
         }
         return iCustomerService.getCustomerListOrder(pageNum,pageSize);
+    }
+
+    /**
+     * 模糊搜索查询顾客
+     * @param customer
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("search_like_customer_list.do")
+    @ResponseBody
+    public ServerResponse searchLikeCustomerList(HttpSession session,
+                                                 Customer customer,
+                                              @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                              @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+        return iCustomerService.searchLikeCustomerList(customer, pageNum, pageSize);
     }
 
     /**

@@ -54,7 +54,8 @@ public class TransportServiceImpl implements ITransportService {
         }
         int rowCount = transportMapper.selectByDeclareNum(transport.getDeclareNum());
         if(rowCount > 0){
-            return ServerResponse.createByErrorMessage("报关次数已存在");
+//            return ServerResponse.createByErrorMessage("报关次数已存在");
+            return ServerResponse.createByErrorMessage("The number of customs declarations has existed.");
         }
         if(StringUtils.isEmpty(transport.getDestination())){
             return ServerResponse.createByErrorMessage("请填写目的地");
@@ -99,7 +100,8 @@ public class TransportServiceImpl implements ITransportService {
         if(!StringUtils.isEmpty(transport.getDeclareNum())){
             int rowCount = transportMapper.checkoutDeclareNum(transport.getId(),transport.getDeclareNum());
             if(rowCount > 0){
-                return ServerResponse.createByErrorMessage("报关次数已存在");
+//                return ServerResponse.createByErrorMessage("报关次数已存在");
+                return ServerResponse.createByErrorMessage("The number of customs declarations has existed.");
             }
         }
         //待定判断

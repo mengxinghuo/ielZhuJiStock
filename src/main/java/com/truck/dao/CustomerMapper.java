@@ -22,5 +22,7 @@ public interface CustomerMapper {
 
     List<Customer> selectByNoAndName(@Param("customerNo") String customerNo,@Param("ptName") String ptName,@Param("status") Integer status);
 
+    List<Customer> searchLikeCustomerList(@Param("customer") Customer customer);
+
     List<Customer> selectOrderByName();
 }

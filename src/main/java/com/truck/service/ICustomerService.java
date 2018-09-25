@@ -11,6 +11,8 @@ public interface ICustomerService {
 
     ServerResponse getCustomerList(String customerNo,String ptName,Integer status, int pageNum,int pageSize);
 
+    ServerResponse searchLikeCustomerList(Customer customer, int pageNum,int pageSize);
+
     ServerResponse getCustomerListOrder(int pageNum,int pageSize);
 
     ServerResponse disableCustomer(Integer customerId,Integer status);

@@ -208,6 +208,44 @@
       </if>
     </where>
   </select>
+  
+  <select id="searchLikeCustomerList" resultMap="BaseResultMap" parameterType="com.truck.pojo.Customer">
+    select
+    <include refid="Base_Column_List" />
+    from iel_customer
+    <where>
+      <if test="customer.customerNo != null" >
+        and customer_no like concat('%',#{customerNo.bookStatus},'%')
+      </if>
+      <if test="customer.ptName != null" >
+        and pt_name like concat('%',#{customer.ptName},'%')
+      </if>
+      <if test="customer.customerLevel != null" >
+        and customer_level like concat('%',#{customer.customerLevel},'%')
+      </if>
+      <if test="customer.business != null" >
+        and business like concat('%',#{customer.business},'%')
+      </if>
+      <if test="customer.area != null" >
+        and area like concat('%',#{customer.area},'%')
+      </if>
+      <if test="customer.city != null" >
+        and city like concat('%',#{customer.city},'%')
+      </if>
+      <if test="customer.phoneNumber != null" >
+        and phone_number like concat('%',#{customer.phoneNumber},'%')
+      </if>
+      <if test="customer.status != null" >
+        and status like concat('%',#{customer.status},'%')
+      </if>
+      <if test="customer.introduction != null" >
+        and introduction like concat('%',#{customer.introduction},'%')
+      </if>
+      <if test="customer.dutyNo != null" >
+        and duty_no like concat('%',#{customer.dutyNo},'%')
+      </if>
+    </where>
+  </select>
 
   <select id="selectOrderByName" resultMap="BaseResultMap" parameterType="map">
     select
