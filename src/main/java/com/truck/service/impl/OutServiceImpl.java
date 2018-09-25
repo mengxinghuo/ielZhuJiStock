@@ -65,7 +65,8 @@ public class OutServiceImpl implements IOutService {
                 return ServerResponse.createByErrorMessage("请填写运输费");
             }*/
             if(cartItem.getCartPrice().compareTo(new BigDecimal(0))==0){
-                return ServerResponse.createByErrorMessage("请填写合同中的销售价格");
+//                return ServerResponse.createByErrorMessage("请填写合同中的销售价格");
+                return ServerResponse.createByErrorMessage("Please fill in the sales price in the contract.");
             }
         }
         Customer customer = customerMapper.selectByPrimaryKey(salesContract.getCustomerId());
