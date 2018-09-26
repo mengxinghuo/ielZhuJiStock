@@ -45,6 +45,9 @@ public class Customer {
         this.dutyNo = dutyNo;
     }
 
+    public Customer() {
+        super();
+    }
 
     public String getDutyNo() {
         return dutyNo;
@@ -60,10 +63,6 @@ public class Customer {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
-    }
-
-    public Customer() {
-        super();
     }
 
     public Integer getCustomerId() {

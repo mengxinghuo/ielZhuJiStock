@@ -52,28 +52,30 @@ public class Excel {
             if(r.getCell(1).getCellType() == HSSFCell.CELL_TYPE_STRING){
                 entryDetail.setCustomsClearance(r.getCell(1).getStringCellValue());
             }else{
-                entryDetail.setCustomsClearance(String.valueOf(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(1).getNumericCellValue()))));
+                entryDetail.setCustomsClearance(String.valueOf(Long.parseLong(new java.text.DecimalFormat("0").format(r.getCell(1).getNumericCellValue()))));
             }
 
             entryDetail.setDestination(r.getCell(2).getStringCellValue());
             entryDetail.setBuyContractNo(r.getCell(3).getStringCellValue());
             entryDetail.setModel(r.getCell(4).getStringCellValue());
-//            if(r.getCell(5).getCellType() == HSSFCell.CELL_TYPE_STRING) {
+
+            if(r.getCell(5).getCellType() == HSSFCell.CELL_TYPE_STRING) {
                 entryDetail.setSn(r.getCell(5).getStringCellValue());
-     /*       }else{
-                entryDetail.setSn(String.valueOf(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(5).getNumericCellValue()))));
-            }*/
+            }else{
+                entryDetail.setSn(String.valueOf(Long.parseLong(new java.text.DecimalFormat("0").format(r.getCell(5).getNumericCellValue()))));
+            }
             if(r.getCell(6).getCellType() == HSSFCell.CELL_TYPE_STRING){
                 entryDetail.setEngineNo(r.getCell(6).getStringCellValue());
             }else{
-                entryDetail.setEngineNo(String.valueOf(Integer.parseInt(new java.text.DecimalFormat("0").format(r.getCell(6).getNumericCellValue()))));
+                entryDetail.setEngineNo(String.valueOf(Long.parseLong(new java.text.DecimalFormat("0").format(r.getCell(6).getNumericCellValue()))));
             }
 
-            if(r.getCell(7).getStringCellValue()!=null){
-                entryDetail.setXxNo(r.getCell(7).getStringCellValue());
+            if(r.getCell(7).getCellType() == HSSFCell.CELL_TYPE_STRING) {
+                entryDetail.setSn(r.getCell(7).getStringCellValue());
             }else{
-                entryDetail.setXxNo(StringUtils.EMPTY);
+                entryDetail.setSn(String.valueOf(Long.parseLong(new java.text.DecimalFormat("0").format(r.getCell(7).getNumericCellValue()))));
             }
+
             entryDetail.setDeviceType(r.getCell(8).getStringCellValue());
             entryDetail.setBrand(r.getCell(9).getStringCellValue());
             if(r.getCell(10).getStringCellValue()!=null){
@@ -95,7 +97,8 @@ public class Excel {
 
 
     public static void main(String[] args) {
-        String path =  "/Users/jianhe/Desktop/主机入库6.xls";
+//        String path =  "/Users/jianhe/Desktop/主机入库6.xls";
+        String path =  "/Users/jianhezhang/Downloads/LONKING_09_02.xls";
         List<EntryDetail> list = null;
         try {
             list = Excel.loadExportsLists(8,path);
