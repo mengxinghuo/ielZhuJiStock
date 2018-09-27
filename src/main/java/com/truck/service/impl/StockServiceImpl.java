@@ -12,7 +12,10 @@ import com.truck.pojo.*;
 import com.truck.service.IStockService;
 import com.truck.service.IRepertoryService;
 import com.truck.util.DateTimeUtil;
+import com.truck.util.Excel;
 import com.truck.vo.StockVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -22,6 +25,8 @@ import java.util.List;
 
 @Service("iStockService")
 public class StockServiceImpl implements IStockService {
+
+    private static  final Logger logger = LoggerFactory.getLogger(StockServiceImpl.class);
 
     @Autowired
     private StockMapper stockMapper;
@@ -203,20 +208,27 @@ public class StockServiceImpl implements IStockService {
         stockVo.setEntryId(stock.getEntryId());
 
         Transport transport = new Transport();
-        if(entry.getTransportId() ==null){
-            stockVo.setShipNum(entry.getShipNum());
-            stockVo.setCustomsClearance(entry.getDeclareNum());
-            stockVo.setDestination(entry.getDestination());
+        if(entry==null){
+            logger.info("异常sotck的entryId======{}查出来的entry为空",stock.getEntryId());
+            stockVo.setShipNum(stock.getShipNum());
+            stockVo.setCustomsClearance(stock.getCustomsClearance());
+            stockVo.setDestination(stock.getDestination());
         }else{
-            transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
-            if(transport ==null){
+            if(entry.getTransportId() ==null){
                 stockVo.setShipNum(entry.getShipNum());
                 stockVo.setCustomsClearance(entry.getDeclareNum());
                 stockVo.setDestination(entry.getDestination());
             }else{
-                stockVo.setShipNum(transport.getShipNum());
-                stockVo.setCustomsClearance(transport.getDeclareNum());
-                stockVo.setDestination(transport.getDestination());
+                transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
+                if(transport ==null){
+                    stockVo.setShipNum(entry.getShipNum());
+                    stockVo.setCustomsClearance(entry.getDeclareNum());
+                    stockVo.setDestination(entry.getDestination());
+                }else{
+                    stockVo.setShipNum(transport.getShipNum());
+                    stockVo.setCustomsClearance(transport.getDeclareNum());
+                    stockVo.setDestination(transport.getDestination());
+                }
             }
         }
 
