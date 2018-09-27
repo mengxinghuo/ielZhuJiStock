@@ -84,6 +84,7 @@ public class StockServiceImpl implements IStockService {
             StockVo stockVo = this.assembleStockVo(adminId,stockItem);
             stockVoList.add(stockVo);
         }
+        stockVoList = assembleStockVoList(stockVoList);
         PageInfo pageInfo = new PageInfo(stockList);
         pageInfo.setList(stockVoList);
         return ServerResponse.createBySuccess(pageInfo);
@@ -100,6 +101,7 @@ public class StockServiceImpl implements IStockService {
             StockVo stockVo = this.assembleStockVo(adminId,stockItem);
             stockVoList.add(stockVo);
         }
+        stockVoList = assembleStockVoList(stockVoList);
         PageInfo pageInfo = new PageInfo(stockList);
         pageInfo.setList(stockVoList);
         return ServerResponse.createBySuccess(pageInfo);
@@ -121,6 +123,7 @@ public class StockServiceImpl implements IStockService {
             StockVo stockVo = this.assembleStockVo(adminId,stockItem);
             stockVoList.add(stockVo);
         }
+        stockVoList = assembleStockVoList(stockVoList);
         PageInfo pageInfo = new PageInfo(stockList);
         pageInfo.setList(stockVoList);
         return ServerResponse.createBySuccess(pageInfo);
@@ -201,36 +204,14 @@ public class StockServiceImpl implements IStockService {
 
 
     public StockVo assembleStockVo(Integer adminId,Stock stock){
-        Entry entry = entryMapper.selectByPrimaryKey(stock.getEntryId());
 
         StockVo stockVo = new StockVo();
         stockVo.setId(stock.getId());
         stockVo.setEntryId(stock.getEntryId());
 
-        Transport transport = new Transport();
-        if(entry==null){
-            logger.info("异常sotck的entryId======{}查出来的entry为空",stock.getEntryId());
-            stockVo.setShipNum(stock.getShipNum());
-            stockVo.setCustomsClearance(stock.getCustomsClearance());
-            stockVo.setDestination(stock.getDestination());
-        }else{
-            if(entry.getTransportId() ==null){
-                stockVo.setShipNum(entry.getShipNum());
-                stockVo.setCustomsClearance(entry.getDeclareNum());
-                stockVo.setDestination(entry.getDestination());
-            }else{
-                transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
-                if(transport ==null){
-                    stockVo.setShipNum(entry.getShipNum());
-                    stockVo.setCustomsClearance(entry.getDeclareNum());
-                    stockVo.setDestination(entry.getDestination());
-                }else{
-                    stockVo.setShipNum(transport.getShipNum());
-                    stockVo.setCustomsClearance(transport.getDeclareNum());
-                    stockVo.setDestination(transport.getDestination());
-                }
-            }
-        }
+        stockVo.setShipNum(stock.getShipNum());
+        stockVo.setCustomsClearance(stock.getCustomsClearance());
+        stockVo.setDestination(stock.getDestination());
 
         stockVo.setPartsNo(stock.getPartsNo());
         stockVo.setPartsName(stock.getPartsName());
@@ -282,7 +263,38 @@ public class StockServiceImpl implements IStockService {
         stockVo.setBookStatus(stock.getBookStatus());
         return stockVo;
     }
-    
+
+    private List<StockVo> assembleStockVoList(List<StockVo> stockVos) {
+        List<StockVo> stockVoList = Lists.newArrayList();
+        for (StockVo stockVo : stockVos) {
+            Entry entry = entryMapper.selectByPrimaryKey(stockVo.getEntryId());
+            Transport transport = new Transport();
+            if(entry==null){
+                logger.info("异常sotck的id==={}和entryId======{}查出来的entry为空",stockVo.getId(),stockVo.getEntryId());
+                continue;
+            }else{
+                if(entry.getTransportId() ==null){
+                    stockVo.setShipNum(entry.getShipNum());
+                    stockVo.setCustomsClearance(entry.getDeclareNum());
+                    stockVo.setDestination(entry.getDestination());
+                }else{
+                    transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
+                    if(transport ==null){
+                        stockVo.setShipNum(entry.getShipNum());
+                        stockVo.setCustomsClearance(entry.getDeclareNum());
+                        stockVo.setDestination(entry.getDestination());
+                    }else{
+                        stockVo.setShipNum(transport.getShipNum());
+                        stockVo.setCustomsClearance(transport.getDeclareNum());
+                        stockVo.setDestination(transport.getDestination());
+                    }
+                }
+            }
+            stockVoList.add(stockVo);
+        }
+        return stockVoList;
+    }
+
     public List<Stock> entryDetailToStock(List<EntryDetail> entryDetailList){
         List<Stock> stockList = Lists.newArrayList();
         for(EntryDetail entryDetailItem : entryDetailList){
