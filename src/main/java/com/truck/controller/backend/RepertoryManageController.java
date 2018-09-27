@@ -57,10 +57,10 @@ public class RepertoryManageController {
     @RequestMapping("get.do")
     @ResponseBody
     public ServerResponse getChildrenParallelRepertory(HttpSession session, @RequestParam(value = "id" ,defaultValue = "0") Integer id){
-       Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+   /*    Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
         if(admin == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
-        }
+        }*/
             //查询子节点的repertory信息,并且不递归,保持平级
             return iRepertoryService.getChildrenParallelRepertory(id);
     }
@@ -74,10 +74,10 @@ public class RepertoryManageController {
     @RequestMapping("getDeep.do")
     @ResponseBody
     public ServerResponse getRepertoryAndDeepChildrenRepertory(HttpSession session, @RequestParam(value = "id" ,defaultValue = "0") Integer id){
-        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
-        if(admin == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
-        }
+//        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+//        if(admin == null){
+//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+//        }
         //查询当前节点的id和递归子节点的id
         return iRepertoryService.selectRepertoryAndChildrenById(id);
     }
@@ -91,10 +91,10 @@ public class RepertoryManageController {
     @RequestMapping("getDeepRepertory.do")
     @ResponseBody
     public ServerResponse getRepertoryAndDeepChildrenRepertoryObject(HttpSession session, @RequestParam(value = "id" ,defaultValue = "0") Integer id){
-        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
-        if(admin == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
-        }
+//        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+//        if(admin == null){
+//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+//        }
         //查询当前节点的id和递归子节点的id
         return iRepertoryService.selectRepertoryObjectAndChildrenById(id);
     }
