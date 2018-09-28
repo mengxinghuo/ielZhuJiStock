@@ -46,13 +46,18 @@ public class StockController {
     @RequestMapping("get_stock_list.do")
     @ResponseBody
     public ServerResponse getStockList(HttpSession session, Integer entryId,
+                                       @RequestParam(value = "adminId",required = false)Integer adminId,
                                          @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                          @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
-        if(admin == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+        if(adminId==null){
+            Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+            if(admin == null){
+                return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+            }
+            return iStockService.getStockList(admin.getAdminId(),entryId, pageNum, pageSize);
+        }else{
+            return iStockService.getStockList(adminId,entryId, pageNum, pageSize);
         }
-        return iStockService.getStockList(admin.getAdminId(),entryId, pageNum, pageSize);
     }
 
     /**
