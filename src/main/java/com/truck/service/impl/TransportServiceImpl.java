@@ -105,6 +105,10 @@ public class TransportServiceImpl implements ITransportService {
             }
         }
         //待定判断
+        if(!StringUtils.isEmpty(transport.getCreateTimeStr())){
+            logger.info("配件传过来的报关时间{}",transport.getCreateTimeStr());
+            transport.setCreateTime(DateTimeUtil.strToDate(transport.getCreateTimeStr(),"yyyy-MM-dd"));
+        }
         int resultCount = transportMapper.updateByPrimaryKeySelective(transport);
         if(resultCount > 0){
             return ServerResponse.createBySuccess("修改成功");
