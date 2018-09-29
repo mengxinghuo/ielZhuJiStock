@@ -127,6 +127,9 @@
       <if test="inspector != null" >
         inspector = #{inspector,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
         update_time = now(),
       <if test="shipNum != null" >
         ship_num=#{shipNum},
