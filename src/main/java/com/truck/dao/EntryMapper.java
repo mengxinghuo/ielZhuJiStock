@@ -16,6 +16,8 @@ public interface EntryMapper {
 
     Entry selectByPrimaryKey(Integer id);
 
+    Entry selectByTransportId(@Param("transportId")Integer transportId);
+
     int updateByPrimaryKeySelective(Entry record);
 
     int updateByPrimaryKey(Entry record);
