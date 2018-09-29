@@ -28,11 +28,11 @@
     select
     <include refid="Base_Column_List" />
     from iel_entry
-    where transport_id = #{id,jdbcType=INTEGER}
+    where transport_id = #{transportId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from iel_entry
-    where id = #{transportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByTransId" parameterType="java.lang.Integer" >
     delete from iel_entry
