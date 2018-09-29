@@ -111,6 +111,7 @@ public class TransportServiceImpl implements ITransportService {
             transport.setCreateTime(DateTimeUtil.strToDate(transport.getCreateTimeStr(),"yyyy-MM-dd"));
             entry.setCreateTime(transport.getCreateTime());
         }
+        entry.setId(transport.getId());
         entry.setDeclareNum(transport.getDeclareNum());
         entry.setDestination(transport.getDestination());
         entry.setShipNum(transport.getShipNum());
