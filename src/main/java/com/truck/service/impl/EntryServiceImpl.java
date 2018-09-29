@@ -263,23 +263,25 @@ public class EntryServiceImpl implements IEntryService {
             entryVo.setShipNum(entry.getShipNum());
             entryVo.setDeclareNum(entry.getDeclareNum());
             entryVo.setDestination(entry.getDestination());
+            entryVo.setCreateTime(DateTimeUtil.dateToStr(entry.getCreateTime(),"yyyy-MM-dd"));
         }else{
             transport =  transportMapper.selectByPrimaryKey(entry.getTransportId());
             if(transport ==null){
                 entryVo.setShipNum(entry.getShipNum());
                 entryVo.setDeclareNum(entry.getDeclareNum());
                 entryVo.setDestination(entry.getDestination());
+                entryVo.setCreateTime(DateTimeUtil.dateToStr(entry.getCreateTime(),"yyyy-MM-dd"));
             }else{
                 entryVo.setShipNum(transport.getShipNum());
                 entryVo.setDeclareNum(transport.getDeclareNum());
                 entryVo.setDestination(transport.getDestination());
+                entryVo.setCreateTime(DateTimeUtil.dateToStr(transport.getCreateTime(),"yyyy-MM-dd"));
             }
         }
 
         entryVo.setStatus(entry.getStatus());
         entryVo.setStatusDesc(Const.EntryStatusEnum.codeOf(entry.getStatus()).getValue());
         entryVo.setInspector(entry.getInspector());
-        entryVo.setCreateTime(DateTimeUtil.dateToStr(entry.getCreateTime(),"yyyy-MM-dd"));
         entryVo.setUpdateTime(DateTimeUtil.dateToStr(entry.getUpdateTime()));
         
         return entryVo;
