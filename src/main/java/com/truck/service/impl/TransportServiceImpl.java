@@ -104,11 +104,17 @@ public class TransportServiceImpl implements ITransportService {
                 return ServerResponse.createByErrorMessage("The number of customs declarations has existed.");
             }
         }
+        Entry entry = new Entry();
         //待定判断
         if(!StringUtils.isEmpty(transport.getCreateTimeStr())){
             logger.info("配件传过来的报关时间{}",transport.getCreateTimeStr());
             transport.setCreateTime(DateTimeUtil.strToDate(transport.getCreateTimeStr(),"yyyy-MM-dd"));
+            entry.setCreateTime(transport.getCreateTime());
         }
+        entry.setDeclareNum(transport.getDeclareNum());
+        entry.setDestination(transport.getDestination());
+        entry.setShipNum(transport.getShipNum());
+        entryMapper.updateByPrimaryKeySelective(entry);
         int resultCount = transportMapper.updateByPrimaryKeySelective(transport);
         if(resultCount > 0){
             return ServerResponse.createBySuccess("修改成功");
