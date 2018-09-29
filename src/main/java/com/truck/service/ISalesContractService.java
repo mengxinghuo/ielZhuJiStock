@@ -11,6 +11,8 @@ public interface ISalesContractService {
 
     ServerResponse getCustomerSalesContract(Integer customerId,int pageNum,int pageSize);
 
+    ServerResponse getCustomerSalesContractOut(Integer customerId);
+
     ServerResponse getSalesContractList(int pageNum,int pageSize);
 
     ServerResponse getSalesContractSold(int pageNum,int pageSize);

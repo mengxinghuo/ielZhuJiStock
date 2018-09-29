@@ -22,4 +22,6 @@ public interface ICustomerService {
     ServerResponse getCustomerDetail(Integer customerId);
 
     ServerResponse updateIntroduction(Integer customerId,String introduction);
+
+    ServerResponse getCustomerListOrders();
 }

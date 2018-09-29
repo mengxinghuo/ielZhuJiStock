@@ -19,6 +19,7 @@ import com.truck.vo.SoldVo;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -103,6 +104,39 @@ public class SalesContractServiceImpl implements ISalesContractService {
         pageInfo.setList(salesContractVoList);
         return ServerResponse.createBySuccess(pageInfo);
     }
+
+    public ServerResponse getCustomerSalesContractOut(Integer customerId){
+        if(StringUtils.isEmpty(customerId)){
+            return ServerResponse.createByErrorMessage("请选择要查询的客户");
+        }
+        List<SalesContract> salesContractList = salesContractMapper.selectByCustomer(customerId);
+        if(salesContractList.size() == 0){
+            return ServerResponse.createByErrorMessage("未查到结果");
+        }
+        List<CustomerDeviceVo> customerDeviceVoList = Lists.newArrayList();
+        for(SalesContract salesContractItem : salesContractList){
+            List<CustomerDeviceVo> customerDeviceVos = this.assembleCustomerDeviceVo(salesContractItem);
+            if(!CollectionUtils.isEmpty(customerDeviceVos))
+                customerDeviceVoList.addAll(customerDeviceVos);
+        }
+        return ServerResponse.createBySuccess(customerDeviceVoList);
+    }
+
+    private List<CustomerDeviceVo> assembleCustomerDeviceVo(SalesContract salesContractItem) {
+        List<CustomerDeviceVo> customerDeviceVoList = Lists.newArrayList();
+        List<OutDetail> outDetailList = outDetailMapper.selectByOutId(salesContractItem.getOutId());
+        for (OutDetail outDetail : outDetailList) {
+            CustomerDeviceVo customerDeviceVo = new CustomerDeviceVo();
+            customerDeviceVo.setCustomerId(salesContractItem.getCustomerId());
+            customerDeviceVo.setOutDetailId(outDetail.getId());
+            customerDeviceVo.setSn(outDetail.getSn());
+            customerDeviceVo.setModel(outDetail.getModel());
+            customerDeviceVoList.add(customerDeviceVo);
+        }
+        return customerDeviceVoList;
+    }
+
+
 
     public ServerResponse getSalesContractList(int pageNum,int pageSize){
         PageHelper.startPage(pageNum, pageSize);

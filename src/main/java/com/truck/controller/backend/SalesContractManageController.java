@@ -68,6 +68,18 @@ public class SalesContractManageController {
     }
 
     /**
+     * 获取某一客户的销售合同信息,设备
+     * @param session
+     * @param customerId
+     * @return呕吐`
+     */
+    @RequestMapping("get_customer_sales_contract_out.do")
+    @ResponseBody
+    public ServerResponse getCustomerSalesContractOut(HttpSession session,Integer customerId){
+        return iSalesContractService.getCustomerSalesContractOut(customerId);
+    }
+
+    /**
      * 查询所有合同列表
      * @param session
      * @param pageNum

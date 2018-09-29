@@ -177,6 +177,20 @@ public class CustomerServiceImpl implements ICustomerService {
         }
     }
 
+    public ServerResponse getCustomerListOrders(){
+        List<Customer> customerList = customerMapper.selectOrderByName();
+        if(customerList.size() == 0){
+            return ServerResponse.createByErrorMessage("未查到数据");
+        }
+        List<CustomerVo> customerVoList = Lists.newArrayList();
+        for(Customer customerItem : customerList){
+            CustomerVo customerVo = this.assembleCustomer(customerItem);
+            customerVoList.add(customerVo);
+        }
+        return ServerResponse.createBySuccess(customerVoList);
+    }
+
+
     public ServerResponse disableCustomer(Integer customerId,Integer status){
         Customer search = customerMapper.selectByPrimaryKey(customerId);
         if(search == null){

@@ -115,6 +115,20 @@ public class CustomerManageController {
     }
 
     /**
+     * 按照字母排序,不分页
+     * @return
+     */
+    @RequestMapping("get_customer_list_orders.do")
+    @ResponseBody
+    public ServerResponse getCustomerListOrders(){
+//        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+//        if(admin == null){
+//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+//        }
+        return iCustomerService.getCustomerListOrders();
+    }
+
+    /**
      * 模糊搜索查询顾客
      * @param customer
      * @param pageNum
