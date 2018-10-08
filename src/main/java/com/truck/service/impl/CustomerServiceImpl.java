@@ -32,7 +32,8 @@ public class CustomerServiceImpl implements ICustomerService {
         }
         Customer searchNo = customerMapper.checkOutCustomer(null,customer.getCustomerNo(),null,null);
         if(searchNo != null){
-            return ServerResponse.createByErrorMessage("编号已存在");
+//            return ServerResponse.createByErrorMessage("编号已存在");
+            return ServerResponse.createByErrorMessage("Customer number already exists");
         }
         Customer searchPhone = customerMapper.checkOutCustomer(null,null,customer.getPhoneNumber(),null);
         if(searchPhone != null){
@@ -54,7 +55,8 @@ public class CustomerServiceImpl implements ICustomerService {
         if(!StringUtils.isEmpty(customer.getCustomerNo())){
             Customer searchNo = customerMapper.checkOutCustomer(null,customer.getCustomerNo(),null,customer.getCustomerId());
             if(searchNo != null){
-                return ServerResponse.createByErrorMessage("编号已存在");
+//                return ServerResponse.createByErrorMessage("编号已存在");
+                return ServerResponse.createByErrorMessage("Customer number already exists");
             }
         }
         if(!StringUtils.isEmpty(customer.getPtName())){
