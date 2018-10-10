@@ -91,6 +91,8 @@ public class CustomerAddressServiceImpl implements ICustomerAddressService {
                     BigDecimal wei1 = repertoryPei.getPositionLongitude();
                     BigDecimal jing2 = customerAddress.getPositionLatitude();
                     BigDecimal wei2 = customerAddress.getPositionLongitude();
+                    if(jing1==null || wei1==null ||jing2==null || wei2==null)
+                        continue;
                     Double distance = Point2.getDistance(jing1.doubleValue(),wei1.doubleValue(),jing2.doubleValue(),wei2.doubleValue());
                     BigDecimal totalDistance=BigDecimalUtil.div(distance,1000);
                     map.put(repertoryPei.getName(),totalDistance);
