@@ -71,9 +71,9 @@ public class Excel {
             }
 
             if(r.getCell(7).getCellType() == HSSFCell.CELL_TYPE_STRING) {
-                entryDetail.setSn(r.getCell(7).getStringCellValue());
+                entryDetail.setXxNo(r.getCell(7).getStringCellValue());
             }else{
-                entryDetail.setSn(String.valueOf(Long.parseLong(new java.text.DecimalFormat("0").format(r.getCell(7).getNumericCellValue()))));
+                entryDetail.setXxNo(String.valueOf(Long.parseLong(new java.text.DecimalFormat("0").format(r.getCell(7).getNumericCellValue()))));
             }
 
             entryDetail.setDeviceType(r.getCell(8).getStringCellValue());
@@ -98,7 +98,7 @@ public class Excel {
 
     public static void main(String[] args) {
 //        String path =  "/Users/jianhe/Desktop/主机入库6.xls";
-        String path =  "/Users/jianhezhang/Downloads/LONKING_09_02.xls";
+        String path =  "/Users/jianhezhang/Downloads/INLINE 17.xls";
         List<EntryDetail> list = null;
         try {
             list = Excel.loadExportsLists(8,path);
@@ -106,8 +106,8 @@ public class Excel {
             e.printStackTrace();
         }
         for (EntryDetail entryDetail : list) {
-            System.out.println(entryDetail.getEngineNo());
-            System.out.println(entryDetail.getShipNum());
+//            System.out.println(entryDetail.getEngineNo());
+            System.out.println("sn===="+entryDetail.getSn());
         }
     }
 
