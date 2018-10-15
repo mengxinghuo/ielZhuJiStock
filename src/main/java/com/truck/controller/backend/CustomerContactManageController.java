@@ -61,10 +61,10 @@ public class CustomerContactManageController {
     @RequestMapping("get_customer_contact.do")
     @ResponseBody
     public ServerResponse getCustomerContact(HttpSession session,Integer customerId){
-        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
-        if(admin == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
-        }
+//        Admin admin = (Admin)session.getAttribute(Const.CURRENT_ADMIN);
+//        if(admin == null){
+//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"管理员用户未登录，请登录");
+//        }
         return iCustomerContactService.getCustomerContact(customerId);
     }
 }
